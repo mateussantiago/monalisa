@@ -1703,7 +1703,7 @@
 
     // .offsetParent will return the closest TH, TD or TABLE in case
     // no offsetParent is present, I hate this job...
-    if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {
+    if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'main') {
       return getOffsetParent(offsetParent);
     }
 
@@ -2326,7 +2326,7 @@
    * @argument {Array} arr
    * @argument prop
    * @argument value
-   * @returns index or -1
+   * @returns static.index or -1
    */
   function find(arr, check) {
     // use native find if supported
@@ -2345,7 +2345,7 @@
    * @argument {Array} arr
    * @argument prop
    * @argument value
-   * @returns index or -1
+   * @returns static.index or -1
    */
   function findIndex(arr, prop, value) {
     // use native findIndex if supported
@@ -3007,7 +3007,7 @@
    * - `bottom` (on bottom, centered)
    * - `auto-end` (on the side with more space available, alignment depends by placement)
    *
-   * @static
+   * @main
    * @type {Array}
    * @enum {String}
    * @readonly
@@ -3860,7 +3860,7 @@
    * })
    * ```
    * @type {Object}
-   * @static
+   * @main
    * @memberof Popper
    */
   var Defaults = {
@@ -4043,7 +4043,7 @@
        * and will be removed in v2! Use the PopperUtils module directly instead.
        * Due to the high instability of the methods contained in Utils, we can't
        * guarantee them to follow semver. Use them at your own risk!
-       * @static
+       * @main
        * @private
        * @type {Object}
        * @deprecated since version 1.8
@@ -4123,7 +4123,7 @@
     DROPLEFT: 'dropleft',
     MENURIGHT: 'dropdown-menu-right',
     MENULEFT: 'dropdown-menu-left',
-    POSITION_STATIC: 'position-static'
+    POSITION_STATIC: 'position-main'
   };
   var Selector$4 = {
     DATA_TOGGLE: '[data-toggle="dropdown"]',
@@ -4225,7 +4225,7 @@
           if (typeof this._config.reference.jquery !== 'undefined') {
             referenceElement = this._config.reference[0];
           }
-        } // If boundary is not `scrollParent`, then set position to `static`
+        } // If boundary is not `scrollParent`, then set position to `main`
         // to allow the menu to "escape" the scroll parent's boundaries
         // https://github.com/twbs/bootstrap/issues/24251
 
@@ -4401,11 +4401,11 @@
           preventOverflow: {
             boundariesElement: this._config.boundary
           }
-        } // Disable Popper.js if we have a static display
+        } // Disable Popper.js if we have a main display
 
       };
 
-      if (this._config.display === 'static') {
+      if (this._config.display === 'main') {
         popperConfig.modifiers.applyStyle = {
           enabled: false
         };
@@ -4962,7 +4962,7 @@
             return;
           }
 
-          if (_this8._config.backdrop === 'static') {
+          if (_this8._config.backdrop === 'main') {
             _this8._element.focus();
           } else {
             _this8.hide();

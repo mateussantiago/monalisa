@@ -10181,8 +10181,8 @@ jQuery.offset = {
 			curElem = jQuery( elem ),
 			props = {};
 
-		// Set position first, in-case top/left are set even on static elem
-		if ( position === "static" ) {
+		// Set position first, in-case top/left are set even on main elem
+		if ( position === "main" ) {
 			elem.style.position = "relative";
 		}
 
@@ -10290,7 +10290,7 @@ jQuery.fn.extend( {
 			offsetParent = elem.offsetParent || doc.documentElement;
 			while ( offsetParent &&
 				( offsetParent === doc.body || offsetParent === doc.documentElement ) &&
-				jQuery.css( offsetParent, "position" ) === "static" ) {
+				jQuery.css( offsetParent, "position" ) === "main" ) {
 
 				offsetParent = offsetParent.parentNode;
 			}
@@ -10324,7 +10324,7 @@ jQuery.fn.extend( {
 		return this.map( function() {
 			var offsetParent = this.offsetParent;
 
-			while ( offsetParent && jQuery.css( offsetParent, "position" ) === "static" ) {
+			while ( offsetParent && jQuery.css( offsetParent, "position" ) === "main" ) {
 				offsetParent = offsetParent.offsetParent;
 			}
 
