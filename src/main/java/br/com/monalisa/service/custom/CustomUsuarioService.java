@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUsuarioService implements UsuarioService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -25,5 +26,9 @@ public class CustomUsuarioService implements UsuarioService {
         usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
 
         return usuarioRepository.save(usuario);
+    }
+
+    public Usuario findByLoginAndPassword(String login, String senha) {
+        return usuarioRepository.findByLoginAndPassword(login, senha);
     }
 }

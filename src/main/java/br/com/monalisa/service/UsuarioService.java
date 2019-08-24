@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface UsuarioService {
 
     Usuario registrarUsuario(UsuarioDTO usuarioDTO);
+
+    Usuario findByLoginAndPassword(String login, String senha);
 }
