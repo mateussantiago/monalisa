@@ -24,6 +24,4 @@ public class TurmaService  {
     public Optional<Turma> findOne(Long id) {
         return turmaRepository.findById(id);
     }
-
-
 }

@@ -3,6 +3,7 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "turma")
@@ -25,5 +26,7 @@ public class Turma implements Serializable {
 
     public void setDescricao(String descricao) { this.descricao = descricao; }
 
+    @OneToMany(mappedBy = "turma")
+    Set<RelUsuarioTurma> relUsuarioTurmas;
 
 }
