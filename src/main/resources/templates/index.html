@@ -1,8 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:include="layouts/include :: page">
-<head>
-    <title>Monalisa</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layouts/main :: head}">
 </head>
 <body>
+    <nav th:replace="~{layouts/main :: navbar}"></nav>
+
+    <header class="masthead text-center text-white">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" th:style="'background:url(' + @{/img/carousel/monalisa.jpg} + ');'">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="display-4">MONALISA</h1>
+                        <p class="lead">Uma plataforma desenvolvida por <b>alunos</b> para <b>alunos</b> da universidade.</p>
+                    </div>
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" th:style="'background:url(' + @{/img/carousel/estudo.jpg} + ');'">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-4">Estudando em conjunto</h2>
+                        <p class="lead">
+                            Uma plataforma em que o aluno pode <b>compartilhar suas dificuldades, dúvidas, ou problemas</b>
+                            nos componentes curriculares do seu curso com os demais <b>alunos que já a estudaram
+                            e podem ajudá-los</b>.
+                        </p>
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" th:style="'background:url(' + @{/img/carousel/alunos.jpg} + ');'">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h2 class="display-4">Compartilhando conhecimento</h2>
+                        <p class="lead">
+                            Todos os alunos podem ser monitores e <b>compartilhar os conhecimentos adiquiridos</b>
+                            nas disciplinas respondendo as dúvidas de <b>pessoas que precisam de ajuda</b>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" ></script>
+
+    <!-- Carousel JavaScript -->
+    <script th:src="@{/vendor/jquery/jquery.slim.min.js}" ></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}" ></script>
 </body>
 </html>
