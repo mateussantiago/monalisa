@@ -3,6 +3,7 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Entity
 public class RelUsuarioTurma {
 
     @Id
