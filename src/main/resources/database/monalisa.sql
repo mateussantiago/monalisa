@@ -11,7 +11,7 @@ CREATE TABLE public.usuario (
 	nome varchar(250) NOT NULL,
 	login varchar(50) NOT NULL,
 	email varchar(250) NOT NULL,
-	senha varchar(256) NOT NULL,
+	senha varchar(60) NOT NULL,
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario),
 	CONSTRAINT usuario_email_key UNIQUE (email),
 	CONSTRAINT usuario_usuario_key UNIQUE (login)
