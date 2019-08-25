@@ -31,7 +31,7 @@ h6 {
 }
 
 .bg-black {
-  background-color: #03324c !important;
+  background-color: rgba(1, 32, 49) !important;
 }
 
 .rounded-pill {
@@ -41,7 +41,7 @@ h6 {
 .navbar-custom {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(1, 32, 49, 0.7);
 }
 
 .navbar-custom .navbar-brand {

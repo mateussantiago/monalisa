@@ -1,63 +1,140 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main :: head}">
-</head>
-<body>
-    <nav th:replace="~{layouts/main :: navbar}"></nav>
+    <head th:replace="~{layouts/main :: head}">
+    </head>
+    <body>
+        <nav th:replace="~{layouts/main :: navbar}"></nav>
 
-    <header class="masthead text-center text-white">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <!-- Slide One - Set the background image for this slide in the line below -->
-                <div class="carousel-item active" th:style="'background:url(' + @{/img/carousel/monalisa.jpg} + ');'">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h1 class="display-4">MONALISA</h1>
-                        <p class="lead">Uma plataforma desenvolvida por <b>alunos</b> para <b>alunos</b> da universidade.</p>
+        <header class="masthead text-center text-white">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <!-- Slide One - Set the background image for this slide in the line below -->
+                    <div class="carousel-item active" th:style="'background-image:url(' + @{/img/carousel/mona.jpg} + ');'">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="display-4">Monalisa</h1>
+                            <p class="lead">Uma plataforma desenvolvida por <b>alunos</b> para <b>alunos</b> da universidade.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Slide Two - Set the background image for this slide in the line below -->
+                    <div class="carousel-item" th:style="'background-image:url(' + @{/img/carousel/estudo.jpg} + ');'">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="display-4">Estudando em conjunto</h1>
+                            <p class="lead">
+                                Uma plataforma em que o aluno pode <b>compartilhar suas dificuldades, dúvidas, ou problemas</b>
+                                nos componentes curriculares do seu curso com os demais <b>alunos que já a estudaram
+                                e podem ajudá-los</b>.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Slide Three - Set the background image for this slide in the line below -->
+                    <div class="carousel-item" th:style="'background-image:url(' + @{/img/carousel/alunos.jpg} + ');'">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1 class="display-4">Compartilhando conhecimento</h1>
+                            <p class="lead">
+                                Todos os alunos podem ser monitores e <b>compartilhar os conhecimentos adiquiridos</b>
+                                nas disciplinas respondendo as dúvidas de <b>pessoas que precisam de ajuda</b>.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <!-- Slide Two - Set the background image for this slide in the line below -->
-                <div class="carousel-item" th:style="'background:url(' + @{/img/carousel/estudo.jpg} + ');'">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2 class="display-4">Estudando em conjunto</h2>
-                        <p class="lead">
-                            Uma plataforma em que o aluno pode <b>compartilhar suas dificuldades, dúvidas, ou problemas</b>
-                            nos componentes curriculares do seu curso com os demais <b>alunos que já a estudaram
-                            e podem ajudá-los</b>.
-                        </p>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </header>
+
+        <section id="sobre">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" th:src="@{/img/index/01.jpg}" alt="">
+                        </div>
                     </div>
-                </div>
-                <!-- Slide Three - Set the background image for this slide in the line below -->
-                <div class="carousel-item" th:style="'background:url(' + @{/img/carousel/alunos.jpg} + ');'">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h2 class="display-4">Compartilhando conhecimento</h2>
-                        <p class="lead">
-                            Todos os alunos podem ser monitores e <b>compartilhar os conhecimentos adiquiridos</b>
-                            nas disciplinas respondendo as dúvidas de <b>pessoas que precisam de ajuda</b>.
-                        </p>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h1 class="display-4">O que é a Monalisa?</h1>
+                            <p class="justify">A <b>Monalisa</b>, ou monitoria online,
+                                é uma plataforma que se propõe a oferecer um tipo de monitoria online para universitários.
+                                Aqui, os alunos podem seguir as disciplinas que forem do seu interesse e postar suas dúvidas,
+                                ajudarem outros alunos com suas dificuldades, compartilhar materiais, vídeo aulas, conhecimentos,
+                                dicas, experiências e etc.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </header>
+        </section>
 
-    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}" ></script>
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" th:src="@{/img/index/02.jpg}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-5">
+                            <h2 class="display-4">O que a plataforma oferece?</h2>
+                            <p class="justify">
+                                A proposta do sistema é justamente permitir que alunos que provém do conhecimento
+                                em determinado conteúdo possam ajudar outros que estão estudando-o, seja respondendo
+                                dúvidas postadas, compartilhando materiais de estudo ou links para vídeos aulas,
+                                ou explicando como funciona a didática ou método avaliativo
+                                dos professores que ministrou sua turma.
+                            </p>
+                            <p class="justify">
+                                Ademais, um outro objetivo do sistema é permitir que haja uma monitoria online,
+                                com um aluno como monitor de determinada área de conhecimento que pode dar aulas online,
+                                marcar horários de monitorias presenciais, etc.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- Carousel JavaScript -->
-    <script th:src="@{/vendor/jquery/jquery.slim.min.js}" ></script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}" ></script>
-</body>
+        <section>
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5">
+                            <img class="img-fluid rounded-circle" th:src="@{/img/index/03.jpg}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">Como posso usar?</h2>
+                            <p class="justify">
+                                Usar a Monalida é muito simples. Basta <a href="">entrar</a> na plataforma, seguir
+                                as disciplinas que você deseja acompanhar e pronto. Depois disso, é só interagir na plataforma
+                                como você achar melhor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer th:replace="~{layouts/main :: footer}"></footer>
+
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+        <!-- Carousel JavaScript -->
+        <script th:src="@{/vendor/jquery/jquery.slim.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+    </body>
 </html>
