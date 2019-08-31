@@ -1,6 +1,5 @@
 package br.com.monalisa.model;
 
-import br.com.monalisa.dto.UsuarioDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

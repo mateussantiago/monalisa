@@ -3,7 +3,6 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "usuario")
@@ -29,9 +28,6 @@ public class Usuario implements Serializable {
     @NotBlank
     @Column(name = "senha")
     private String senha;
-
-    @OneToMany(mappedBy = "usuario")
-    Set<RelUsuarioTurma> relUsuarioTurmas;
 
     public Long getIdUsuario() {
         return idUsuario;

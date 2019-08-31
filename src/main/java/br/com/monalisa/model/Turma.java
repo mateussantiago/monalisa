@@ -3,7 +3,6 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "turma")
@@ -15,18 +14,34 @@ public class Turma implements Serializable {
     private Long idTurma;
 
     @NotBlank
+    @Column(name = "nome")
+    private String nome;;
+
+    @NotBlank
     @Column(name = "descricao")
     private String descricao;
 
-    public Long getIdTurma() { return idTurma; }
+    public Long getIdTurma() {
+        return idTurma;
+    }
 
-    public void setIdTurma(Long idTurma) { this.idTurma = idTurma; }
+    public void setIdTurma(Long idTurma) {
+        this.idTurma = idTurma;
+    }
 
-    public String getDescricao() { return descricao; }
+    public String getNome() {
+        return nome;
+    }
 
-    public void setDescricao(String descricao) { this.descricao = descricao; }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-    @OneToMany(mappedBy = "turma")
-    Set<RelUsuarioTurma> relUsuarioTurmas;
+    public String getDescricao() {
+        return descricao;
+    }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 }
