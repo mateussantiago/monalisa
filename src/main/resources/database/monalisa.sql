@@ -1,23 +1,106 @@
+-- DROP SEQUENCE public.seq_id_usuario;
 CREATE SEQUENCE public.seq_id_usuario
    INCREMENT 1
    START 1
    MINVALUE 1
    MAXVALUE 999999999999999999;
 
+-- Permissions
+ALTER SEQUENCE public.seq_id_usuario OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_usuario TO postgres;
+
 -- Drop table
 -- DROP TABLE public.usuario;
 CREATE TABLE public.usuario (
-	id_usuario serial NOT NULL,
+	id_usuario int4 NOT NULL,
 	nome varchar(250) NOT NULL,
 	login varchar(50) NOT NULL,
 	email varchar(250) NOT NULL,
-	senha varchar(256) NOT NULL,
+	senha varchar(60) NOT NULL,
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario),
-	CONSTRAINT usuario_email_key UNIQUE (email),
-	CONSTRAINT usuario_usuario_key UNIQUE (login)
 );
+
 -- Permissions
 ALTER TABLE public.usuario OWNER TO postgres;
 GRANT ALL ON TABLE public.usuario TO postgres;
--- Add sequence
-ALTER TABLE usuario ALTER COLUMN id_usuario SET DEFAULT NEXTVAL('seq_id_usuario');
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_tag;
+CREATE SEQUENCE public.seq_id_tag
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_tag OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_tag TO postgres;
+
+-- Drop table
+-- DROP TABLE public.tag;
+CREATE TABLE public.tag (
+	id_tag int4 NOT NULL,
+	nome varchar(250) NULL,
+	ativo bool NOT NULL DEFAULT true,
+	CONSTRAINT pk_tag PRIMARY KEY (id_tag),
+);
+
+-- Permissions
+ALTER TABLE public.tag OWNER TO postgres;
+GRANT ALL ON TABLE public.tag TO postgres;
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_turma;
+CREATE SEQUENCE public.seq_id_turma
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_turma OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_turma TO postgres;
+
+-- Drop table
+-- DROP TABLE public.turma;
+CREATE TABLE public.turma (
+	id_turma int4 NOT NULL,
+	nome varchar(250) NULL,
+	descricao varchar(1000) NULL,
+	ativo bool NOT NULL DEFAULT true,
+	CONSTRAINT pk_turma PRIMARY KEY (id_turma)
+);
+
+-- Permissions
+ALTER TABLE public.turma OWNER TO postgres;
+GRANT ALL ON TABLE public.turma TO postgres;
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_postagem;
+CREATE SEQUENCE public.seq_id_postagem
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_postagem OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_postagem TO postgres;
+
+-- Drop table
+-- DROP TABLE public.postagem;
+CREATE TABLE public.postagem (
+	id_postagem int4 NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	texto varchar(5000) NULL,
+	avaliacao_positiva int4 NULL,
+	avaliacao_negativa int4 NULL,
+	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem)
+);
+
+-- Permissions
+ALTER TABLE public.postagem OWNER TO postgres;
+GRANT ALL ON TABLE public.postagem TO postgres;
