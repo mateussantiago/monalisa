@@ -17,7 +17,6 @@ public class CustomUsuarioService implements UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Override
     public Usuario registrarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDTO.getNome());
@@ -26,6 +25,10 @@ public class CustomUsuarioService implements UsuarioService {
         usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
 
         return usuarioRepository.save(usuario);
+    }
+
+    public Usuario findByEmail(String email) {
+        return usuarioRepository.findByEmail(email);
     }
 
     public Usuario findByLoginAndPassword(String login, String senha) {

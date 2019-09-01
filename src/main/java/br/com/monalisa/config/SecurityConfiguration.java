@@ -33,13 +33,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login")
                 .permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("feed")
-                .hasAnyRole("USER")
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login/entrar")
+                .successForwardUrl("/login/entrar")
+                .usernameParameter("inputEmail")
+                .passwordParameter("inputPassword")
                 .and()
-                .formLogin().loginPage("/login")
-                .usernameParameter("login")
-                .passwordParameter("senha")
-                .successForwardUrl("/feed");
+                .csrf().disable();
     }
 }
