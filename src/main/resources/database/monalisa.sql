@@ -165,6 +165,7 @@ CREATE TABLE public.turmausuario(
     id_turma int4 NOT NULL,
     data_inicio TIMESTAMP,
     data_fim TIMESTAMP,
+    ativo bool NOT NULL,
     CONSTRAINT pk_turmausuario PRIMARY KEY (id_turma_usuario),
 
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario)

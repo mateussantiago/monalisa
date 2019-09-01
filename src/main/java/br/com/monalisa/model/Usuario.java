@@ -2,7 +2,9 @@ package br.com.monalisa.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "usuario")
@@ -28,6 +30,17 @@ public class Usuario implements Serializable {
     @NotBlank
     @Column(name = "senha")
     private String senha;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private Set<TurmaUsuario> turmas;
+
+    public Set<TurmaUsuario> getTurmas() {
+        return turmas;
+    }
+
+    public void setTurmas(Set<TurmaUsuario> turmas) {
+        this.turmas = turmas;
+    }
 
     public Long getIdUsuario() {
         return idUsuario;

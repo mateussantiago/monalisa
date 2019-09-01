@@ -3,6 +3,7 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "turma")
@@ -20,6 +21,9 @@ public class Turma implements Serializable {
     @NotBlank
     @Column(name = "descricao")
     private String descricao;
+
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    private Set<TurmaUsuario> usuarios;
 
 
     public Long getIdTurma() {

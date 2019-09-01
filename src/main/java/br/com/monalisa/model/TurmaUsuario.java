@@ -17,11 +17,11 @@ public class TurmaUsuario implements Serializable {
     @Column(name = "id_turma_usuario")
     private Long idTurmaUsuario;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_turma")
     private Turma turma;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
@@ -29,13 +29,16 @@ public class TurmaUsuario implements Serializable {
     @CreatedDate
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data_inicio;
+    private Date dataInicio;
 
     @Column(name = "data_fim")
     @CreatedDate
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date data_fim;
+    private Date dataFim;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 
     public Long getIdTurmaUsuario() {
         return idTurmaUsuario;
@@ -61,19 +64,27 @@ public class TurmaUsuario implements Serializable {
         this.usuario = usuario;
     }
 
-    public Date getData_inicio() {
-        return data_inicio;
+    public Date getDataInicio() {
+        return dataInicio;
     }
 
-    public void setData_inicio(Date data_inicio) {
-        this.data_inicio = data_inicio;
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
     }
 
-    public Date getData_fim() {
-        return data_fim;
+    public Date getDataFim() {
+        return dataFim;
     }
 
-    public void setData_fim(Date data_fim) {
-        this.data_fim = data_fim;
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

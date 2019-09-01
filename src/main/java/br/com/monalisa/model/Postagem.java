@@ -2,7 +2,9 @@ package br.com.monalisa.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "postagem")
@@ -27,7 +29,16 @@ public class Postagem implements Serializable {
 
     @NotBlank
     @Column(name = "curtidas_negativas")
-    private Long curtidas_negativas;
+    private Long curtidasNegativas;
+
+    @Column(name = "id_postagem_genitora")
+    private Postagem postagemGenitora;
+
+    @OneToMany(mappedBy = "postagemGenitora", cascade = CascadeType.ALL)
+    private Set<Postagem> postagensFilhas;
+
+//    @OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
+//    private
 
     public Long getIdPostagem(){  return idPostagem;  }
 
@@ -41,11 +52,31 @@ public class Postagem implements Serializable {
 
     public void setCurtidasPositivas(Long curtidasPositivas) { this.curtidasPositivas = curtidasPositivas; }
 
-    public Long getCurtidas_negativas() { return curtidas_negativas; }
+    public Long getCurtidasNegativas() {
+        return curtidasNegativas;
+    }
 
-    public void setCurtidas_negativas(Long curtidas_negativas) { this.curtidas_negativas = curtidas_negativas; }
+    public void setCurtidasNegativas(Long curtidasNegativas) {
+        this.curtidasNegativas = curtidasNegativas;
+    }
 
     public Long getUsuarioAutor() { return usuarioAutor; }
 
     public void setUsuarioAutor(Long usuarioAutor) { this.usuarioAutor = usuarioAutor; }
+
+    public Postagem getPostagemGenitora() {
+        return postagemGenitora;
+    }
+
+    public void setPostagemGenitora(Postagem postagemGenitora) {
+        this.postagemGenitora = postagemGenitora;
+    }
+
+    public Set<Postagem> getPostagensFilhas() {
+        return postagensFilhas;
+    }
+
+    public void setPostagensFilhas(Set<Postagem> postagensFilhas) {
+        this.postagensFilhas = postagensFilhas;
+    }
 }
