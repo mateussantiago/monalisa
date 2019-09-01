@@ -149,4 +149,33 @@ CREATE TABLE public.turmausuario(
 
     CONSTRAINT fk_turma FOREIGN KEY (id_turma),
     REFERENCES public.turma (id_turma)
+)
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_assunto;
+CREATE SEQUENCE public.seq_id_assunto
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_assunto OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_assunto TO postgres;
+
+-- Drop table
+-- DROP TABLE public.assunto;
+CREATE TABLE public.assunto (
+	id_assunto int4 NOT NULL,
+	nome varchar(250) NULL,
+	descricao varchar(1000) NULL,
+	ativo bool NOT NULL DEFAULT true,
+	CONSTRAINT pk_assunto PRIMARY KEY (id_assunto)
 );
+
+-- Permissions
+ALTER TABLE public.assunto OWNER TO postgres;
+GRANT ALL ON TABLE public.assunto TO postgres;
+
+------------------------------------------------------------
