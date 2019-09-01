@@ -30,16 +30,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/login")
+                .antMatchers("/")
                 .permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("feed")
-                .hasAnyRole("USER")
-                .and()
-                .formLogin().loginPage("/login")
-                .usernameParameter("login")
-                .passwordParameter("senha")
-                .successForwardUrl("/feed");
+                .formLogin().loginPage("/")
+                .usernameParameter("inputEmail")
+                .passwordParameter("inputSenha")
+                .successForwardUrl("/entrar")
+                .failureUrl("/deuruim");
     }
 }
