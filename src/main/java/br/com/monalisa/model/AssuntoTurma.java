@@ -6,6 +6,11 @@ import java.io.Serializable;
 @Entity
 @Table(schema = "public", name = "assuntoturma")
 public class AssuntoTurma implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_assuntoturma", allocationSize = 1)
+    @Column(name = "id_assuntoturma")
+    private Long idAssuntoTurma;
 
     @ManyToOne
     @JoinColumn(name = "id_assunto")
