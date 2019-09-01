@@ -25,6 +25,7 @@ ALTER TABLE public.usuario OWNER TO postgres;
 GRANT ALL ON TABLE public.usuario TO postgres;
 
 ------------------------------------------------------------
+
 -- DROP SEQUENCE public.seq_id_tag;
 CREATE SEQUENCE public.seq_id_tag
 	INCREMENT BY 1
@@ -51,6 +52,7 @@ ALTER TABLE public.tag OWNER TO postgres;
 GRANT ALL ON TABLE public.tag TO postgres;
 
 ------------------------------------------------------------
+
 -- DROP SEQUENCE public.seq_id_turma;
 CREATE SEQUENCE public.seq_id_turma
 	INCREMENT BY 1
@@ -78,6 +80,7 @@ ALTER TABLE public.turma OWNER TO postgres;
 GRANT ALL ON TABLE public.turma TO postgres;
 
 ------------------------------------------------------------
+
 -- DROP SEQUENCE public.seq_id_postagem;
 CREATE SEQUENCE public.seq_id_postagem
 	INCREMENT BY 1
@@ -106,6 +109,18 @@ ALTER TABLE public.postagem OWNER TO postgres;
 GRANT ALL ON TABLE public.postagem TO postgres;
 
 ------------------------------------------------------------
+
+-- DROP SEQUENCE public.seq_id_tagturma;
+CREATE SEQUENCE public.seq_id_tagturma
+   INCREMENT 1
+   START 1
+   MINVALUE 1
+   MAXVALUE 999999999999999999;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_tagturma OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_tagturma TO postgres;
+
 -- Drop table
 -- DROP TABLE public.tagturma;
 CREATE TABLE public.tagturma(
@@ -119,6 +134,10 @@ CREATE TABLE public.tagturma(
     CONSTRAINT fk_turma FOREIGN KEY (id_turma)
     REFERENCES public.turma(id_turma)
 );
+
+-- Permissions
+ALTER TABLE public.tagturma OWNER TO postgres;
+GRANT ALL ON TABLE public.tagturma TO postgres;
 
 ------------------------------------------------------------
 
@@ -149,9 +168,14 @@ CREATE TABLE public.turmausuario(
 
     CONSTRAINT fk_turma FOREIGN KEY (id_turma),
     REFERENCES public.turma (id_turma)
-)
+);
+
+-- Permissions
+ALTER TABLE public.turmausuario OWNER TO postgres;
+GRANT ALL ON TABLE public.turmausuario TO postgres;
 
 ------------------------------------------------------------
+
 -- DROP SEQUENCE public.seq_id_assunto;
 CREATE SEQUENCE public.seq_id_assunto
 	INCREMENT BY 1
@@ -177,5 +201,39 @@ CREATE TABLE public.assunto (
 -- Permissions
 ALTER TABLE public.assunto OWNER TO postgres;
 GRANT ALL ON TABLE public.assunto TO postgres;
+
+------------------------------------------------------------
+
+-- DROP SEQUENCE public.seq_id_assunto_turma;
+CREATE SEQUENCE public.seq_id_assunto_turma
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_assunto_turma OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_assunto_turma TO postgres;
+
+
+-- Drop table
+-- DROP TABLE public.assuntoturma;
+CREATE TABLE public.assuntoturma(
+
+    id_assunto int4 NOT NULL,
+    id_turma int4 NOT NULL,
+    ativo bool NOT NULL,
+
+    CONSTRAINT fk_assunto FOREIGN KEY (id_assunto)
+    REFERENCES public.assunto(id_assunto),
+
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma)
+    REFERENCES public.turma(id_turma)
+);
+
+-- Permissions
+ALTER TABLE public.assuntoturma OWNER TO postgres;
+GRANT ALL ON TABLE public.assuntoturma TO postgres;
 
 ------------------------------------------------------------
