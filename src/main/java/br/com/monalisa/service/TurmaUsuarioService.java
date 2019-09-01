@@ -2,6 +2,7 @@ package br.com.monalisa.service;
 
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.repository.TurmaUsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.Optional;
 
 @Service
 public class TurmaUsuarioService {
-    TurmaUsuarioRepository turmaUsuarioRepository;
+
+    @Autowired
+    private TurmaUsuarioRepository turmaUsuarioRepository;
 
     public TurmaUsuario save(TurmaUsuario assuntoTurma) {
         return turmaUsuarioRepository.save(assuntoTurma);

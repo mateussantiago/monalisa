@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class AssuntoTurmaPostagemService {
     @Autowired
-    AssuntoTurmaPostagemRepository assuntoTurmaPostagemRepository;
+    private AssuntoTurmaPostagemRepository assuntoTurmaPostagemRepository;
 
     public AssuntoTurmaPostagem save(AssuntoTurmaPostagem tag) {
         return assuntoTurmaPostagemRepository.save(tag);
