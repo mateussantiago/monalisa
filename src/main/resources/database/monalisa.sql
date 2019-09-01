@@ -104,3 +104,17 @@ CREATE TABLE public.postagem (
 -- Permissions
 ALTER TABLE public.postagem OWNER TO postgres;
 GRANT ALL ON TABLE public.postagem TO postgres;
+
+------------------------------------------------------------
+
+CREATE TABLE public.tagturma(
+    id_tag int4 NOT NULL,
+    id_turma int4 NOT NULL,
+    ativo bool NOT NULL,
+
+    CONSTRAINT fk_tag FOREIGN KEY (id_tag)
+    REFERENCES public.tag(id_tag),
+
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma)
+    REFERENCES public.turma(id_turma)
+);
