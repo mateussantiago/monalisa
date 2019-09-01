@@ -106,8 +106,22 @@ ALTER TABLE public.postagem OWNER TO postgres;
 GRANT ALL ON TABLE public.postagem TO postgres;
 
 ------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_tagturma;
+CREATE SEQUENCE public.seq_id_tagturma
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
 
+-- Permissions
+ALTER SEQUENCE public.seq_id_tagturma OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_tagturma TO postgres;
+
+-- Drop table
+-- DROP TABLE public.tagturma;
 CREATE TABLE public.tagturma(
+    id_tagturma int4 NOT NULL,
     id_tag int4 NOT NULL,
     id_turma int4 NOT NULL,
     ativo bool NOT NULL,
@@ -116,5 +130,11 @@ CREATE TABLE public.tagturma(
     REFERENCES public.tag(id_tag),
 
     CONSTRAINT fk_turma FOREIGN KEY (id_turma)
-    REFERENCES public.turma(id_turma)
+    REFERENCES public.turma(id_turma),
+
+    CONSTRAINT pk_tagturma PRIMARY KEY (id_tagturma)
 );
+
+-- Permissions
+ALTER TABLE public.tagturma OWNER TO postgres;
+GRANT ALL ON TABLE public.tagturma TO postgres;

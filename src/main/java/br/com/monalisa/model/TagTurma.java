@@ -6,6 +6,11 @@ import java.io.Serializable;
 @Entity
 @Table(schema = "public", name = "tagturma")
 public class TagTurma implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_tagturma", allocationSize = 1)
+    @Column(name = "id_tagturma")
+    private Long idTagTurma;
 
     @ManyToOne
     @JoinColumn(name = "id_tag")
@@ -17,6 +22,14 @@ public class TagTurma implements Serializable {
 
     @Column(name = "ativo")
     private boolean ativo;
+
+    public Long getIdTagTurma() {
+        return idTagTurma;
+    }
+
+    public void setIdTagTurma(Long idTagTurma) {
+        this.idTagTurma = idTagTurma;
+    }
 
     public Tag getTag() {
         return tag;
