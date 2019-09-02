@@ -22,10 +22,6 @@ public class Turma implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
-    private Set<TurmaUsuario> usuarios;
-
-
     public Long getIdTurma() {
         return idTurma;
     }

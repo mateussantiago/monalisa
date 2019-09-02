@@ -25,6 +25,14 @@ public class TagTurma implements Serializable {
     @Column(name = "ativo")
     private boolean ativo;
 
+    public Long getIdTagTurma() {
+        return idTagTurma;
+    }
+
+    public void setIdTagTurma(Long idTagTurma) {
+        this.idTagTurma = idTagTurma;
+    }
+
     public Tag getTag() {
         return tag;
     }

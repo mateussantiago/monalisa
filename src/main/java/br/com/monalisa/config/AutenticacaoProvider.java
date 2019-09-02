@@ -8,26 +8,33 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AutenticacaoProvider implements AuthenticationProvider {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private UsuarioService usuarioService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String login = authentication.getName();
+        String email = authentication.getName();
         String senha = authentication.getCredentials().toString();
-        Usuario usuario = usuarioService.findByLoginAndPassword(login, senha);
+        Usuario usuario = usuarioService.findByEmail(email);
 
         if (usuario != null) {
-            return new UsernamePasswordAuthenticationToken(login, senha);
+            Boolean senhaCorreta = passwordEncoder.matches(senha, usuario.getSenha());
+
+            if (senhaCorreta) {
+                return new UsernamePasswordAuthenticationToken(email, usuario.getSenha());
+            }
         }
 
         throw new UsernameNotFoundException("Login e/ou Senha inválidos");
-
     }
 
     @Override

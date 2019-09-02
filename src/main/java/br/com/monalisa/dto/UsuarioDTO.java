@@ -10,6 +10,8 @@ public class UsuarioDTO {
 
     public String senha;
 
+    public String confirmarSenha;
+
     public String getNome() {
         return nome;
     }
@@ -40,5 +42,13 @@ public class UsuarioDTO {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getConfirmarSenha() {
+        return confirmarSenha;
+    }
+
+    public void setConfirmarSenha(String confirmarSenha) {
+        this.confirmarSenha = confirmarSenha;
     }
 }

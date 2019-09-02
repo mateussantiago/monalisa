@@ -1,70 +1,53 @@
 package br.com.monalisa.service;
 
+import java.util.List;
+
 import br.com.monalisa.model.Turma;
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.repository.TurmaUsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TurmaUsuarioService {
 
-    @Autowired
-    private TurmaUsuarioRepository turmaUsuarioRepository;
+	@Autowired
+	private TurmaUsuarioRepository turmaUsuarioRepository;
 
-    public TurmaUsuario save(TurmaUsuario turmaUsuario) {
-        turmaUsuario.setDataInicio(new Date());
-        turmaUsuario.setAtivo(true);
+	@Autowired
+	private UsuarioService usuarioService;
 
-        return turmaUsuarioRepository.save(turmaUsuario);
-    }
+	@Autowired
+	private TurmaService turmaService;
 
+	public TurmaUsuario save(TurmaUsuario turmaUsuario) {
+		return turmaUsuarioRepository.save(turmaUsuario);
+	}
 
-    public List<TurmaUsuario> findAll() {
-        return turmaUsuarioRepository.findAll();
-    }
+	public List<TurmaUsuario> findByIdUsuario(Long idUsuario) {
+		return turmaUsuarioRepository.findByIdUsuario(idUsuario);
+	}
 
-    public Optional<TurmaUsuario> findOne(Long id) {
-        return turmaUsuarioRepository.findById(id);
-    }
+	public TurmaUsuario seguirTurma(Long idTurma, Long idUsuario) {
+		Turma turma = turmaService.findByIdTurma(idTurma);
+		Usuario usuario = usuarioService.findByIdUsuario(idUsuario);
+		TurmaUsuario turmaUsuario = new TurmaUsuario();
+		turmaUsuario.setTurma(turma);
+		turmaUsuario.setUsuario(usuario);
 
-    public TurmaUsuario followTurma(Usuario usuario, Turma turma){
-        TurmaUsuario turmaUsuario = new TurmaUsuario();
+		return turmaUsuarioRepository.save(turmaUsuario);
+	}
 
-        turmaUsuario.setUsuario(usuario);
-        turmaUsuario.setTurma(turma);
+	public TurmaUsuario deixarSeguirTurma(Long idTurma, Long idUsuario) {
+		TurmaUsuario turmaUsuario = turmaUsuarioRepository.findByIdTurmaAndIdUsuario(idTurma, idUsuario);
 
-        return save(turmaUsuario);
-    }
+		if (turmaUsuario != null) {
+			turmaUsuario.setAtivo(false);
+			turmaUsuario = turmaUsuarioRepository.save(turmaUsuario);
+		}
 
-    public TurmaUsuario unfollowTurma(Usuario usuario, Turma turma){
-        boolean achouTurma = false;
-
-        TurmaUsuario turmaUsuario = new TurmaUsuario();
-        for (Iterator<TurmaUsuario> it = usuario.getTurmas().iterator(); it.hasNext(); ) {
-            turmaUsuario = it.next();
-            if (turmaUsuario.getTurma().getIdTurma().equals(turma.getIdTurma())) {
-                if(turmaUsuario.isAtivo()){
-                    turmaUsuario.setAtivo(false);
-                    achouTurma = true;
-                    break;
-                } else{
-                    throw new RuntimeException("Usuário já está desvinculado da turma");
-                }
-            }
-        }
-
-        if(!achouTurma){
-            throw new RuntimeException("Usuário não está cadastrado nessa turma");
-        }
-
-        return save(turmaUsuario);
-    }
+		return turmaUsuario;
+	}
 }

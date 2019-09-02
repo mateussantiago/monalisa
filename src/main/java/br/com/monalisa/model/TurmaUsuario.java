@@ -1,90 +1,67 @@
 package br.com.monalisa.model;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
-@Table(schema = "public", name = "tagturma")
+@Table(schema = "public", name = "turma_usuario")
 public class TurmaUsuario implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
-    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_turma_usuario", allocationSize = 1)
-    @Column(name = "id_turma_usuario")
-    private Long idTurmaUsuario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
+	@SequenceGenerator(name = "seqGenerator", sequenceName = "public.turma_usuario_seq", allocationSize = 1)
+	@Column(name = "id_turma_usuario")
+	private Long idTurmaUsuario;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_turma")
-    private Turma turma;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_turma", nullable = false)
+	private Turma turma;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_usuario", nullable = false)
+	private Usuario usuario;
 
-    @Column(name = "data_inicio")
-    @CreatedDate
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataInicio;
+	@Column(name = "ativo")
+	private Boolean ativo;
 
-    @Column(name = "data_fim")
-    @CreatedDate
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataFim;
+	public Long getIdTurmaUsuario() {
+		return idTurmaUsuario;
+	}
 
-    @Column(name = "ativo")
-    private boolean ativo;
+	public void setIdTurmaUsuario(Long idTurmaUsuario) {
+		this.idTurmaUsuario = idTurmaUsuario;
+	}
 
-    public Long getIdTurmaUsuario() {
-        return idTurmaUsuario;
-    }
+	public Turma getTurma() {
+		return turma;
+	}
 
-    public void setIdTurmaUsuario(Long idTurmaUsuario) {
-        this.idTurmaUsuario = idTurmaUsuario;
-    }
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
 
-    public Turma getTurma() {
-        return turma;
-    }
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+	public Boolean getAtivo() {
+		return ativo;
+	}
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    public Date getDataFim() {
-        return dataFim;
-    }
-
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
-    }
-
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
 }

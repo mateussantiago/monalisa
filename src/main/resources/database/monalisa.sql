@@ -178,6 +178,13 @@ ALTER TABLE public.assunto OWNER TO postgres;
 GRANT ALL ON TABLE public.assunto TO postgres;
 
 ------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_tagturma;
+CREATE SEQUENCE public.seq_id_tagturma
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
 
 -- DROP SEQUENCE public.seq_id_assunto_turma;
 CREATE SEQUENCE public.seq_id_assunto_turma
