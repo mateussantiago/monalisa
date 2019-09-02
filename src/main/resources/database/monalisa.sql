@@ -18,6 +18,7 @@ CREATE TABLE public.usuario (
 	login varchar(50) NOT NULL,
 	email varchar(250) NOT NULL,
 	senha varchar(60) NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario)
 );
 

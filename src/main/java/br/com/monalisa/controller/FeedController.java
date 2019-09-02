@@ -33,8 +33,6 @@ public class FeedController {
         List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.findByIdUsuario(idUsuario);
         model.addAttribute("turmasUsuarios", turmaUsuarioList);
 
-        turmaUsuarioService.deixarSeguirTurma(Long.valueOf(3), idUsuario);
-
         return "feed/feed";
     }
 }
