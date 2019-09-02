@@ -20,12 +20,12 @@ public class TurmaUsuarioController {
     @PostMapping("/follow")
     public TurmaUsuario followTurma(@RequestBody Turma turma){
         Usuario usuario = new Usuario();
-        return turmaUsuarioService.followTurma(usuario, turma);
+        return turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), turma.getIdTurma());
     }
 
     @PostMapping("/unfollow")
     public TurmaUsuario unfollowTurma(@RequestBody Turma turma){
         Usuario usuario = new Usuario();
-        return turmaUsuarioService.unfollowTurma(usuario, turma);
+        return turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), turma.getIdTurma());
     }
 }
