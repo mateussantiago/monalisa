@@ -18,7 +18,6 @@ public class Tag implements Serializable {
     @Column(name = "nome")
     private String nome;
 
-    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
 
