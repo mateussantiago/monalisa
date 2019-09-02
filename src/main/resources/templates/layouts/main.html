@@ -1,10 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
+
     <title>Monalisa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <!-- Bootstrap core CSS -->
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
@@ -27,10 +29,18 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="" data-toggle="modal" data-target="#myModal">Entrar</a>
+                        <a class="nav-link" th:href="@{/login}">Entrar</a>
                     </li>
                 </ul>
             </div>
+<!--        <div class="collapse navbar-collapse" id="navbarResponsive" th:if="${#user.hasAuthorization()}">-->
+<!--            <div class="collapse navbar-collapse" id="navbarResponsive">-->
+<!--                <ul class="navbar-nav ml-auto">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="">Sair</a>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
     </nav>
 
@@ -41,52 +51,5 @@
         </div>
         <!-- /.container -->
     </footer>
-
-<!--    <div id="myModal" class="modal fade" role="dialog" th:fragment="modal-login">-->
-<!--        <div class="modal-dialog">-->
-
-<!--            &lt;!&ndash; Modal content&ndash;&gt;-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header text-center">-->
-<!--                    <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel" style="color: #1b1e21;"><strong>Acessar Monalisa</strong></h3>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--                        <span aria-hidden="true">&times;</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <div class="container">-->
-<!--                        <div class="card-signin my-5">-->
-<!--                            <div class="card-body">-->
-<!--                                <form class="form-signin">-->
-<!--                                    <div class="form-label-group">-->
-<!--                                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>-->
-<!--                                        <label for="inputEmail">Email</label>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="form-label-group">-->
-<!--                                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
-<!--                                        <label for="inputPassword">Senha</label>-->
-<!--                                    </div>-->
-
-<!--                                    <div class="custom-control custom-checkbox mb-3">-->
-<!--                                        <input type="checkbox" class="custom-control-input" id="customCheck1">-->
-<!--                                        <label class="custom-control-label" for="customCheck1">Lembrar minha senha</label>-->
-<!--                                    </div>-->
-<!--                                    <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>-->
-<!--                                </form>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <!--Footer-->
-                <div class="modal-footer mx-5 pt-3 mb-1">
-                    <p class="font-small grey-text d-flex justify-content-end">Não possui um cadastro?
-                        <a href="#" class="blue-text ml-1">
-                            Cadastre-se</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
