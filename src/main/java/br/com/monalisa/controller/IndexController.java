@@ -1,6 +1,5 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.dto.UsuarioDTO;
 import br.com.monalisa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -20,7 +20,7 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @RequestMapping("/")
+    @RequestMapping("")
     public String login(Model model) {
 
         return "login/login";
@@ -35,8 +35,9 @@ public class LoginController {
     @RequestMapping(value = "/entrar", method = RequestMethod.POST)
     public String entrar(Model model, HttpSession httpSession) {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
+        httpSession.setAttribute("usuarioLogado", authentication.getPrincipal().toString());
 
-        return "/feed";
+        return "redirect:/feed";
     }
 
     @RequestMapping(value = "/cadastro/novo", method = RequestMethod.POST)
@@ -44,9 +45,9 @@ public class LoginController {
         Usuario usuario = usuarioService.registrarUsuario(usuarioDTO);
 
         if (usuario != null ){
-            return "redirect:../";
+            return "redirect:/login";
         }
 
-        return "/";
+        return "redirect:/";
     }
 }
