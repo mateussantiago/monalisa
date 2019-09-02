@@ -5,12 +5,12 @@ import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-@Table(schema = "public", name = "assuntoturma")
+@Table(schema = "public", name = "assunto_turma")
 public class AssuntoTurma implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
-    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_assuntoturma", allocationSize = 1)
-    @Column(name = "id_assuntoturma")
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_assunto_turma", allocationSize = 1)
+    @Column(name = "id_assunto_turma")
     private Long idAssuntoTurma;
 
     @ManyToOne
