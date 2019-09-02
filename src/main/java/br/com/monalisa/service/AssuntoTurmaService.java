@@ -1,6 +1,8 @@
 package br.com.monalisa.service;
 
+import br.com.monalisa.model.Assunto;
 import br.com.monalisa.model.AssuntoTurma;
+import br.com.monalisa.model.Postagem;
 import br.com.monalisa.repository.AssuntoTurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,4 +26,5 @@ public class AssuntoTurmaService {
     public Optional<AssuntoTurma> findOne(Long id) {
         return assuntoTurmaRepository.findById(id);
     }
+
 }

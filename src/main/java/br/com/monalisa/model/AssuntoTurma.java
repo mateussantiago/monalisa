@@ -2,6 +2,7 @@ package br.com.monalisa.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "assuntoturma")
@@ -22,6 +23,9 @@ public class AssuntoTurma implements Serializable {
 
     @Column(name = "ativo")
     private boolean ativo;
+
+    @OneToMany(mappedBy = "assuntoTurma", cascade = CascadeType.ALL)
+    private Set<Postagem> postagem;
 
     public Assunto getAssunto() {
         return assunto;
@@ -45,5 +49,21 @@ public class AssuntoTurma implements Serializable {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public Long getIdAssuntoTurma() {
+        return idAssuntoTurma;
+    }
+
+    public void setIdAssuntoTurma(Long idAssuntoTurma) {
+        this.idAssuntoTurma = idAssuntoTurma;
+    }
+
+    public Set<Postagem> getPostagem() {
+        return postagem;
+    }
+
+    public void setPostagem(Set<Postagem> postagem) {
+        this.postagem = postagem;
     }
 }

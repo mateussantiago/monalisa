@@ -25,21 +25,9 @@ public class PostagemService  {
         return postagemRepository.findById(id);
     }
 
-//    public Postagem postar(Postagem postagem, AssuntoTurma assuntoTurma){
-//        if(postagem.getPostagemGenitora() == null){
-//            // nao tem postagem genitora, tem que criar uma relacao UsuarioTurmaPostagem
-//
-//            AssuntoTurmaPostagem assuntoTurmaPostagem = new AssuntoTurmaPostagem();
-//            assuntoTurmaPostagem.setAssuntoTurma(assuntoTurma);
-//            assuntoTurmaPostagem.setPostagem(postagem);
-//
-//
-//
-//        }else{
-//            // tem postagem genitora, nao tem que criar uma relacao UsuarioTurmaPostagem
-//            // so aponta pra genitora
-//
-//
-//        }
-//    }
+    public Postagem postar(Postagem postagem, AssuntoTurma assuntoTurma){
+        // essa postagem foi digitada pelo usuario
+        return save(postagem);
+    }
+
 }

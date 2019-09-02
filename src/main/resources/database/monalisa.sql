@@ -81,36 +81,6 @@ GRANT ALL ON TABLE public.turma TO postgres;
 
 ------------------------------------------------------------
 
---DROP SEQUENCE public.seq_id_postagem;
-CREATE SEQUENCE public.seq_id_postagem
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 999999999999999999
-	CACHE 1
-	NO CYCLE;
-
--- Permissions
-ALTER SEQUENCE public.seq_id_postagem OWNER TO postgres;
-GRANT ALL ON SEQUENCE public.seq_id_postagem TO postgres;
-
--- Drop table
---DROP TABLE public.postagem;
-CREATE TABLE public.postagem (
-	id_postagem int4 NOT NULL,
-	ativo bool NOT NULL DEFAULT true,
-	conteudo varchar(5000) NOT NULL,
-	avaliacao_positiva int4 NULL,
-	avaliacao_negativa int4 NULL,
-	id_postagem_genitora int4 NULL,
-
-	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
-
-	constraint fk_postagem foreign key (id_postagem)
-	references public.postagem (id_postagem)
-);
-
-------------------------------------------------------------
-
 -- DROP SEQUENCE public.seq_id_tagturma;
 CREATE SEQUENCE public.seq_id_tagturma
    INCREMENT 1
@@ -245,8 +215,8 @@ GRANT ALL ON TABLE public.assuntoturma TO postgres;
 
 ------------------------------------------------------------
 
--- DROP SEQUENCE public.seq_id_assuntoturma_postagem;
-CREATE SEQUENCE public.seq_id_assuntoturma_postagem
+--DROP SEQUENCE public.seq_id_postagem;
+CREATE SEQUENCE public.seq_id_postagem
 	INCREMENT BY 1
 	MINVALUE 1
 	MAXVALUE 999999999999999999
@@ -254,30 +224,25 @@ CREATE SEQUENCE public.seq_id_assuntoturma_postagem
 	NO CYCLE;
 
 -- Permissions
-ALTER SEQUENCE public.seq_id_assuntoturma_postagem OWNER TO postgres;
-GRANT ALL ON SEQUENCE public.seq_id_assuntoturma_postagem TO postgres;
-
+ALTER SEQUENCE public.seq_id_postagem OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_postagem TO postgres;
 
 -- Drop table
--- DROP TABLE public.assuntoturmapostagem;
-CREATE TABLE public.assuntoturmapostagem(
+--DROP TABLE public.postagem;
+CREATE TABLE public.postagem (
+	id_postagem int4 NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	conteudo varchar(5000) NOT NULL,
+	avaliacao_positiva int4 NULL,
+	avaliacao_negativa int4 NULL,
+	id_postagem_genitora int4 NULL,
+	id_assuntoturma int4 NULL,
 
-    id_assuntoturma_postagem int4 NOT NULL,
-    id_assuntoturma int4 NOT NULL,
-    id_postagem int4 NOT NULL,
-    ativo bool NOT NULL,
+	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
 
-    CONSTRAINT fk_assuntoturma FOREIGN KEY (id_assuntoturma)
-    REFERENCES public.assuntoturma(id_assuntoturma),
+	constraint fk_postagem foreign key (id_postagem)
+	references public.postagem (id_postagem),
 
-    CONSTRAINT fk_postagem FOREIGN KEY (id_postagem)
-    REFERENCES public.postagem(id_postagem),
-
-    CONSTRAINT pk_assuntoturmapostagem PRIMARY KEY (id_assuntoturma_postagem)
+	constraint fk_assuntoturma foreign key (id_assuntoturma)
+	references public.assuntoturma (id_assuntoturma)
 );
-
--- Permissions
-ALTER TABLE public.assuntoturmapostagem OWNER TO postgres;
-GRANT ALL ON TABLE public.assuntoturmapostagem TO postgres;
-
-------------------------------------------------------------

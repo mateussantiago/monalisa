@@ -9,6 +9,7 @@ import java.util.Set;
 @Entity
 @Table(schema = "public", name = "postagem")
 public class Postagem implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
     @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_postagem", allocationSize = 1)
@@ -19,26 +20,28 @@ public class Postagem implements Serializable {
     @Column(name = "texto")
     private String texto;
 
-    @NotBlank
+    @NotNull
     @Column(name = "usuario_autor")
     private Long usuarioAutor;
 
-    @NotBlank
+    @NotNull
     @Column(name = "curtidas_positivas")
     private Long curtidasPositivas;
 
-    @NotBlank
+    @NotNull
     @Column(name = "curtidas_negativas")
     private Long curtidasNegativas;
 
-    @Column(name = "id_postagem_genitora")
+    @ManyToOne
+    @JoinColumn(name = "id_postagem_genitora")
     private Postagem postagemGenitora;
+
+    @ManyToOne
+    @JoinColumn(name = "id_assuntoturma")
+    private AssuntoTurma assuntoTurma;
 
     @OneToMany(mappedBy = "postagemGenitora", cascade = CascadeType.ALL)
     private Set<Postagem> postagensFilhas;
-
-//    @OneToMany(mappedBy = "postagem", cascade = CascadeType.ALL)
-//    private
 
     public Long getIdPostagem(){  return idPostagem;  }
 
@@ -79,4 +82,14 @@ public class Postagem implements Serializable {
     public void setPostagensFilhas(Set<Postagem> postagensFilhas) {
         this.postagensFilhas = postagensFilhas;
     }
+
+    public AssuntoTurma getAssuntoTurma() {
+        return assuntoTurma;
+    }
+
+    public void setAssuntoTurma(AssuntoTurma assuntoTurma) {
+        this.assuntoTurma = assuntoTurma;
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package br.com.monalisa.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -20,6 +21,7 @@ public class TagTurma implements Serializable {
     @JoinColumn(name = "id_turma")
     private Turma turma;
 
+    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
 

@@ -14,10 +14,10 @@ public class PostagemController {
     @Autowired
     private PostagemService postagemService;
 
-//    @PostMapping("/")
-//    public Postagem postar(@RequestBody Postagem postagem){
-//        postagemService.save(postagem);
-//    }
+    @PostMapping("/")
+    public Postagem postar(@RequestBody Postagem postagem){
+        return postagemService.save(postagem);
+    }
 
 
 }

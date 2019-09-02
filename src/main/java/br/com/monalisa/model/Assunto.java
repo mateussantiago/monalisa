@@ -16,7 +16,7 @@ public class Assunto implements Serializable {
 
     @NotBlank
     @Column(name = "nome")
-    private String nome;;
+    private String nome;
 
     @NotBlank
     @Column(name = "descricao")
