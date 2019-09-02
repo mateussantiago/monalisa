@@ -1,15 +1,16 @@
 package br.com.monalisa.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "public", name = "tagturma")
+@Table(schema = "public", name = "tag_turma")
 public class TagTurma implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
-    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_tagturma", allocationSize = 1)
-    @Column(name = "id_tagturma")
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_tag_turma", allocationSize = 1)
+    @Column(name = "id_tag_turma")
     private Long idTagTurma;
 
     @ManyToOne

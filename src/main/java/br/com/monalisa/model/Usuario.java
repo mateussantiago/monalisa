@@ -2,7 +2,9 @@ package br.com.monalisa.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "usuario")
@@ -28,6 +30,9 @@ public class Usuario implements Serializable {
     @NotBlank
     @Column(name = "senha")
     private String senha;
+
+    @Column(name = "ativo")
+    private Boolean ativo;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -67,5 +72,13 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }
