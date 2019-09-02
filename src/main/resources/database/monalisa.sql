@@ -119,22 +119,53 @@ ALTER SEQUENCE public.seq_id_tagturma OWNER TO postgres;
 GRANT ALL ON SEQUENCE public.seq_id_tagturma TO postgres;
 
 -- Drop table
--- DROP TABLE public.tagturma;
-CREATE TABLE public.tagturma(
-    id_tagturma int4 NOT NULL,
-    id_tag int4 NOT NULL,
-    id_turma int4 NOT NULL,
-    ativo bool NOT NULL,
-
-    CONSTRAINT fk_tag FOREIGN KEY (id_tag)
-    REFERENCES public.tag(id_tag),
-
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma)
-    REFERENCES public.turma(id_turma),
-
-    CONSTRAINT pk_tagturma PRIMARY KEY (id_tagturma)
+-- DROP TABLE public.tag_turma;
+CREATE TABLE public.tag_turma (
+	id_tag_turma int4 NOT NULL,
+	id_tag int4 NOT NULL,
+	id_turma int4 NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	CONSTRAINT pk_tagturma PRIMARY KEY (id_tag_turma),
+	CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES tag(id_tag),
+	CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES turma(id_turma)
 );
 
 -- Permissions
-ALTER TABLE public.tagturma OWNER TO postgres;
-GRANT ALL ON TABLE public.tagturma TO postgres;
+ALTER TABLE public.tag_turma OWNER TO postgres;
+GRANT ALL ON TABLE public.tag_turma TO postgres;
+
+
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_turma_usuario
+CREATE SEQUENCE public.seq_id_turma_usuario
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_turma_usuario OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_turma_usuario TO postgres;
+
+-- Drop table
+-- DROP TABLE public.turma_usuario;
+CREATE TABLE public.turma_usuario(
+    id_turma_usuario int4 NOT NULL,
+    id_turma int4 NOT NULL,
+    id_usuario int4 NOT NULL,
+    ativo bool NOT NULL DEFAULT true,
+
+    CONSTRAINT pk_turma_usuario PRIMARY KEY (id_turma_usuario, id_turma, id_usuario),
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma),
+	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario(id_usuario)
+);
+
+-- Permissions
+ALTER TABLE public.turma_usuario OWNER TO postgres;
+GRANT ALL ON TABLE public.turma_usuario TO postgres;
+
+
+
+

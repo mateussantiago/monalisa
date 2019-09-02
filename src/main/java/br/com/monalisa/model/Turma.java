@@ -21,7 +21,6 @@ public class Turma implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
-
     public Long getIdTurma() {
         return idTurma;
     }

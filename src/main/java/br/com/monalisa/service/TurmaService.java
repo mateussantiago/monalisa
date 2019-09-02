@@ -21,7 +21,7 @@ public class TurmaService  {
         return turmaRepository.findAll();
     }
 
-    public Optional<Turma> findOne(Long id) {
-        return turmaRepository.findById(id);
+    public Turma findByIdTurma(Long id) {
+        return turmaRepository.findByIdTurma(id);
     }
 }

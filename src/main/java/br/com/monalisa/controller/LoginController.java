@@ -35,7 +35,9 @@ public class LoginController {
     @RequestMapping(value = "/entrar", method = RequestMethod.POST)
     public String entrar(Model model, HttpSession httpSession) {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        httpSession.setAttribute("usuarioLogado", authentication.getPrincipal().toString());
+        Usuario usuario = usuarioService.findByEmail(authentication.getPrincipal().toString());
+
+        httpSession.setAttribute("usuarioLogado", usuario.getIdUsuario());
 
         return "redirect:/feed";
     }
