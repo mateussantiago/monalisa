@@ -12,6 +12,7 @@ import br.com.monalisa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,7 +32,13 @@ public class FeedController {
     public String feed(Model model, HttpSession httpSession) {
         Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
         List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.findByIdUsuario(idUsuario);
-        model.addAttribute("turmasUsuarios", turmaUsuarioList);
+        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
+
+        return "feed/feed";
+    }
+
+    @RequestMapping(value = "/turma/{idTUrma}")
+    public String turma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
 
         return "feed/feed";
     }

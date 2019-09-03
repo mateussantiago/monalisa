@@ -12,9 +12,9 @@
         <div class="col-lg-3">
             <br>
             <div class="list-group">
-                <a href="#" class="list-group-item active">Cálculo 1</a>
-                <a href="#" class="list-group-item">Cálculo 2</a>
-                <a href="#" class="list-group-item">Cálculo 3</a>
+                <tr th:each="turmaUsuario : ${turmaUsuarioList}">
+                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTUrma}(idTurma = ${turmaUsuario.turma.id)}" class="list-group-item active"></a>
+                </tr>
             </div>
         </div>
         <!-- /.col-lg-3 -->
