@@ -3,20 +3,20 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
-@Table(schema = "public", name = "turma")
-public class Turma implements Serializable {
+@Table(schema = "public", name = "assunto")
+public class Assunto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
-    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_turma", allocationSize = 1)
-    @Column(name = "id_turma")
-    private Long idTurma;
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_assunto", allocationSize = 1)
+    @Column(name = "id_assunto")
+    private Long idAssunto;
 
     @NotBlank
     @Column(name = "nome")
-    private String nome;;
+    private String nome;
 
     @NotBlank
     @Column(name = "descricao")
@@ -25,12 +25,12 @@ public class Turma implements Serializable {
     @Column(name = "ativo")
     private Boolean ativo;
 
-    public Long getIdTurma() {
-        return idTurma;
+    public Long getIdAssunto() {
+        return idAssunto;
     }
 
-    public void setIdTurma(Long idTurma) {
-        this.idTurma = idTurma;
+    public void setIdAssunto(Long idAssunto) {
+        this.idAssunto = idAssunto;
     }
 
     public String getNome() {
