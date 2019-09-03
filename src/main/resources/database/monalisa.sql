@@ -217,6 +217,6 @@ CREATE TABLE public.postagem (
 	id_postagem_genitora int4 NULL,
 	id_assunto_turma int4 NULL,
 	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
-	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES public.postagem (id_postagem),
+	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem_genitora) REFERENCES public.postagem (id_postagem),
     CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma)
 );

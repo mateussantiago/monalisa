@@ -21,7 +21,7 @@ public class Postagem implements Serializable {
 
     @NotNull
     @Column(name = "usuario_autor")
-    private Long usuarioAutor;
+    private Usuario usuarioAutor;
 
     @NotNull
     @Column(name = "curtidas_positivas")
@@ -40,7 +40,7 @@ public class Postagem implements Serializable {
     private AssuntoTurma assuntoTurma;
 
     @Column(name = "ativo")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     public Long getIdPostagem() {
         return idPostagem;
@@ -74,11 +74,11 @@ public class Postagem implements Serializable {
         this.curtidasNegativas = curtidasNegativas;
     }
 
-    public Long getUsuarioAutor() {
+    public Usuario getUsuarioAutor() {
         return usuarioAutor;
     }
 
-    public void setUsuarioAutor(Long usuarioAutor) {
+    public void setUsuarioAutor(Usuario usuarioAutor) {
         this.usuarioAutor = usuarioAutor;
     }
 
