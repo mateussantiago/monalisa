@@ -27,4 +27,7 @@ public class AssuntoTurmaService {
         return assuntoTurmaRepository.findById(id);
     }
 
+    public AssuntoTurma buscarAssuntoTurmaPorIdAssuntoEIdTurma(Long assunto, Long turma){
+        return assuntoTurmaRepository.findAssuntoTurmaByAssuntoAndTurma(assunto, turma);
+    }
 }
