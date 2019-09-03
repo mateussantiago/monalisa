@@ -13,7 +13,7 @@
             <br>
             <div class="list-group">
                 <tr th:each="turmaUsuario : ${turmaUsuarioList}">
-                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTUrma}(idTurma = ${turmaUsuario.turma.id)}" class="list-group-item active"></a>
+                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}" class="list-group-item active"></a>
                 </tr>
             </div>
         </div>

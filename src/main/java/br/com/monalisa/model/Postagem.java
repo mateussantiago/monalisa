@@ -36,7 +36,7 @@ public class Postagem implements Serializable {
     private Postagem postagemGenitora;
 
     @ManyToOne
-    @JoinColumn(name = "id_assuntoturma")
+    @JoinColumn(name = "id_assunto_turma")
     private AssuntoTurma assuntoTurma;
 
     @Column(name = "ativo")
