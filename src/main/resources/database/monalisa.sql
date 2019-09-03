@@ -18,7 +18,7 @@ CREATE TABLE public.usuario (
 	login varchar(50) NOT NULL,
 	email varchar(250) NOT NULL,
 	senha varchar(60) NOT NULL,
-	ativo bool NOT NULL DEFAULT true,
+	ativo bool NULL DEFAULT true,
 	CONSTRAINT pk_usuario PRIMARY KEY (id_usuario)
 );
 
@@ -44,7 +44,7 @@ GRANT ALL ON SEQUENCE public.seq_id_tag TO postgres;
 CREATE TABLE public.tag (
 	id_tag int4 NOT NULL,
 	nome varchar(250) NULL,
-	ativo bool NOT NULL DEFAULT true,
+	ativo bool NULL DEFAULT true,
 	CONSTRAINT pk_tag PRIMARY KEY (id_tag)
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE public.turma (
 	id_turma int4 NOT NULL,
 	nome varchar(250) NULL,
 	descricao varchar(1000) NULL,
-	ativo bool NOT NULL DEFAULT true,
+	ativo bool NULL DEFAULT true,
 	CONSTRAINT pk_turma PRIMARY KEY (id_turma)
 );
 
@@ -97,8 +97,8 @@ CREATE TABLE public.tag_turma (
     id_tag_turma int4 NOT NULL,
     id_tag int4 NOT NULL,
     id_turma int4 NOT NULL,
-    ativo bool NOT NULL DEFAULT true,
-    CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma),
+    ativo bool NULL DEFAULT true,
+    CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma)
     CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES public.tag(id_tag),
     CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma)
 );
@@ -128,7 +128,7 @@ CREATE TABLE public.turma_usuario (
     id_turma int4 NOT NULL,
     data_inicio TIMESTAMP,
     data_fim TIMESTAMP,
-    ativo bool NOT NULL DEFAULT true,
+    ativo bool NULL DEFAULT true,
     CONSTRAINT pk_turma_usuario PRIMARY KEY (id_turma_usuario),
     CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario (id_usuario),
     CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma (id_turma)
@@ -157,7 +157,7 @@ CREATE TABLE public.assunto (
 	id_assunto int4 NOT NULL,
 	nome varchar(250) NULL,
 	descricao varchar(1000) NULL,
-	ativo bool NOT NULL DEFAULT true,
+	ativo bool NULL DEFAULT true,
 	CONSTRAINT pk_assunto PRIMARY KEY (id_assunto)
 );
 
@@ -183,7 +183,7 @@ CREATE TABLE public.assunto_turma (
 	id_assunto_turma int4 not null,
     id_assunto int4 NOT NULL,
     id_turma int4 NOT NULL,
-    ativo bool NOT NULL DEFAULT true,
+    ativo bool NULL DEFAULT true,
     CONSTRAINT pk_assunto_turma PRIMARY KEY (id_assunto_turma),
     CONSTRAINT fk_assunto FOREIGN KEY (id_assunto) REFERENCES public.assunto(id_assunto),
     CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma)
