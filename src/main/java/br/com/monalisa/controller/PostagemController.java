@@ -51,7 +51,7 @@ public class PostagemController {
         Postagem postagem = new Postagem();
         postagem.setTexto("text: postagem teste");
         postagem.setAssuntoTurma(assuntoTurma);
-        postagem.setUsuarioAutor(usuario);
+        //  postagem.setUsuarioAutor(usuario);
 
 
         return "index";
