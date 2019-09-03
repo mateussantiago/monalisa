@@ -98,9 +98,9 @@ CREATE TABLE public.tag_turma (
     id_tag int4 NOT NULL,
     id_turma int4 NOT NULL,
     ativo bool NOT NULL DEFAULT true,
-    CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma)
+    CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma),
     CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES public.tag(id_tag),
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma),
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma)
 );
 
 -- Permissions
@@ -216,7 +216,6 @@ CREATE TABLE public.postagem (
 	avaliacao_negativa int4 NULL,
 	id_postagem_genitora int4 NULL,
 	id_assunto_turma int4 NULL,
-	ativo NOT NULL DEFAULT true,
 	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
 	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES public.postagem (id_postagem),
     CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma)
