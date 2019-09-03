@@ -21,7 +21,6 @@ public class TagTurma implements Serializable {
     @JoinColumn(name = "id_turma")
     private Turma turma;
 
-    @NotNull
     @Column(name = "ativo")
     private boolean ativo;
 

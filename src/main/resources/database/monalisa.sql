@@ -1,3 +1,4 @@
+------------------------------------------------------------
 --DROP SEQUENCE public.seq_id_usuario;
 CREATE SEQUENCE public.seq_id_usuario
    INCREMENT 1
@@ -25,7 +26,6 @@ ALTER TABLE public.usuario OWNER TO postgres;
 GRANT ALL ON TABLE public.usuario TO postgres;
 
 ------------------------------------------------------------
-
 --DROP SEQUENCE public.seq_id_tag;
 CREATE SEQUENCE public.seq_id_tag
 	INCREMENT BY 1
@@ -40,7 +40,7 @@ GRANT ALL ON SEQUENCE public.seq_id_tag TO postgres;
 
 -- Drop table
 --DROP TABLE public.tag;
-CREATE TABLE public.tag(
+CREATE TABLE public.tag (
 	id_tag int4 NOT NULL,
 	nome varchar(250) NULL,
 	ativo bool NOT NULL DEFAULT true,
@@ -52,7 +52,6 @@ ALTER TABLE public.tag OWNER TO postgres;
 GRANT ALL ON TABLE public.tag TO postgres;
 
 ------------------------------------------------------------
-
 --DROP SEQUENCE public.seq_id_turma;
 CREATE SEQUENCE public.seq_id_turma
 	INCREMENT BY 1
@@ -80,7 +79,6 @@ ALTER TABLE public.turma OWNER TO postgres;
 GRANT ALL ON TABLE public.turma TO postgres;
 
 ------------------------------------------------------------
-
 -- DROP SEQUENCE public.seq_id_tag_turma;
 CREATE SEQUENCE public.seq_id_tag_turma
    INCREMENT 1
@@ -94,19 +92,14 @@ GRANT ALL ON SEQUENCE public.seq_id_tag_turma TO postgres;
 
 -- Drop table
 -- DROP TABLE public.tag_turma;
-CREATE TABLE public.tag_turma(
+CREATE TABLE public.tag_turma (
     id_tag_turma int4 NOT NULL,
     id_tag int4 NOT NULL,
     id_turma int4 NOT NULL,
-    ativo bool NOT NULL,
-
-    CONSTRAINT fk_tag FOREIGN KEY (id_tag)
-    REFERENCES public.tag(id_tag),
-
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma)
-    REFERENCES public.turma(id_turma),
-
+    ativo bool NOT NULL DEFAULT true,
     CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma)
+    CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES public.tag(id_tag),
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma),
 );
 
 -- Permissions
@@ -114,7 +107,6 @@ ALTER TABLE public.tag_turma OWNER TO postgres;
 GRANT ALL ON TABLE public.tag_turma TO postgres;
 
 ------------------------------------------------------------
-
 -- DROP SEQUENCE public.seq_id_turma_usuario;
 CREATE SEQUENCE public.seq_id_turma_usuario
 	INCREMENT BY 1
@@ -129,20 +121,16 @@ GRANT ALL ON SEQUENCE public.seq_id_turma_usuario TO postgres;
 
 -- Drop table
 -- DROP TABLE public.turma_usuario;
-CREATE TABLE public.turma_usuario(
+CREATE TABLE public.turma_usuario (
     id_turma_usuario int4 NOT NULL,
     id_usuario int4 NOT NULL,
     id_turma int4 NOT NULL,
     data_inicio TIMESTAMP,
     data_fim TIMESTAMP,
-    ativo bool NOT NULL,
+    ativo bool NOT NULL DEFAULT true,
     CONSTRAINT pk_turma_usuario PRIMARY KEY (id_turma_usuario),
-
-    CONSTRAINT fk_usuario FOREIGN KEY (id_usuario)
-    REFERENCES public.usuario (id_usuario),
-
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma)
-    REFERENCES public.turma (id_turma)
+    CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario (id_usuario),
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma (id_turma)
 );
 
 -- Permissions
@@ -150,7 +138,6 @@ ALTER TABLE public.turma_usuario OWNER TO postgres;
 GRANT ALL ON TABLE public.turma_usuario TO postgres;
 
 ------------------------------------------------------------
-
 -- DROP SEQUENCE public.seq_id_assunto;
 CREATE SEQUENCE public.seq_id_assunto
 	INCREMENT BY 1
@@ -173,12 +160,10 @@ CREATE TABLE public.assunto (
 	CONSTRAINT pk_assunto PRIMARY KEY (id_assunto)
 );
 
--- Permissions
 ALTER TABLE public.assunto OWNER TO postgres;
 GRANT ALL ON TABLE public.assunto TO postgres;
 
 ------------------------------------------------------------
-
 -- DROP SEQUENCE public.seq_id_assunto_turma;
 CREATE SEQUENCE public.seq_id_assunto_turma
 	INCREMENT BY 1
@@ -191,22 +176,16 @@ CREATE SEQUENCE public.seq_id_assunto_turma
 ALTER SEQUENCE public.seq_id_assunto_turma OWNER TO postgres;
 GRANT ALL ON SEQUENCE public.seq_id_assunto_turma TO postgres;
 
-
 -- Drop table
 -- DROP TABLE public.assunto_turma;
-CREATE TABLE public.assunto_turma(
+CREATE TABLE public.assunto_turma (
 	id_assunto_turma int4 not null,
     id_assunto int4 NOT NULL,
     id_turma int4 NOT NULL,
-    ativo bool NOT NULL,
-
-    CONSTRAINT fk_assunto FOREIGN KEY (id_assunto)
-    REFERENCES public.assunto(id_assunto),
-
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma)
-    REFERENCES public.turma(id_turma),
-
-    constraint pk_assunto_turma primary key (id_assunto_turma)
+    ativo bool NOT NULL DEFAULT true,
+    CONSTRAINT pk_assunto_turma PRIMARY KEY (id_assunto_turma),
+    CONSTRAINT fk_assunto FOREIGN KEY (id_assunto) REFERENCES public.assunto(id_assunto),
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma)
 );
 
 -- Permissions
@@ -214,7 +193,6 @@ ALTER TABLE public.assunto_turma OWNER TO postgres;
 GRANT ALL ON TABLE public.assunto_turma TO postgres;
 
 ------------------------------------------------------------
-
 --DROP SEQUENCE public.seq_id_postagem;
 CREATE SEQUENCE public.seq_id_postagem
 	INCREMENT BY 1
@@ -237,12 +215,8 @@ CREATE TABLE public.postagem (
 	avaliacao_negativa int4 NULL,
 	id_postagem_genitora int4 NULL,
 	id_assunto_turma int4 NULL,
-
+	ativo NOT NULL DEFAULT true,
 	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
-
-	constraint fk_postagem foreign key (id_postagem)
-	references public.postagem (id_postagem),
-
-	constraint fk_assunto_turma foreign key (id_assunto_turma)
-	references public.assunto_turma (id_assunto_turma)
+	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES public.postagem (id_postagem),
+    CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma)
 );

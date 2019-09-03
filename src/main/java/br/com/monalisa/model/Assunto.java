@@ -22,6 +22,9 @@ public class Assunto implements Serializable {
     @Column(name = "descricao")
     private String descricao;
 
+    @Column(name = "ativo")
+    private Boolean ativo;
+
     public Long getIdAssunto() {
         return idAssunto;
     }
@@ -44,5 +47,13 @@ public class Assunto implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }

@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "postagem")
@@ -40,20 +39,32 @@ public class Postagem implements Serializable {
     @JoinColumn(name = "id_assuntoturma")
     private AssuntoTurma assuntoTurma;
 
-    @OneToMany(mappedBy = "postagemGenitora", cascade = CascadeType.ALL)
-    private Set<Postagem> postagensFilhas;
+    @Column(name = "ativo")
+    private Boolean ativo;
 
-    public Long getIdPostagem(){  return idPostagem;  }
+    public Long getIdPostagem() {
+        return idPostagem;
+    }
 
-    public void setIdPostagem(Long idPostagem) { this.idPostagem = idPostagem;  }
+    public void setIdPostagem(Long idPostagem) {
+        this.idPostagem = idPostagem;
+    }
 
-    public String getTexto(){ return texto; }
+    public String getTexto() {
+        return texto;
+    }
 
-    public void setTexto(String texto) { this.texto = texto; }
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
 
-    public Long getCurtidasPositivas() { return curtidasPositivas; }
+    public Long getCurtidasPositivas() {
+        return curtidasPositivas;
+    }
 
-    public void setCurtidasPositivas(Long curtidasPositivas) { this.curtidasPositivas = curtidasPositivas; }
+    public void setCurtidasPositivas(Long curtidasPositivas) {
+        this.curtidasPositivas = curtidasPositivas;
+    }
 
     public Long getCurtidasNegativas() {
         return curtidasNegativas;
@@ -63,9 +74,13 @@ public class Postagem implements Serializable {
         this.curtidasNegativas = curtidasNegativas;
     }
 
-    public Long getUsuarioAutor() { return usuarioAutor; }
+    public Long getUsuarioAutor() {
+        return usuarioAutor;
+    }
 
-    public void setUsuarioAutor(Long usuarioAutor) { this.usuarioAutor = usuarioAutor; }
+    public void setUsuarioAutor(Long usuarioAutor) {
+        this.usuarioAutor = usuarioAutor;
+    }
 
     public Postagem getPostagemGenitora() {
         return postagemGenitora;
@@ -73,14 +88,6 @@ public class Postagem implements Serializable {
 
     public void setPostagemGenitora(Postagem postagemGenitora) {
         this.postagemGenitora = postagemGenitora;
-    }
-
-    public Set<Postagem> getPostagensFilhas() {
-        return postagensFilhas;
-    }
-
-    public void setPostagensFilhas(Set<Postagem> postagensFilhas) {
-        this.postagensFilhas = postagensFilhas;
     }
 
     public AssuntoTurma getAssuntoTurma() {
@@ -91,5 +98,11 @@ public class Postagem implements Serializable {
         this.assuntoTurma = assuntoTurma;
     }
 
+    public Boolean getAtivo() {
+        return ativo;
+    }
 
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }

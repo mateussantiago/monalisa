@@ -31,16 +31,8 @@ public class Usuario implements Serializable {
     @Column(name = "senha")
     private String senha;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Set<TurmaUsuario> turmas;
-
-    public Set<TurmaUsuario> getTurmas() {
-        return turmas;
-    }
-
-    public void setTurmas(Set<TurmaUsuario> turmas) {
-        this.turmas = turmas;
-    }
+    @Column(name = "ativo")
+    private Boolean ativo;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -80,5 +72,13 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
     }
 }
