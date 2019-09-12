@@ -3,6 +3,7 @@ package br.com.monalisa.service;
 import br.com.monalisa.dto.PostagemDTO;
 import br.com.monalisa.model.*;
 import br.com.monalisa.repository.PostagemRepository;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,14 @@ public class PostagemService {
 
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
+
+    public List<Postagem> findAll() {
+        return postagemRepository.findAll();
+    }
+
+    public Postagem findById(Long id) {
+        return postagemRepository.findPostagemById(id);
+    }
 
     public Postagem save(Postagem postagem) {
         return postagemRepository.save(postagem);

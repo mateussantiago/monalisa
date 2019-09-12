@@ -22,7 +22,7 @@ public class AssuntoService {
         return assuntoRepository.findAll();
     }
 
-    public Optional<Assunto> findOne(Long id) {
+    public Optional<Assunto> findById(Long id) {
         return assuntoRepository.findById(id);
     }
 }

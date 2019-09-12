@@ -18,10 +18,8 @@ public class PostagemController {
     @Autowired
     private PostagemService postagemService;
 
+    @Autowired
     private UsuarioService usuarioService;
-    private TurmaService turmaService;
-    private AssuntoService assuntoService;
-    private AssuntoTurmaService assuntoTurmaService;
 
     @PostMapping(value = "/postar")
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
@@ -32,7 +30,7 @@ public class PostagemController {
             throw new RuntimeException("Não existe usuário ativo nessa sessão");
         }
 
-//        return postagemService.postar(postagemDTO, usuario);
-         return "feed/feed";
+        Postagem postagem = postagemService.postar(postagemDTO, usuario);
+        return "feed/feed";
     }
 }

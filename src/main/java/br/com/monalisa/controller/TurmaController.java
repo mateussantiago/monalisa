@@ -11,21 +11,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
-@RequestMapping("turmausuario")
-public class TurmaUsuarioController {
+@RequestMapping("turma")
+public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
     @PostMapping("/follow")
-    public TurmaUsuario followTurma(@RequestBody Turma turma){
-        Usuario usuario = new Usuario();
-        return turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), turma.getIdTurma());
+    public TurmaUsuario followTurma(HttpSession httpSession, Long idTurma){
+        Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
+
+        return turmaUsuarioService.seguirTurma(idUsuario,idTurma);
     }
 
     @PostMapping("/unfollow")
-    public TurmaUsuario unfollowTurma(@RequestBody Turma turma){
-        Usuario usuario = new Usuario();
-        return turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), turma.getIdTurma());
+    public TurmaUsuario unfollowTurma(HttpSession httpSession, Long idTurma){
+        Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
+
+        return turmaUsuarioService.deixarSeguirTurma(idUsuario, idTurma);
     }
 }

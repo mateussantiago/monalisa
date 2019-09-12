@@ -23,7 +23,7 @@ public class AssuntoTurmaService {
         return assuntoTurmaRepository.findAll();
     }
 
-    public Optional<AssuntoTurma> findOne(Long id) {
+    public Optional<AssuntoTurma> findById(Long id) {
         return assuntoTurmaRepository.findById(id);
     }
 
