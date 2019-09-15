@@ -17,15 +17,15 @@ public class PostagemService {
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
-    public List<Postagem> findAll() {
+    public List<Postagem> buscarTodos() {
         return postagemRepository.findAll();
     }
 
-    public Postagem findById(Long id) {
+    public Postagem buscarPorId(Long id) {
         return postagemRepository.findPostagemById(id);
     }
 
-    public Postagem save(Postagem postagem) {
+    public Postagem salvar(Postagem postagem) {
         return postagemRepository.save(postagem);
     }
 
@@ -36,7 +36,7 @@ public class PostagemService {
             throw new EntidadeNaoEncontradaException("Não existe uma postagem anterior com está referência para adicionar um comentário.");
         }
 
-        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarAssuntoTurmaPorIdAssuntoEIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
+        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarAssuntoTurmaPorIdAssuntoIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
 
         if (assuntoTurma == null) {
             throw new EntidadeNaoEncontradaException("Não foi possível identificar uma referência dessa turma com este assunto.");
@@ -48,6 +48,6 @@ public class PostagemService {
         postagem.setPostagemGenitora(postagemGenitora);
         postagem.setAssuntoTurma(assuntoTurma);
 
-        return save(postagem);
+        return salvar(postagem);
     }
 }

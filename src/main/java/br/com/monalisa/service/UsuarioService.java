@@ -27,15 +27,15 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario findByIdUsuario(Long idUsuario) {
+    public Usuario buscarPorId(Long idUsuario) {
         return usuarioRepository.findByIdUsuario(idUsuario);
     }
 
-    public Usuario findByEmail(String email) {
+    public Usuario buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }
 
-    public Usuario findByLogin(String login) {
+    public Usuario buscarPorLogin(String login) {
         return usuarioRepository.findByLogin(login);
     }
 }

@@ -13,15 +13,15 @@ public class TagService  {
     @Autowired
     private TagRepository tagRepository;
 
-    public Tag save(Tag tag) {
+    public Tag salvar(Tag tag) {
         return tagRepository.save(tag);
     }
 
-    public List<Tag> findAll() {
+    public List<Tag> buscarTodos() {
         return tagRepository.findAll();
     }
 
-    public Optional<Tag> findById(Long id) {
+    public Optional<Tag> buscarPorId(Long id) {
         return tagRepository.findById(id);
     }
 }

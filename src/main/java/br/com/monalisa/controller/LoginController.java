@@ -33,7 +33,7 @@ public class LoginController {
     @RequestMapping(value = "/entrar", method = RequestMethod.POST)
     public String entrar(Model model, HttpSession httpSession) {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        Usuario usuario = usuarioService.findByEmail(authentication.getPrincipal().toString());
+        Usuario usuario = usuarioService.buscarPorEmail(authentication.getPrincipal().toString());
 
         httpSession.setAttribute("usuarioLogado", usuario.getIdUsuario());
 

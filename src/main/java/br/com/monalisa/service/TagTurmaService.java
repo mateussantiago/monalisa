@@ -13,15 +13,15 @@ public class TagTurmaService {
     @Autowired
     private TagTurmaRepository tagTurmaRepository;
 
-    public TagTurma save(TagTurma turma) {
+    public TagTurma salvar(TagTurma turma) {
         return tagTurmaRepository.save(turma);
     }
 
-    public List<TagTurma> findAll() {
+    public List<TagTurma> buscarTodos() {
         return tagTurmaRepository.findAll();
     }
 
-    public Optional<TagTurma> findById(Long id) {
+    public Optional<TagTurma> buscarPorId(Long id) {
         return tagTurmaRepository.findById(id);
     }
 }

@@ -13,19 +13,19 @@ public class AssuntoTurmaService {
     @Autowired
     private AssuntoTurmaRepository assuntoTurmaRepository;
 
-    public AssuntoTurma save(AssuntoTurma assuntoTurma) {
+    public AssuntoTurma salvar(AssuntoTurma assuntoTurma) {
         return assuntoTurmaRepository.save(assuntoTurma);
     }
 
-    public List<AssuntoTurma> findAll() {
+    public List<AssuntoTurma> buscarTodos() {
         return assuntoTurmaRepository.findAll();
     }
 
-    public Optional<AssuntoTurma> findById(Long id) {
+    public Optional<AssuntoTurma> buscarPorId(Long id) {
         return assuntoTurmaRepository.findById(id);
     }
 
-    public AssuntoTurma buscarAssuntoTurmaPorIdAssuntoEIdTurma(Long assunto, Long turma){
+    public AssuntoTurma buscarAssuntoTurmaPorIdAssuntoIdTurma(Long assunto, Long turma){
         return assuntoTurmaRepository.findAssuntoTurmaByAssuntoAndTurma(assunto, turma);
     }
 }

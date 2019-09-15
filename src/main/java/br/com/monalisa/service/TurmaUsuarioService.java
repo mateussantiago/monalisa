@@ -24,22 +24,22 @@ public class TurmaUsuarioService {
 	@Autowired
 	private TurmaService turmaService;
 
-	public TurmaUsuario save(TurmaUsuario turmaUsuario) {
+	public TurmaUsuario salvar(TurmaUsuario turmaUsuario) {
 		return turmaUsuarioRepository.save(turmaUsuario);
 	}
 
-	public List<TurmaUsuario> findByIdUsuario(Long idUsuario) {
+	public List<TurmaUsuario> buscarPorIdUsuario(Long idUsuario) {
 		return turmaUsuarioRepository.findByIdUsuario(idUsuario);
 	}
 
 	public TurmaUsuario seguirTurma(Long idTurma, Long idUsuario) {
-		Turma turma = turmaService.findById(idTurma);
+		Turma turma = turmaService.buscarPorId(idTurma);
 
 		if (turma == null){
 			throw new EntidadeNaoEncontradaException("Turma não encontrada.");
 		}
 
-		Usuario usuario = usuarioService.findByIdUsuario(idUsuario);
+		Usuario usuario = usuarioService.buscarPorId(idUsuario);
 
 		if (usuario == null){
 			throw new EntidadeNaoEncontradaException("Usuário não encontrado.");

@@ -1,9 +1,7 @@
 package br.com.monalisa.controller;
 
 import br.com.monalisa.model.TurmaUsuario;
-import br.com.monalisa.service.TurmaService;
 import br.com.monalisa.service.TurmaUsuarioService;
-import br.com.monalisa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +21,7 @@ public class FeedController {
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
         Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.findByIdUsuario(idUsuario);
+        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
         model.addAttribute("turmaUsuarioList", turmaUsuarioList);
 
         return "feed/feed";

@@ -13,15 +13,15 @@ public class TurmaService  {
     @Autowired
     private TurmaRepository turmaRepository;
 
-    public Turma save(Turma turma) {
+    public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);
     }
 
-    public List<Turma> findAll() {
+    public List<Turma> buscarTodos() {
         return turmaRepository.findAll();
     }
 
-    public Turma findById(Long id) {
+    public Turma buscarPorId(Long id) {
         return turmaRepository.findByIdTurma(id);
     }
 }
