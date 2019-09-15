@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feed")
+@RequestMapping("feed")
 public class FeedController {
 
     @Autowired

@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("login")
 public class LoginController {
-
     @Autowired
     private UsuarioService usuarioService;
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/postagem")
+@RequestMapping("postagem")
 public class PostagemController {
     @Autowired
     private PostagemService postagemService;
