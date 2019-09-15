@@ -22,7 +22,6 @@ public class LoginController {
 
     @RequestMapping("")
     public String login(Model model) {
-
         return "login/login";
     }
 

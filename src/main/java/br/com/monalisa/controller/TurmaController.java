@@ -16,16 +16,16 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
-    @PostMapping("/follow")
-    public TurmaUsuario followTurma(HttpSession httpSession, Long idTurma){
-        Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
+    @PostMapping("/seguir")
+    public TurmaUsuario seguirTurma(HttpSession httpSession, Long idTurma){
+        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
 
         return turmaUsuarioService.seguirTurma(idUsuario, idTurma);
     }
 
-    @PostMapping("/unfollow")
-    public TurmaUsuario unfollowTurma(HttpSession httpSession, Long idTurma){
-        Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
+    @PostMapping("/desseguir")
+    public TurmaUsuario desseguirTurma(HttpSession httpSession, Long idTurma){
+        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
 
         return turmaUsuarioService.deixarSeguirTurma(idUsuario, idTurma);
     }

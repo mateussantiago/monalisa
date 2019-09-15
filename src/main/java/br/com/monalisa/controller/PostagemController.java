@@ -22,7 +22,7 @@ public class PostagemController {
 
     @PostMapping(value = "/postar")
     public String postar(HttpSession httpSession, PostagemDTO postagemDTO){
-        Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
+        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
         Usuario usuario = usuarioService.findByIdUsuario(idUsuario);
 
         if (usuario == null){
