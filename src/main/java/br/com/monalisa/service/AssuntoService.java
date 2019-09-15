@@ -14,15 +14,15 @@ public class AssuntoService {
     @Autowired
     private AssuntoRepository assuntoRepository;
 
+    public List<Assunto> buscarTodos() {
+        return assuntoRepository.buscarTodos();
+    }
+
+    public Assunto buscarPorId(Long id) {
+        return assuntoRepository.buscarPorId(id);
+    }
+
     public Assunto salvar(Assunto assunto) {
         return assuntoRepository.save(assunto);
-    }
-
-    public List<Assunto> buscarTodos() {
-        return assuntoRepository.findAll();
-    }
-
-    public Optional<Assunto> buscarPorId(Long id) {
-        return assuntoRepository.findById(id);
     }
 }
