@@ -33,7 +33,7 @@ public class TurmaUsuarioService {
 	}
 
 	public TurmaUsuario seguirTurma(Long idTurma, Long idUsuario) {
-		Turma turma = turmaService.findByIdTurma(idTurma);
+		Turma turma = turmaService.findById(idTurma);
 
 		if (turma == null){
 			throw new EntidadeNaoEncontradaException("Turma não encontrada.");

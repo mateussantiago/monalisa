@@ -21,7 +21,7 @@ public class TagTurmaService {
         return tagTurmaRepository.findAll();
     }
 
-    public Optional<TagTurma> findOne(Long id) {
+    public Optional<TagTurma> findById(Long id) {
         return tagTurmaRepository.findById(id);
     }
 }
