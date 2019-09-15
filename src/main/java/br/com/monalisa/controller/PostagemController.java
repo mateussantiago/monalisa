@@ -1,7 +1,6 @@
 package br.com.monalisa.controller;
 
 import br.com.monalisa.dto.PostagemDTO;
-import br.com.monalisa.dto.UsuarioDTO;
 import br.com.monalisa.model.*;
 import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;

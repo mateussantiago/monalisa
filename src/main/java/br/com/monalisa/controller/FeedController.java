@@ -18,12 +18,6 @@ import java.util.List;
 public class FeedController {
 
     @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private TurmaService turmaService;
-
-    @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
     @RequestMapping("")
@@ -37,7 +31,6 @@ public class FeedController {
 
     @RequestMapping(value = "/turma/{idTurma}")
     public String turma(@PathVariable("idTurma") Long idTurma, Model model) {
-
-
+        return "";
     }
 }
