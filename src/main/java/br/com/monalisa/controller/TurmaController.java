@@ -20,7 +20,7 @@ public class TurmaController {
     public TurmaUsuario followTurma(HttpSession httpSession, Long idTurma){
         Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
 
-        return turmaUsuarioService.seguirTurma(idUsuario,idTurma);
+        return turmaUsuarioService.seguirTurma(idUsuario, idTurma);
     }
 
     @PostMapping("/unfollow")

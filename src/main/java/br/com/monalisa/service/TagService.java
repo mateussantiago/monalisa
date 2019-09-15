@@ -24,5 +24,4 @@ public class TagService  {
     public Optional<Tag> findOne(Long id) {
         return tagRepository.findById(id);
     }
-
 }

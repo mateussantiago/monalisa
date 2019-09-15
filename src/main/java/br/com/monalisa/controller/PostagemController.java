@@ -21,7 +21,7 @@ public class PostagemController {
     private UsuarioService usuarioService;
 
     @PostMapping(value = "/postar")
-    public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
+    public String postar(HttpSession httpSession, PostagemDTO postagemDTO){
         Long idUsuario = (Long) httpSession.getAttribute("idUsuario");
         Usuario usuario = usuarioService.findByIdUsuario(idUsuario);
 
@@ -29,7 +29,7 @@ public class PostagemController {
             throw new RuntimeException("Não existe usuário ativo nessa sessão");
         }
 
-        Postagem postagem = postagemService.postar(postagemDTO, usuario);
+        postagemService.postar(postagemDTO, usuario);
         return "feed/feed";
     }
 }
