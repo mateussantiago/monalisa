@@ -12,8 +12,6 @@ import br.com.monalisa.repository.TurmaUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
-
 @Service
 public class TurmaUsuarioService {
 
