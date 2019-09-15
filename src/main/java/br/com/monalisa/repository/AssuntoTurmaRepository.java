@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AssuntoTurmaRepository   extends JpaRepository<AssuntoTurma, Long>, JpaSpecificationExecutor<AssuntoTurma> {
+public interface AssuntoTurmaRepository extends JpaRepository<AssuntoTurma, Long>, JpaSpecificationExecutor<AssuntoTurma> {
     AssuntoTurma findAssuntoTurmaByAssuntoAndTurma(Long assunto, Long turma);
 }
