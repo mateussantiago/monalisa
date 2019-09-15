@@ -38,6 +38,6 @@ public class FeedController {
     @RequestMapping(value = "/turma/{idTurma}")
     public String turma(@PathVariable("idTurma") Long idTurma, Model model) {
 
-
+        return "";
     }
 }
