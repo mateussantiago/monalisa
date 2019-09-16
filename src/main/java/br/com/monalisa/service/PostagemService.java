@@ -36,7 +36,7 @@ public class PostagemService {
             throw new EntidadeNaoEncontradaException("Não existe uma postagem anterior com está referência para adicionar um comentário.");
         }
 
-        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarAssuntoTurmaPorIdAssuntoIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
+        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorIdAssuntoEIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
 
         if (assuntoTurma == null) {
             throw new EntidadeNaoEncontradaException("Não foi possível identificar uma referência dessa turma com este assunto.");

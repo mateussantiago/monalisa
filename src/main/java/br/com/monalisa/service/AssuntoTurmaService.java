@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AssuntoTurmaService {
@@ -18,14 +17,14 @@ public class AssuntoTurmaService {
     }
 
     public List<AssuntoTurma> buscarTodos() {
-        return assuntoTurmaRepository.findAll();
+        return assuntoTurmaRepository.buscarTodos();
     }
 
-    public Optional<AssuntoTurma> buscarPorId(Long id) {
-        return assuntoTurmaRepository.findById(id);
+    public AssuntoTurma buscarPorId(Long id) {
+        return assuntoTurmaRepository.buscarPorId(id);
     }
 
-    public AssuntoTurma buscarAssuntoTurmaPorIdAssuntoIdTurma(Long assunto, Long turma){
-        return assuntoTurmaRepository.findAssuntoTurmaByAssuntoAndTurma(assunto, turma);
+    public AssuntoTurma buscarPorIdAssuntoEIdTurma(Long assunto, Long turma){
+        return assuntoTurmaRepository.buscarPorAssuntoETurma(assunto, turma);
     }
 }
