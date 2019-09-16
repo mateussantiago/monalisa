@@ -23,4 +23,8 @@ public class AssuntoService {
     public Assunto salvar(Assunto assunto) {
         return assuntoRepository.save(assunto);
     }
+
+    public List<Assunto> buscarAssuntoPorNome(String assunto){
+        return assuntoRepository.buscarAssuntoPorNome(assunto);
+    }
 }
