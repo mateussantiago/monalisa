@@ -15,7 +15,6 @@ import java.io.Serializable;
 @Entity
 @Table(schema = "public", name = "turma_usuario")
 public class TurmaUsuario implements Serializable {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
 	@SequenceGenerator(name = "seqGenerator", sequenceName = "public.turma_usuario_seq", allocationSize = 1)

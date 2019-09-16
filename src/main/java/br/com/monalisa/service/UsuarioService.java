@@ -28,14 +28,14 @@ public class UsuarioService {
     }
 
     public Usuario buscarPorId(Long idUsuario) {
-        return usuarioRepository.findByIdUsuario(idUsuario);
+        return usuarioRepository.buscarPorId(idUsuario);
     }
 
     public Usuario buscarPorEmail(String email) {
-        return usuarioRepository.findByEmail(email);
+        return usuarioRepository.buscarPorEmail(email);
     }
 
     public Usuario buscarPorLogin(String login) {
-        return usuarioRepository.findByLogin(login);
+        return usuarioRepository.buscarPorLogin(login);
     }
 }

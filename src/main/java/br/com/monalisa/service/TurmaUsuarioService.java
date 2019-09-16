@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TurmaUsuarioService {
-
 	@Autowired
 	private TurmaUsuarioRepository turmaUsuarioRepository;
 
@@ -29,7 +28,7 @@ public class TurmaUsuarioService {
 	}
 
 	public List<TurmaUsuario> buscarPorIdUsuario(Long idUsuario) {
-		return turmaUsuarioRepository.findByIdUsuario(idUsuario);
+		return turmaUsuarioRepository.buscarPorIdUsuario(idUsuario);
 	}
 
 	public TurmaUsuario seguirTurma(Long idTurma, Long idUsuario) {
@@ -53,7 +52,7 @@ public class TurmaUsuarioService {
 	}
 
 	public TurmaUsuario deixarSeguirTurma(Long idTurma, Long idUsuario) {
-		TurmaUsuario turmaUsuario = turmaUsuarioRepository.findByIdTurmaAndIdUsuario(idTurma, idUsuario);
+		TurmaUsuario turmaUsuario = turmaUsuarioRepository.buscarPorIdTurmaEIdUsuario(idTurma, idUsuario);
 
 		if (turmaUsuario == null){
 			throw new OperacaoInvalidaException("Esse usuário não segue essa turma.");

@@ -7,15 +7,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpecificationExecutor<Usuario> {
+    @Query(value = "select * from public.usuario where ativo is true", nativeQuery = true)
+    List<Usuario> buscarTodos();
 
-    @Query(value = "select * from usuario where id_usuario = :idUsuario", nativeQuery = true)
-    Usuario findByIdUsuario(Long idUsuario);
+    @Query(value = "select * from usuario where id_usuario = :id", nativeQuery = true)
+    Usuario buscarPorId(@Param(value = "id") Long idUsuario);
 
     @Query(value = "select * from usuario where email like :email", nativeQuery = true)
-    Usuario findByEmail(@Param("email") String email);
+    Usuario buscarPorEmail(@Param("email") String email);
 
     @Query(value = "select * from usuario where login like :login", nativeQuery = true)
-    Usuario findByLogin(String login);
+    Usuario buscarPorLogin(@Param("login") String login);
 }
