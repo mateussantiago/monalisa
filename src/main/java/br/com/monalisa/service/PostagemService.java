@@ -18,11 +18,11 @@ public class PostagemService {
     private AssuntoTurmaService assuntoTurmaService;
 
     public List<Postagem> buscarTodos() {
-        return postagemRepository.findAll();
+        return postagemRepository.buscarTodos();
     }
 
     public Postagem buscarPorId(Long id) {
-        return postagemRepository.findPostagemById(id);
+        return postagemRepository.buscarPorId(id);
     }
 
     public Postagem salvar(Postagem postagem) {

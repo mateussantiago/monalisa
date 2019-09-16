@@ -12,9 +12,9 @@ import java.util.List;
 
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSpecificationExecutor<Postagem> {
-    @Query(value = "select * from postagem where ativo is true", nativeQuery = true)
-    List<Postagem> findAll();
+    @Query(value = "select * from public.postagem where ativo is true", nativeQuery = true)
+    List<Postagem> buscarTodos();
 
-    @Query(value = "select * from postagem where id_postagem = :idPostagem", nativeQuery = true)
-    Postagem findPostagemById(@Param(value = "idPostagem") Long idPostagem);
+    @Query(value = "select * from public.postagem where id_postagem = :idPostagem", nativeQuery = true)
+    Postagem buscarPorId(@Param(value = "idPostagem") Long idPostagem);
 }

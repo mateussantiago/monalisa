@@ -4,7 +4,6 @@ import br.com.monalisa.model.Tag;
 import br.com.monalisa.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
 import java.util.List;
 
@@ -18,10 +17,10 @@ public class TagService  {
     }
 
     public List<Tag> buscarTodos() {
-        return tagRepository.findAll();
+        return tagRepository.buscarTodos();
     }
 
-    public Optional<Tag> buscarPorId(Long id) {
-        return tagRepository.findById(id);
+    public Tag buscarPorId(Long id) {
+        return tagRepository.buscarPorId(id);
     }
 }
