@@ -1,9 +1,7 @@
 package br.com.monalisa.controller;
 
 import br.com.monalisa.model.TurmaUsuario;
-import br.com.monalisa.service.TurmaService;
 import br.com.monalisa.service.TurmaUsuarioService;
-import br.com.monalisa.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/feed")
+@RequestMapping("feed")
 public class FeedController {
-
-    @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private TurmaService turmaService;
 
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
@@ -29,7 +21,7 @@ public class FeedController {
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
         Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.findByIdUsuario(idUsuario);
+        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
         model.addAttribute("turmaUsuarioList", turmaUsuarioList);
 
         return "feed/feed";
@@ -37,7 +29,6 @@ public class FeedController {
 
     @RequestMapping(value = "/turma/{idTurma}")
     public String turma(@PathVariable("idTurma") Long idTurma, Model model) {
-
         return "";
     }
 }

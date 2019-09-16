@@ -1,28 +1,26 @@
 package br.com.monalisa.service;
 
 import br.com.monalisa.model.Assunto;
-import br.com.monalisa.model.AssuntoTurma;
 import br.com.monalisa.repository.AssuntoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AssuntoService {
     @Autowired
     private AssuntoRepository assuntoRepository;
 
-    public Assunto save(Assunto assunto) {
+    public List<Assunto> buscarTodos() {
+        return assuntoRepository.buscarTodos();
+    }
+
+    public Assunto buscarPorId(Long id) {
+        return assuntoRepository.buscarPorId(id);
+    }
+
+    public Assunto salvar(Assunto assunto) {
         return assuntoRepository.save(assunto);
-    }
-
-    public List<Assunto> findAll() {
-        return assuntoRepository.findAll();
-    }
-
-    public Optional<Assunto> findOne(Long id) {
-        return assuntoRepository.findById(id);
     }
 }

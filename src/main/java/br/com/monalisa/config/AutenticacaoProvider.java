@@ -24,7 +24,7 @@ public class AutenticacaoProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
         String senha = authentication.getCredentials().toString();
-        Usuario usuario = usuarioService.findByEmail(email);
+        Usuario usuario = usuarioService.buscarPorEmail(email);
 
         if (usuario != null) {
             Boolean senhaCorreta = passwordEncoder.matches(senha, usuario.getSenha());
