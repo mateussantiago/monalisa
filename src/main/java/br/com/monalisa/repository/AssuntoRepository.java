@@ -16,4 +16,10 @@ public interface AssuntoRepository  extends JpaRepository<Assunto, Long>, JpaSpe
 
     @Query(value = "select * from assunto where id_assunto = :id and ativo is true", nativeQuery = true)
     Assunto buscarPorId(@Param(value = "id") Long id);
+
+    @Query(value = "select * " +
+            "from assunto " +
+            "where lower(nome) like concat('%', lower(cast(:assunto as text)), '%')" +
+            "and ativo is true", nativeQuery = true)
+    List<Assunto> buscarAssuntoPorNome(@Param(value = "assunto") String assunto);
 }

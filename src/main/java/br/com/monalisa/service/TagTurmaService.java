@@ -1,6 +1,7 @@
 package br.com.monalisa.service;
 
 import br.com.monalisa.model.TagTurma;
+import br.com.monalisa.model.Turma;
 import br.com.monalisa.repository.TagTurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,5 +23,9 @@ public class TagTurmaService {
 
     public TagTurma salvar(TagTurma turma) {
         return tagTurmaRepository.save(turma);
+    }
+
+    public List<Turma> buscarTurmasPorTag(String tag){
+        return tagTurmaRepository.buscarTurmaPorTag(tag);
     }
 }
