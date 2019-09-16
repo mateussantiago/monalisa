@@ -43,7 +43,7 @@ public class PostagemService {
         }
 
         Postagem postagem = new Postagem();
-        postagem.setTexto(postagemDTO.getTexto());
+        postagem.setConteudo(postagemDTO.getTexto());
         postagem.setUsuarioAutor(usuario);
         postagem.setPostagemGenitora(postagemGenitora);
         postagem.setAssuntoTurma(assuntoTurma);
