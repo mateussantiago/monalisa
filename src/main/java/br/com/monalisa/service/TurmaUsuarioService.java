@@ -2,6 +2,8 @@ package br.com.monalisa.service;
 
 import java.util.List;
 
+import br.com.monalisa.exception.EntidadeNaoEncontradaException;
+import br.com.monalisa.exception.OperacaoInvalidaException;
 import br.com.monalisa.model.Turma;
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.model.Usuario;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TurmaUsuarioService {
-
 	@Autowired
 	private TurmaUsuarioRepository turmaUsuarioRepository;
 
@@ -22,17 +23,27 @@ public class TurmaUsuarioService {
 	@Autowired
 	private TurmaService turmaService;
 
-	public TurmaUsuario save(TurmaUsuario turmaUsuario) {
+	public TurmaUsuario salvar(TurmaUsuario turmaUsuario) {
 		return turmaUsuarioRepository.save(turmaUsuario);
 	}
 
-	public List<TurmaUsuario> findByIdUsuario(Long idUsuario) {
-		return turmaUsuarioRepository.findByIdUsuario(idUsuario);
+	public List<TurmaUsuario> buscarPorIdUsuario(Long idUsuario) {
+		return turmaUsuarioRepository.buscarPorIdUsuario(idUsuario);
 	}
 
 	public TurmaUsuario seguirTurma(Long idTurma, Long idUsuario) {
-		Turma turma = turmaService.findByIdTurma(idTurma);
-		Usuario usuario = usuarioService.findByIdUsuario(idUsuario);
+		Turma turma = turmaService.buscarPorId(idTurma);
+
+		if (turma == null){
+			throw new EntidadeNaoEncontradaException("Turma não encontrada.");
+		}
+
+		Usuario usuario = usuarioService.buscarPorId(idUsuario);
+
+		if (usuario == null){
+			throw new EntidadeNaoEncontradaException("Usuário não encontrado.");
+		}
+
 		TurmaUsuario turmaUsuario = new TurmaUsuario();
 		turmaUsuario.setTurma(turma);
 		turmaUsuario.setUsuario(usuario);
@@ -41,13 +52,14 @@ public class TurmaUsuarioService {
 	}
 
 	public TurmaUsuario deixarSeguirTurma(Long idTurma, Long idUsuario) {
-		TurmaUsuario turmaUsuario = turmaUsuarioRepository.findByIdTurmaAndIdUsuario(idTurma, idUsuario);
+		TurmaUsuario turmaUsuario = turmaUsuarioRepository.buscarPorIdTurmaEIdUsuario(idTurma, idUsuario);
 
-		if (turmaUsuario != null) {
-			turmaUsuario.setAtivo(false);
-			turmaUsuario = turmaUsuarioRepository.save(turmaUsuario);
+		if (turmaUsuario == null){
+			throw new OperacaoInvalidaException("Esse usuário não segue essa turma.");
 		}
 
-		return turmaUsuario;
+		turmaUsuario.setAtivo(false);
+
+		return turmaUsuarioRepository.save(turmaUsuario);
 	}
 }

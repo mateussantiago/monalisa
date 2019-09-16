@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("login")
 public class LoginController {
-
     @Autowired
     private UsuarioService usuarioService;
 
     @RequestMapping("")
     public String login(Model model) {
-
         return "login/login";
     }
 
@@ -35,7 +33,7 @@ public class LoginController {
     @RequestMapping(value = "/entrar", method = RequestMethod.POST)
     public String entrar(Model model, HttpSession httpSession) {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-        Usuario usuario = usuarioService.findByEmail(authentication.getPrincipal().toString());
+        Usuario usuario = usuarioService.buscarPorEmail(authentication.getPrincipal().toString());
 
         httpSession.setAttribute("usuarioLogado", usuario.getIdUsuario());
 
