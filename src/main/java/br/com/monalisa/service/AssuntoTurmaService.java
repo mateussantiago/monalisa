@@ -12,16 +12,16 @@ public class AssuntoTurmaService {
     @Autowired
     private AssuntoTurmaRepository assuntoTurmaRepository;
 
-    public AssuntoTurma salvar(AssuntoTurma assuntoTurma) {
-        return assuntoTurmaRepository.save(assuntoTurma);
-    }
-
     public List<AssuntoTurma> buscarTodos() {
         return assuntoTurmaRepository.buscarTodos();
     }
 
     public AssuntoTurma buscarPorId(Long id) {
         return assuntoTurmaRepository.buscarPorId(id);
+    }
+
+    public AssuntoTurma salvar(AssuntoTurma assuntoTurma) {
+        return assuntoTurmaRepository.save(assuntoTurma);
     }
 
     public AssuntoTurma buscarPorIdAssuntoEIdTurma(Long assunto, Long turma){
