@@ -6,6 +6,7 @@ import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,6 +31,20 @@ public class PostagemController {
         }
 
         postagemService.postar(postagemDTO, usuario);
+        return "feed/feed";
+    }
+
+    @PostMapping(value = "/{id}/gostar")
+    public String gostar(Model model, @PathVariable(value = "id") Long id){
+        postagemService.gostar(id);
+
+        return "feed/feed";
+    }
+
+    @PostMapping(value = "/{id}/desgostar")
+    public String desgostar(Model model, @PathVariable(value = "id") Long id){
+        postagemService.desgostar(id);
+
         return "feed/feed";
     }
 }

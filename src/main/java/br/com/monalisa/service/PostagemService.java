@@ -50,4 +50,28 @@ public class PostagemService {
 
         return salvar(postagem);
     }
+
+    public Postagem gostar(Long id){
+        Postagem postagem = this.buscarPorId(id);
+
+        if (postagem == null){
+            throw new EntidadeNaoEncontradaException("Postagem não encontrada.");
+        }
+
+        postagem.setCurtidasPositivas(postagem.getCurtidasPositivas()+1);
+
+        return salvar(postagem);
+    }
+
+    public Postagem desgostar(Long id){
+        Postagem postagem = this.buscarPorId(id);
+
+        if (postagem == null){
+            throw new EntidadeNaoEncontradaException("Postagem não encontrada.");
+        }
+
+        postagem.setCurtidasNegativas(postagem.getCurtidasNegativas()+1);
+
+        return salvar(postagem);
+    }
 }

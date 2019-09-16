@@ -8,7 +8,6 @@ import java.io.Serializable;
 @Entity
 @Table(schema = "public", name = "postagem")
 public class Postagem implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
     @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_postagem", allocationSize = 1)
@@ -23,11 +22,9 @@ public class Postagem implements Serializable {
     @Column(name = "usuario_autor")
     private Usuario usuarioAutor;
 
-    @NotNull
     @Column(name = "curtidas_positivas")
     private Long curtidasPositivas;
 
-    @NotNull
     @Column(name = "curtidas_negativas")
     private Long curtidasNegativas;
 
