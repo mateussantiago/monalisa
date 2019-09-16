@@ -2,6 +2,7 @@ package br.com.monalisa.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -17,6 +18,9 @@ public class Tag implements Serializable {
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "ativo")
+    private boolean ativo;
+
     public Long getIdTag() { return idTag; }
 
     public void setIdTag(Long idTag) { this.idTag = idTag; }
@@ -24,4 +28,12 @@ public class Tag implements Serializable {
     public String getNome() { return nome; }
 
     public void setNome(String nome) { this.nome = nome; }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
 }

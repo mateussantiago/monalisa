@@ -2,6 +2,7 @@ package br.com.monalisa.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -13,39 +14,92 @@ public class Postagem implements Serializable {
     @Column(name = "id_postagem")
     private Long idPostagem;
 
-    @NotBlank
-    @Column(name = "texto")
-    private String texto;
+    @Column(name = "ativo")
+    private Boolean ativo = true;
 
     @NotBlank
-    @Column(name = "usuario_autor")
-    private Long usuarioAutor;
+    @Column(name = "conteudo")
+    private String conteudo;
 
-    @NotBlank
     @Column(name = "curtidas_positivas")
-    private Long curtidasPositivas;
+    private Long curtidasPositivas = 0L;
 
-    @NotBlank
     @Column(name = "curtidas_negativas")
-    private Long curtidas_negativas;
+    private Long curtidasNegativas = 0L;
 
-    public Long getIdPostagem(){  return idPostagem;  }
+    @ManyToOne
+    @JoinColumn(name = "id_postagem_genitora")
+    private Postagem postagemGenitora;
 
-    public void setIdPostagem(Long idPostagem) { this.idPostagem = idPostagem;  }
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_usuario_autor")
+    private Usuario usuarioAutor;
 
-    public String getTexto(){ return texto; }
+    @ManyToOne
+    @JoinColumn(name = "id_assunto_turma")
+    private AssuntoTurma assuntoTurma;
 
-    public void setTexto(String texto) { this.texto = texto; }
+    public Long getIdPostagem() {
+        return idPostagem;
+    }
 
-    public Long getCurtidasPositivas() { return curtidasPositivas; }
+    public void setIdPostagem(Long idPostagem) {
+        this.idPostagem = idPostagem;
+    }
 
-    public void setCurtidasPositivas(Long curtidasPositivas) { this.curtidasPositivas = curtidasPositivas; }
+    public String getConteudo() {
+        return conteudo;
+    }
 
-    public Long getCurtidas_negativas() { return curtidas_negativas; }
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
+    }
 
-    public void setCurtidas_negativas(Long curtidas_negativas) { this.curtidas_negativas = curtidas_negativas; }
+    public Long getCurtidasPositivas() {
+        return curtidasPositivas;
+    }
 
-    public Long getUsuarioAutor() { return usuarioAutor; }
+    public void setCurtidasPositivas(Long curtidasPositivas) {
+        this.curtidasPositivas = curtidasPositivas;
+    }
 
-    public void setUsuarioAutor(Long usuarioAutor) { this.usuarioAutor = usuarioAutor; }
+    public Long getCurtidasNegativas() {
+        return curtidasNegativas;
+    }
+
+    public void setCurtidasNegativas(Long curtidasNegativas) {
+        this.curtidasNegativas = curtidasNegativas;
+    }
+
+    public Usuario getUsuarioAutor() {
+        return usuarioAutor;
+    }
+
+    public void setUsuarioAutor(Usuario usuarioAutor) {
+        this.usuarioAutor = usuarioAutor;
+    }
+
+    public Postagem getPostagemGenitora() {
+        return postagemGenitora;
+    }
+
+    public void setPostagemGenitora(Postagem postagemGenitora) {
+        this.postagemGenitora = postagemGenitora;
+    }
+
+    public AssuntoTurma getAssuntoTurma() {
+        return assuntoTurma;
+    }
+
+    public void setAssuntoTurma(AssuntoTurma assuntoTurma) {
+        this.assuntoTurma = assuntoTurma;
+    }
+
+    public Boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        this.ativo = ativo;
+    }
 }

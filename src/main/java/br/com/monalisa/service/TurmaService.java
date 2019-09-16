@@ -4,7 +4,6 @@ import br.com.monalisa.model.Turma;
 import br.com.monalisa.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Optional;
 
 import java.util.List;
 
@@ -13,15 +12,15 @@ public class TurmaService  {
     @Autowired
     private TurmaRepository turmaRepository;
 
-    public Turma save(Turma turma) {
+    public List<Turma> buscarTodos() {
+        return turmaRepository.buscarTodos();
+    }
+
+    public Turma buscarPorId(Long id) {
+        return turmaRepository.buscarPorId(id);
+    }
+
+    public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);
-    }
-
-    public List<Turma> findAll() {
-        return turmaRepository.findAll();
-    }
-
-    public Optional<Turma> findOne(Long id) {
-        return turmaRepository.findById(id);
     }
 }
