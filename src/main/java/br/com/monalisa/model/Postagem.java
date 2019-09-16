@@ -8,39 +8,36 @@ import java.io.Serializable;
 @Entity
 @Table(schema = "public", name = "postagem")
 public class Postagem implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
     @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_postagem", allocationSize = 1)
     @Column(name = "id_postagem")
     private Long idPostagem;
 
+    @Column(name = "ativo")
+    private Boolean ativo = true;
+
     @NotBlank
-    @Column(name = "texto")
-    private String texto;
+    @Column(name = "conteudo")
+    private String conteudo;
 
-    @NotNull
-    @Column(name = "usuario_autor")
-    private Usuario usuarioAutor;
-
-    @NotNull
     @Column(name = "curtidas_positivas")
-    private Long curtidasPositivas;
+    private Long curtidasPositivas = 0L;
 
-    @NotNull
     @Column(name = "curtidas_negativas")
-    private Long curtidasNegativas;
+    private Long curtidasNegativas = 0L;
 
     @ManyToOne
     @JoinColumn(name = "id_postagem_genitora")
     private Postagem postagemGenitora;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_usuario_autor")
+    private Usuario usuarioAutor;
+
     @ManyToOne
     @JoinColumn(name = "id_assunto_turma")
     private AssuntoTurma assuntoTurma;
-
-    @Column(name = "ativo")
-    private Boolean ativo = true;
 
     public Long getIdPostagem() {
         return idPostagem;
@@ -50,12 +47,12 @@ public class Postagem implements Serializable {
         this.idPostagem = idPostagem;
     }
 
-    public String getTexto() {
-        return texto;
+    public String getConteudo() {
+        return conteudo;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
     }
 
     public Long getCurtidasPositivas() {

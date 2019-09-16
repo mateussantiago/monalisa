@@ -98,7 +98,7 @@ CREATE TABLE public.tag_turma (
     id_tag int4 NOT NULL,
     id_turma int4 NOT NULL,
     ativo bool NULL DEFAULT true,
-    CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma)
+    CONSTRAINT pk_tag_turma PRIMARY KEY (id_tag_turma),
     CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES public.tag(id_tag),
     CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma)
 );
@@ -212,11 +212,13 @@ CREATE TABLE public.postagem (
 	id_postagem int4 NOT NULL,
 	ativo bool NOT NULL DEFAULT true,
 	conteudo varchar(5000) NOT NULL,
-	avaliacao_positiva int4 NULL,
-	avaliacao_negativa int4 NULL,
+	curtidas_positivas int4 NULL DEFAULT 0,
+	curtidas_negativas int4 NULL DEFAULT 0,
 	id_postagem_genitora int4 NULL,
 	id_assunto_turma int4 NULL,
+	id_usuario_autor int4 NOT NULL,
 	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
 	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem_genitora) REFERENCES public.postagem (id_postagem),
-    CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma)
+    CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma),
+    CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor) REFERENCES public.usuario (id_usuario)
 );
