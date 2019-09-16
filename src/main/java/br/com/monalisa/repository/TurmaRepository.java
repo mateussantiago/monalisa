@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface TurmaRepository extends JpaRepository<Turma, Long>, JpaSpecificationExecutor<Turma> {
-	@Query(value = "select * from public.turma where ativo is true", nativeQuery = true)
+	@Query(value = "select * from turma where ativo is true", nativeQuery = true)
 	List<Turma> buscarTodos();
 
-	@Query(value = "select * from public.turma where id_turma = :id and ativo is true", nativeQuery = true)
+	@Query(value = "select * from turma where id_turma = :id and ativo is true", nativeQuery = true)
 	Turma buscarPorId(@Param(value = "id") Long id);
 }

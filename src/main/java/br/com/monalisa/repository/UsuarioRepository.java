@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpecificationExecutor<Usuario> {
-    @Query(value = "select * from public.usuario where ativo is true", nativeQuery = true)
+    @Query(value = "select * from usuario where ativo is true", nativeQuery = true)
     List<Usuario> buscarTodos();
 
     @Query(value = "select * from usuario where id_usuario = :id", nativeQuery = true)

@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface AssuntoRepository  extends JpaRepository<Assunto, Long>, JpaSpecificationExecutor<Assunto> {
-    @Query(value = "select * from public.assunto where ativo is true", nativeQuery = true)
+    @Query(value = "select * from assunto where ativo is true", nativeQuery = true)
     List<Assunto> buscarTodos();
 
-    @Query(value = "select * from public.assunto where id_assunto = :id and ativo is true", nativeQuery = true)
+    @Query(value = "select * from assunto where id_assunto = :id and ativo is true", nativeQuery = true)
     Assunto buscarPorId(@Param(value = "id") Long id);
 }

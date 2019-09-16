@@ -12,9 +12,9 @@ import java.util.List;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, Long>, JpaSpecificationExecutor<Tag> {
-    @Query(value = "select * from public.tag where ativo is true", nativeQuery = true)
+    @Query(value = "select * from tag where ativo is true", nativeQuery = true)
     List<Tag> buscarTodos();
 
-    @Query(value = "select * from public.tag where id_tag = :id and ativo is true", nativeQuery = true)
+    @Query(value = "select * from tag where id_tag = :id and ativo is true", nativeQuery = true)
     Tag buscarPorId(@Param(value = "id") Long id);
 }

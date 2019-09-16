@@ -11,14 +11,14 @@ import java.util.List;
 
 @Repository
 public interface AssuntoTurmaRepository extends JpaRepository<AssuntoTurma, Long>, JpaSpecificationExecutor<AssuntoTurma> {
-    @Query(value = "select * from public.assunto_turma where ativo is true", nativeQuery = true)
+    @Query(value = "select * from assunto_turma where ativo is true", nativeQuery = true)
     List<AssuntoTurma> buscarTodos();
 
-    @Query(value = "select * from public.assunto_turma where id_assunto_turma = :id and ativo is true", nativeQuery = true)
+    @Query(value = "select * from assunto_turma where id_assunto_turma = :id and ativo is true", nativeQuery = true)
     AssuntoTurma buscarPorId(@Param(value = "id") Long id);
 
     @Query(value = "select * " +
-            "from public.assunto_turma " +
+            "from assunto_turma " +
             "where id_assunto = :idAssunto and " +
             "id_turma = :idTurma and " +
             "ativo is true", nativeQuery = true)
