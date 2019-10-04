@@ -158,7 +158,9 @@ CREATE TABLE public.assunto (
 	nome varchar(250) NULL,
 	descricao varchar(1000) NULL,
 	ativo bool NULL DEFAULT true,
-	CONSTRAINT pk_assunto PRIMARY KEY (id_assunto)
+	id_usuario int4 NOT NULL,
+	CONSTRAINT pk_assunto PRIMARY KEY (id_assunto),
+	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario (id_usuario)
 );
 
 ALTER TABLE public.assunto OWNER TO postgres;
@@ -184,9 +186,12 @@ CREATE TABLE public.assunto_turma (
     id_assunto int4 NOT NULL,
     id_turma int4 NOT NULL,
     ativo bool NULL DEFAULT true,
+    id_usuario int4 NOT NULL,
+    justificativa varchar(1000) NULL,
     CONSTRAINT pk_assunto_turma PRIMARY KEY (id_assunto_turma),
     CONSTRAINT fk_assunto FOREIGN KEY (id_assunto) REFERENCES public.assunto(id_assunto),
-    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma)
+    CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES public.turma(id_turma),
+    CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES public.usuario (id_usuario)
 );
 
 -- Permissions
