@@ -12,16 +12,20 @@ INSERT INTO public.assunto(id_assunto, nome, descricao, ativo) VALUES
 (2, 'Derivadas', 'Derivadas', true),
 (3, 'Psicanálise', 'Psicanálise', true),
 (4, 'Conjuntos', 'Conjuntos', true),
-(5, 'Integrais múltiplas', 'Integrais múltiplas', true);
-ALTER SEQUENCE seq_id_assunto RESTART WITH 6;
+(5, 'Integrais múltiplas', 'Integrais múltiplas', true),
+(6, 'Ciência de Dados', 'Introdução ao estudo de ciência de dados', true);
+ALTER SEQUENCE seq_id_assunto RESTART WITH 7;
 
 INSERT INTO public.assunto_turma(id_assunto_turma, id_assunto, id_turma, ativo) VALUES 
 (1, 1, 1, true),
 (2, 1, 2, true),
 (3, 5, 5, true),
 (4, 5, 3, true),
-(5, 2, 4, true);
-ALTER SEQUENCE seq_id_assunto_turma RESTART WITH 6;
+(5, 2, 4, true),
+(6, 2, 1, true),
+(7, 5, 1, true),
+(9, 4, 3, true);
+ALTER SEQUENCE seq_id_assunto_turma RESTART WITH 10;
 
 INSERT INTO public.tag(id_tag, nome, ativo) VALUES 
 (1, 'Matemática elementar 1', true),

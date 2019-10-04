@@ -27,4 +27,8 @@ public class AssuntoTurmaService {
     public AssuntoTurma buscarPorIdAssuntoEIdTurma(Long assunto, Long turma){
         return assuntoTurmaRepository.buscarPorAssuntoETurma(assunto, turma);
     }
+
+    public List<AssuntoTurma> buscarPorIdTurma(Long idTurma) {
+        return assuntoTurmaRepository.buscarPorIdTurma(idTurma);
+    }
 }

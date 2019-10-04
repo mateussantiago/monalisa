@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(schema = "public", name = "postagem")
-public class Postagem implements Serializable {
+public class    Postagem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
     @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_postagem", allocationSize = 1)

@@ -68,7 +68,7 @@ CREATE TABLE public.tag_turma (
 	id_tag_turma int4 NOT NULL,
 	id_tag int4 NOT NULL,
 	id_turma int4 NOT NULL,
-	ativo bool NULL DEFAULT true,
+	ativo bool NOT NULL DEFAULT true,
 	CONSTRAINT pk_tagturma PRIMARY KEY (id_tag_turma),
 	CONSTRAINT fk_tag FOREIGN KEY (id_tag) REFERENCES tag(id_tag),
 	CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES turma(id_turma)
@@ -90,7 +90,7 @@ CREATE TABLE public.turma_usuario (
 	id_turma_usuario int4 NOT NULL,
 	id_turma int4 NOT NULL,
 	id_usuario int4 NOT NULL,
-	ativo bool NULL DEFAULT true,
+	ativo bool NOT NULL DEFAULT true,
 	CONSTRAINT pk_turma_usuario PRIMARY KEY (id_turma_usuario, id_turma, id_usuario),
 	CONSTRAINT fk_turma FOREIGN KEY (id_turma) REFERENCES turma(id_turma),
 	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)

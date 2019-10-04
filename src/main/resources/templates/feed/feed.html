@@ -12,7 +12,7 @@
         <div class="col-lg-3">
             <br>
             <div class="list-group">
-                <tr th:each="turmaUsuario : ${turmaUsuarioList}">
+                <tr th:each="turmaUsuario: ${turmaUsuarioList}">
                     <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}" class="list-group-item active"></a>
                 </tr>
             </div>
@@ -22,57 +22,17 @@
         <div class="col-lg-9">
             <div class="card card-outline-secondary my-4">
                 <div class="card-header">
-                    <h5>Cálculo 3</h5>
+                    <h5>Assuntos</h5>
                 </div>
                 <div class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;">
-                    Limites
-                </div>
-                <div class="card-body">
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <p class="mt-0">mateussantiago
-                                <br>
-                                <small class="text-muted">Posted by Mateus on 3/1/17</small>
-                            </p>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- Comment with nested comments -->
-                    <div class="media mb-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <p class="mt-0">pauloaugusto
-                                <br>
-                                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                            </p>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                            <div class="media mt-4">
-                                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                                <div class="media-body">
-                                    <p class="mt-0">mrayanealves
-                                        <br>
-                                        <small class="text-muted">Posted by Maria Rayane on 3/1/17</small>
-                                    </p>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div>
-                            </div>
-                        </div>
+                    <div class="list-group">
+                        <tr th:each="assuntoTurma: ${assuntoTurmaList}">
+                            <a th:text="${assuntoTurma.assunto.nome}" th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma},
+                            idAssunto=${assuntoTurma.assunto.idAssunto})}"></a>
+                        </tr>
                     </div>
                 </div>
                 <hr>
-                <div class="media mb-4">
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="2" placeholder="Escreva um comentário"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

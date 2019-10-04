@@ -1,9 +1,11 @@
 package br.com.monalisa.controller;
 
 import br.com.monalisa.model.Assunto;
+import br.com.monalisa.model.AssuntoTurma;
 import br.com.monalisa.model.Turma;
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.service.AssuntoService;
+import br.com.monalisa.service.AssuntoTurmaService;
 import br.com.monalisa.service.TagTurmaService;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +31,39 @@ public class FeedController {
     @Autowired
     private AssuntoService assuntoService;
 
+    @Autowired
+    private AssuntoTurmaService assuntoTurmaService;
+
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
         Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
         List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
+
+        if (turmaUsuarioList != null && turmaUsuarioList.size() > 0) {
+            Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
+            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma(primeiraTurma.getIdTurma());
+            model.addAttribute("assuntoTurmaList", assuntoTurmaList);
+        }
+
         model.addAttribute("turmaUsuarioList", turmaUsuarioList);
 
         return "feed/feed";
     }
 
     @RequestMapping(value = "/turma/{idTurma}")
-    public String turma(@PathVariable("idTurma") Long idTurma, Model model) {
+    public String turma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
+        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
+        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
+        List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma(idTurma);
+        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
+        model.addAttribute("assuntoTurmaList", assuntoTurmaList);
+
+        return "feed/feed";
+    }
+
+    @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
+    public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
+                            HttpSession httpSession) {
         return "";
     }
 
