@@ -41,7 +41,7 @@ public class FeedController {
 
         if (turmaUsuarioList != null && turmaUsuarioList.size() > 0) {
             Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
-            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma(primeiraTurma.getIdTurma());
+            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma( primeiraTurma.getIdTurma());
             model.addAttribute("assuntoTurmaList", assuntoTurmaList);
         }
 
@@ -64,6 +64,7 @@ public class FeedController {
     @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
     public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
                             HttpSession httpSession) {
+
         return "";
     }
 

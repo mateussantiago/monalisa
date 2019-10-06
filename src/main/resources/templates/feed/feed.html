@@ -28,7 +28,7 @@
                     <div class="list-group">
                         <tr th:each="assuntoTurma: ${assuntoTurmaList}">
                             <a th:text="${assuntoTurma.assunto.nome}" th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma},
-                            idAssunto=${assuntoTurma.assunto.idAssunto})}"></a>
+                            idAssunto=${assuntoTurma.assunto.idAssunto  })}"></a>
                         </tr>
                     </div>
                 </div>
