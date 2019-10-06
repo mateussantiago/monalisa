@@ -1,6 +1,5 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
-
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:fragment="page">
+<head>
     <title>Monalisa</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -19,29 +18,35 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top " th:fragment="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="#">Monalisa</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-<!--        <div class="collapse navbar-collapse" id="navbarResponsive" th:if="${not #user.hasAuthorization()}">-->
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/login}">Entrar</a>
-                    </li>
-                </ul>
+    <div class="navigation-div">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top ">
+            <div class="container">
+                <a class="navbar-brand" href="#">Monalisa</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!--        <div class="collapse navbar-collapse" id="navbarResponsive" th:if="${not #usuarioLogado.hasAuthorization()}">-->
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/login}">Entrar</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 
-    <!-- Footer -->
-    <footer class="py-5 bg-black" th:fragment="footer">
-        <div class="container">
-            <p class="m-0 text-center text-white small">Copyright &copy; Monalisa 2019</p>
-        </div>
-        <!-- /.container -->
-    </footer>
+    <!-- Conteúdo personalizado -->
+    <div id="container-fluid" >
+        <section th:include="this :: content"></section>
+    </div>
+
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Carousel JavaScript -->
+    <script th:src="@{/vendor/jquery/jquery.slim.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
