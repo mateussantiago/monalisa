@@ -1,9 +1,6 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.model.Assunto;
-import br.com.monalisa.model.AssuntoTurma;
-import br.com.monalisa.model.Turma;
-import br.com.monalisa.model.TurmaUsuario;
+import br.com.monalisa.model.*;
 import br.com.monalisa.service.AssuntoService;
 import br.com.monalisa.service.AssuntoTurmaService;
 import br.com.monalisa.service.TagTurmaService;
@@ -36,8 +33,11 @@ public class FeedController {
 
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
+        // Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+//        System.out.println(usuario.getNome());
+
+        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario());
 
         if (turmaUsuarioList != null && turmaUsuarioList.size() > 0) {
             Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
@@ -52,8 +52,8 @@ public class FeedController {
 
     @RequestMapping(value = "/turma/{idTurma}")
     public String turma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario());
         List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma(idTurma);
         model.addAttribute("turmaUsuarioList", turmaUsuarioList);
         model.addAttribute("assuntoTurmaList", assuntoTurmaList);

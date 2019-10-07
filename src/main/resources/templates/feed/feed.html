@@ -1,49 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main :: head}">
-</head>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:include="layouts/main :: page">
 
-<body>
-<nav th:replace="~{layouts/main :: navbar}"></nav>
-<!-- Page Content -->
-<div class="container" style="padding-top: 56px;">
-
-    <div class="row">
-        <div class="col-lg-3">
-            <br>
-            <div class="list-group">
-                <tr th:each="turmaUsuario: ${turmaUsuarioList}">
-                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}" class="list-group-item active"></a>
-                </tr>
+<div th:fragment="content">
+    <div class="container" style="padding-top: 56px;">
+        <div class="row">
+            <div class="col-lg-3">
+                <br>
+                <div class="list-group">
+                    <tr th:each="turmaUsuario: ${turmaUsuarioList}">
+                        <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}" class="list-group-item active"></a>
+                    </tr>
+                </div>
             </div>
-        </div>
-        <!-- /.col-lg-3 -->
+            <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
-            <div class="card card-outline-secondary my-4">
-                <div class="card-header">
-                    <h5>Assuntos</h5>
-                </div>
-                <div class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;">
-                    <div class="list-group">
-                        <tr th:each="assuntoTurma: ${assuntoTurmaList}">
-                            <a th:text="${assuntoTurma.assunto.nome}" th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma},
-                            idAssunto=${assuntoTurma.assunto.idAssunto  })}"></a>
-                        </tr>
+            <div class="col-lg-9">
+                <div class="card card-outline-secondary my-4">
+                    <div class="card-header">
+                        <h5>Assuntos</h5>
                     </div>
+                    <div class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;">
+                        <div class="list-group">
+                            <tr th:each="assuntoTurma: ${assuntoTurmaList}">
+                                <a th:text="${assuntoTurma.assunto.nome}" th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma},
+                            idAssunto=${assuntoTurma.assunto.idAssunto  })}"></a>
+                            </tr>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
-                <hr>
             </div>
         </div>
     </div>
 </div>
-<!-- /.container -->
 
-<footer th:replace="~{layouts/main :: footer}"></footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
 </html>

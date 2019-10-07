@@ -2,6 +2,7 @@ package br.com.monalisa.controller;
 
 
 import br.com.monalisa.model.TurmaUsuario;
+import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,15 +19,15 @@ public class TurmaController {
 
     @PostMapping("/seguir")
     public TurmaUsuario seguirTurma(HttpSession httpSession, Long idTurma){
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        return turmaUsuarioService.seguirTurma(idUsuario, idTurma);
+        return turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), idTurma);
     }
 
     @PostMapping("/desseguir")
     public TurmaUsuario desseguirTurma(HttpSession httpSession, Long idTurma){
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        return turmaUsuarioService.deixarSeguirTurma(idUsuario, idTurma);
+        return turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
     }
 }

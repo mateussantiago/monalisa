@@ -25,13 +25,20 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <!--        <div class="collapse navbar-collapse" id="navbarResponsive" th:if="${not #usuarioLogado.hasAuthorization()}">-->
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/login}">Entrar</a>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse ml-auto" id="navbarResponsive">
+                    <div class="ml-auto" th:if="${session.usuarioLogado == null}">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}">Entrar</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="navbar-nav ml-auto" th:if="${session.usuarioLogado != null}">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>
