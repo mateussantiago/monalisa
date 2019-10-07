@@ -2,6 +2,27 @@
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:include="layouts/main :: page">
 
 <div th:fragment="content">
+    <!-- Navigation -->
+    <div class="navigation-div">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top ">
+            <div class="container">
+                <a class="navbar-brand" href="#">Monalisa</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse ml-auto" id="navbarResponsive">
+                    <div class="ml-auto">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/login}">Entrar</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
     <header class="masthead text-center text-white">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">

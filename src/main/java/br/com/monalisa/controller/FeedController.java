@@ -39,7 +39,7 @@ public class FeedController {
 
         List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario());
 
-        if (turmaUsuarioList != null && turmaUsuarioList.size() > 0) {
+        if (turmaUsuarioList != null && !turmaUsuarioList.isEmpty()) {
             Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
             List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma( primeiraTurma.getIdTurma());
             model.addAttribute("assuntoTurmaList", assuntoTurmaList);
