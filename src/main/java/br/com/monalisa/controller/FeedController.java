@@ -1,10 +1,7 @@
 package br.com.monalisa.controller;
 
 import br.com.monalisa.model.*;
-import br.com.monalisa.service.AssuntoService;
-import br.com.monalisa.service.AssuntoTurmaService;
-import br.com.monalisa.service.TagTurmaService;
-import br.com.monalisa.service.TurmaUsuarioService;
+import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,21 +28,24 @@ public class FeedController {
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
+    @Autowired
+    private PostagemService postagemService;
+
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
-        // Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-//        System.out.println(usuario.getNome());
 
         List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario());
+        List<Postagem> postagemList = postagemService.buscarPostagensPrincipais(usuario);
 
-        if (turmaUsuarioList != null && !turmaUsuarioList.isEmpty()) {
-            Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
-            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma( primeiraTurma.getIdTurma());
-            model.addAttribute("assuntoTurmaList", assuntoTurmaList);
-        }
+//        if (turmaUsuarioList != null && !turmaUsuarioList.isEmpty()) {
+//            Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
+//            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma( primeiraTurma.getIdTurma());
+//            model.addAttribute("assuntoTurmaList", assuntoTurmaList);
+//        }
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioList);
+        model.addAttribute("postagemList", postagemList);
 
         return "feed/feed";
     }

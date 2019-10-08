@@ -24,61 +24,23 @@
         </div>
     </nav>
 
-    <div class="card card-outline-secondary my-4">
-        <div class="card-header">
-            <h5>Cálculo 3</h5>
-        </div>
-        <div class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;">
-            Limites
-        </div>
-        <div class="card-body">
-            <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <p class="mt-0">mateussantiago
-                        <br>
-                        <small class="text-muted">Posted by Mateus on 3/1/17</small>
-                    </p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
+    <tr th:each="postagem : ${postagemList}">
+        <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+                <h5 th:text="${postagem.assuntoTurma.turma.nome}"></h5>
             </div>
-            <hr>
-            <!-- Comment with nested comments -->
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <p class="mt-0">pauloaugusto
-                        <br>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                    </p>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-                    <div class="media mt-4">
-                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                        <div class="media-body">
-                            <p class="mt-0">mrayanealves
-                                <br>
-                                <small class="text-muted">Posted by Maria Rayane on 3/1/17</small>
-                            </p>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="media mb-4">
+            <div th:text="${postagem.assuntoTurma.assunto.nome}" class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;"></div>
             <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="2" placeholder="Escreva um comentário"></textarea>
+                <div class="media mt-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body" th:text="${postagem.conteudo}">
+                        <p class="mt-0" th:text="${postagem.usuarioAutor.login}"></p>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+                </div>
+                <hr>
             </div>
         </div>
-    </div>
-</div>
+    </tr>
 
 <!--    <h2>Collapsible Sidebar Using Bootstrap 4</h2>-->
 <!--    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->

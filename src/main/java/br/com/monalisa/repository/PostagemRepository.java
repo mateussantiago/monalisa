@@ -12,6 +12,16 @@ import java.util.List;
 
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSpecificationExecutor<Postagem> {
+    @Query(value = "select p.* " +
+            "from postagem p, assunto_turma ast, turma t, turma_usuario tu, usuario u " +
+            "where p.ativo is true " +
+            "and id_postagem_genitora is null " +
+            "and p.id_assunto_turma = ast.id_assunto_turma " +
+            "and ast.id_turma = t.id_turma " +
+            "and t.id_turma = tu.id_turma " +
+            "and tu.id_usuario = :idUsuario", nativeQuery = true)
+    List<Postagem> buscarPrincipais(@Param("idUsuario") Long idUsuario);
+
     @Query(value = "select * from postagem where ativo is true", nativeQuery = true)
     List<Postagem> buscarTodos();
 

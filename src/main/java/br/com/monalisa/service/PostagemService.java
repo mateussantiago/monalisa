@@ -17,6 +17,10 @@ public class PostagemService {
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
+    public List<Postagem> buscarPostagensPrincipais(Usuario usuario){
+        return postagemRepository.buscarPrincipais(usuario.getIdUsuario());
+    }
+
     public List<Postagem> buscarTodos() {
         return postagemRepository.buscarTodos();
     }
