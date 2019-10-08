@@ -1,15 +1,14 @@
 /*
     DEMO STYLE
 */
-
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900";
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Catamaran', sans-serif;
     background: #fafafa;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Catamaran', sans-serif;
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -59,7 +58,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background-color: rgba(1, 32, 49, 0.95) !important;
+    background:rgba(1, 32, 49, 1); !important;
     color: #fff;
     transition: all 0.3s;
 }
@@ -71,13 +70,12 @@ a:focus {
 #sidebar .sidebar-header {
     text-transform: uppercase;
     padding: 20px;
-    background: rgba(1, 32, 49, 0.8); !important;
-    color: #fff;
+    background: rgba(1, 32, 49, 0.9); !important;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -87,19 +85,19 @@ a:focus {
 
 #sidebar ul li a {
     padding: 10px;
-    font-size: 1em;
+    font-size: 1.1em;
     display: block;
 }
 
 #sidebar ul li a:hover {
-    color: rgba(1, 32, 49, 0.8); !important;
+    color: rgba(1, 32, 49, 1); !important;
     background: #fff;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: rgba(1, 32, 49, 0.8); !important;
+    background: rgba(1, 32, 49, 0.9); !important;
 }
 
 a[data-toggle="collapse"] {
@@ -117,7 +115,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: rgba(1, 32, 49, 0.8); !important;
+    background: rgba(1, 32, 49, 0.9); !important;
 }
 
 ul.CTAs {
@@ -134,12 +132,12 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    background: rgba(1, 32, 49, 0.8); !important;
+    color: rgba(1, 32, 49, 1); !important;
 }
 
 a.article,
 a.article:hover {
-    background: rgba(1, 32, 49, 0.8); !important;
+    background: rgba(1, 32, 49, 0.9); !important;
     color: #fff !important;
 }
 

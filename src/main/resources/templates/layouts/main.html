@@ -1,69 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" th:fragment="page">
 <head>
-    <title>Monalisa</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Monalisa</title>
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet" >
     <link th:href="@{/vendor/bootstrap/css/bootstrap.css}" rel="stylesheet" >
 
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/monalisa-feed.css}" rel="stylesheet">
+
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link th:href="@{/css/monalisa.css}" rel="stylesheet">
-    <link th:href="@{/css/monalisa-feed.css}" rel="stylesheet">
 </head>
 
 <body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h4>Monalisa</h4>
+            </div>
 
-<div class="wrapper">
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h5>Monalisa</h5>
+            <ul class="list-unstyled components">
+                <p><b>Suas turmas</b></p>
+
+                <tr th:each="turmaUsuario: ${turmaUsuarioList}">
+                    <li>
+                        <a th:text="${turmaUsuario.turma.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.turma.idTurma}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
+                        <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.turma.idTurma}">
+                            <a>Todos os assuntos</a>
+                            <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"></a>
+                        </ul>
+                    </li>
+                </tr>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <div id="container-fluid" class="container">
+                <div th:include="this :: content"></div>
+            </div>
         </div>
-
-        <ul class="list-unstyled components">
-            <p>Suas turmas</p>
-
-            <tr th:each="turmaUsuario: ${turmaUsuarioList}">
-                <li>
-                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.turma.idTurma}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
-                    <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.turma.idTurma}">
-                        <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"></a>
-                    </ul>
-                </li>
-            </tr>
-        </ul>
-    </nav>
-
-    <div id="container-fluid" class="container">
-        <div th:include="this :: content"></div>
     </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-
-<!-- Carousel JavaScript -->
-<script th:src="@{/vendor/jquery/jquery.slim.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-
-<script type="text/javascript">
-    var count = 1;
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

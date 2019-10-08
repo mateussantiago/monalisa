@@ -35,17 +35,8 @@ public class FeedController {
     public String feed(Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario());
-        List<Postagem> postagemList = postagemService.buscarPostagensPrincipais(usuario);
-
-//        if (turmaUsuarioList != null && !turmaUsuarioList.isEmpty()) {
-//            Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
-//            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma( primeiraTurma.getIdTurma());
-//            model.addAttribute("assuntoTurmaList", assuntoTurmaList);
-//        }
-
-        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
-        model.addAttribute("postagemList", postagemList);
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
 
         return "feed/feed";
     }
@@ -53,10 +44,9 @@ public class FeedController {
     @RequestMapping(value = "/turma/{idTurma}")
     public String turma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario());
-        List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma(idTurma);
-        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
-        model.addAttribute("assuntoTurmaList", assuntoTurmaList);
+
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("assuntoTurmaList", assuntoTurmaService.buscarPorIdTurma(idTurma));
 
         return "feed/feed";
     }
@@ -64,7 +54,6 @@ public class FeedController {
     @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
     public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
                             HttpSession httpSession) {
-
         return "";
     }
 
