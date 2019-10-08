@@ -17,21 +17,53 @@
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/monalisa.css}" rel="stylesheet">
+    <link th:href="@{/css/monalisa-feed.css}" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Conteúdo personalizado -->
-    <div id="container-fluid" >
-        <section th:include="this :: content"></section>
+
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h5>Monalisa</h5>
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Suas turmas</p>
+
+            <tr th:each="turmaUsuario: ${turmaUsuarioList}">
+                <li>
+                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.turma.idTurma}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
+                    <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.turma.idTurma}">
+                        <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"></a>
+                    </ul>
+                </li>
+            </tr>
+        </ul>
+    </nav>
+
+    <div id="container-fluid" class="container">
+        <div th:include="this :: content"></div>
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
-    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.js}"></script>
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 
-    <!-- Carousel JavaScript -->
-    <script th:src="@{/vendor/jquery/jquery.slim.min.js}"></script>
-    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!-- Carousel JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.slim.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+
+<script type="text/javascript">
+    var count = 1;
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+</script>
 </body>
 </html>
