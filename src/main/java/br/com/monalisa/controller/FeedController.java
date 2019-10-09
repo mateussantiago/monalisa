@@ -62,7 +62,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPorTurmaEAssunto(idTurma, idAssunto));
-        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscarPorIdTurma(idTurma));
+        model.addAttribute("assuntoTurma", assuntoTurmaService.buscarPorIdAssuntoEIdTurma(idAssunto, idTurma));
 
         return "feed/feed";
     }
