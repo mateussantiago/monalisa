@@ -23,6 +23,7 @@ public class UsuarioService {
         usuario.setLogin(usuarioDTO.getLogin());
         usuario.setEmail(usuarioDTO.getEmail());
         usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+        usuario.setAtivo(true);
 
         return usuarioRepository.save(usuario);
     }

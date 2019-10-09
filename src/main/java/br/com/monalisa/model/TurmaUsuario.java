@@ -1,15 +1,6 @@
 package br.com.monalisa.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -22,11 +13,11 @@ public class TurmaUsuario implements Serializable {
 	private Long idTurmaUsuario;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_turma", nullable = false)
+	@JoinColumn(name = "id_turma")
 	private Turma turma;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "id_usuario", nullable = false)
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
 	@Column(name = "ativo")

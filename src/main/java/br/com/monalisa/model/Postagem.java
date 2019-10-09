@@ -4,10 +4,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(schema = "public", name = "postagem")
-public class Postagem implements Serializable {
+public class    Postagem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
     @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_postagem", allocationSize = 1)
@@ -38,6 +39,9 @@ public class Postagem implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_assunto_turma")
     private AssuntoTurma assuntoTurma;
+
+    @OneToMany(mappedBy = "postagemGenitora")
+    private List<Postagem> respostas;
 
     public Long getIdPostagem() {
         return idPostagem;
@@ -101,5 +105,13 @@ public class Postagem implements Serializable {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public List<Postagem> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(List<Postagem> respostas) {
+        this.respostas = respostas;
     }
 }

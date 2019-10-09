@@ -1,11 +1,7 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.model.Assunto;
-import br.com.monalisa.model.Turma;
-import br.com.monalisa.model.TurmaUsuario;
-import br.com.monalisa.service.AssuntoService;
-import br.com.monalisa.service.TagTurmaService;
-import br.com.monalisa.service.TurmaUsuarioService;
+import br.com.monalisa.model.*;
+import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,17 +25,35 @@ public class FeedController {
     @Autowired
     private AssuntoService assuntoService;
 
+    @Autowired
+    private AssuntoTurmaService assuntoTurmaService;
+
+    @Autowired
+    private PostagemService postagemService;
+
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
-        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
 
         return "feed/feed";
     }
 
     @RequestMapping(value = "/turma/{idTurma}")
-    public String turma(@PathVariable("idTurma") Long idTurma, Model model) {
+    public String turma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPorTurma(idTurma));
+
+        return "feed/feed";
+    }
+
+    @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
+    public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
+                                   HttpSession httpSession) {
         return "";
     }
 

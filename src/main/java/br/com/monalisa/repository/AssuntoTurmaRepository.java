@@ -1,5 +1,6 @@
 package br.com.monalisa.repository;
 
+import br.com.monalisa.model.Assunto;
 import br.com.monalisa.model.AssuntoTurma;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -22,6 +23,10 @@ public interface AssuntoTurmaRepository extends JpaRepository<AssuntoTurma, Long
             "where id_assunto = :idAssunto and " +
             "id_turma = :idTurma and " +
             "ativo is true", nativeQuery = true)
-    AssuntoTurma buscarPorAssuntoETurma(@Param(value = "idAssunto") Long assunto,
-                                        @Param(value = "idTurma") Long turma);
+    AssuntoTurma buscarPorAssuntoETurma(@Param(value = "idAssunto") Long assunto, @Param(value = "idTurma") Long turma);
+
+    @Query(value = "select * from assunto_turma " +
+            "where id_turma = :idTurma " +
+            "and ativo is true", nativeQuery = true)
+    List<AssuntoTurma> buscarPorIdTurma(@Param(value = "idTurma") Long idTurma);
 }

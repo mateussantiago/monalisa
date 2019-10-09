@@ -3,7 +3,7 @@ package br.com.monalisa.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(schema = "public", name = "turma")
@@ -16,7 +16,7 @@ public class Turma implements Serializable {
 
     @NotBlank
     @Column(name = "nome")
-    private String nome;;
+    private String nome;
 
     @NotBlank
     @Column(name = "descricao")
@@ -24,6 +24,9 @@ public class Turma implements Serializable {
 
     @Column(name = "ativo")
     private Boolean ativo;
+
+    @OneToMany(mappedBy = "turma")
+    private List<AssuntoTurma> assuntoTurmas;
 
     public Long getIdTurma() {
         return idTurma;
@@ -55,5 +58,13 @@ public class Turma implements Serializable {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public List<AssuntoTurma> getAssuntoTurmas() {
+        return assuntoTurmas;
+    }
+
+    public void setAssuntoTurmas(List<AssuntoTurma> assuntoTurmas) {
+        this.assuntoTurmas = assuntoTurmas;
     }
 }

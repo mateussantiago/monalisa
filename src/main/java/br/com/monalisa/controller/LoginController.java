@@ -35,7 +35,7 @@ public class LoginController {
         UsernamePasswordAuthenticationToken authentication = (UsernamePasswordAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = usuarioService.buscarPorEmail(authentication.getPrincipal().toString());
 
-        httpSession.setAttribute("usuarioLogado", usuario.getIdUsuario());
+        httpSession.setAttribute("usuarioLogado", usuario);
 
         return "redirect:/feed";
     }
