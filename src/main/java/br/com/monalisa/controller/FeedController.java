@@ -33,6 +33,9 @@ public class FeedController {
     @Autowired
     private PostagemService postagemService;
 
+    @Autowired
+    private TurmaService turmaService;
+
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
@@ -68,11 +71,16 @@ public class FeedController {
 
     @PostMapping(value = "/buscar")
     public String buscar(Model model, String busca){
-        List<Turma> turmasEncontradas = tagTurmaService.buscarTurmasPorTag(busca);
-        List<Assunto> assuntosEncontrados = assuntoService.buscarAssuntoPorNome(busca);
+        List<Turma> turmasEncontradasPorTags = turmaService.buscarTurmasPorTag(busca);
+        List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
+        List<Turma> turmasEncontradasPorNome = turmaService.buscarPorNome(busca);
+
+        List<Turma> turmasEncontradas = turmasEncontradasPorTags;
+        turmasEncontradas.addAll(turmasEncontradasPorAssunto);
+        turmasEncontradas.addAll(turmasEncontradasPorNome);
+
 
         model.addAttribute("turmasEncontradasList", turmasEncontradas);
-        model.addAttribute("assuntosEncontradisList", assuntosEncontrados);
 
         return "feed/feed";
     }

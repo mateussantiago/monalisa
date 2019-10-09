@@ -20,7 +20,19 @@ public class TurmaService  {
         return turmaRepository.buscarPorId(id);
     }
 
+    public List<Turma> buscarPorNome(String nome) {
+        return turmaRepository.buscarPorNome(nome);
+    }
+
     public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);
+    }
+
+    public List<Turma> buscarTurmasPorAssunto(String assunto){
+        return turmaRepository.buscarTurmasPorAssunto(assunto);
+    }
+
+    public List<Turma> buscarTurmasPorTag(String tag){
+        return turmaRepository.buscarTurmasPorTag(tag);
     }
 }

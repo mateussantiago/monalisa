@@ -24,8 +24,4 @@ public class TagTurmaService {
     public TagTurma salvar(TagTurma turma) {
         return tagTurmaRepository.save(turma);
     }
-
-    public List<Turma> buscarTurmasPorTag(String tag){
-        return tagTurmaRepository.buscarTurmaPorTag(tag);
-    }
 }
