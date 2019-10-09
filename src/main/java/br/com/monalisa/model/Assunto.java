@@ -25,6 +25,10 @@ public class Assunto implements Serializable {
     @Column(name = "ativo")
     private Boolean ativo;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuarioCriador;
+
     public Long getIdAssunto() {
         return idAssunto;
     }
@@ -56,4 +60,10 @@ public class Assunto implements Serializable {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
+
+    public Usuario getUsuarioCriador() { return usuarioCriador; }
+
+    public void setUsuarioCriador(Usuario usuarioCriador) { this.usuarioCriador = usuarioCriador; }
+
+
 }

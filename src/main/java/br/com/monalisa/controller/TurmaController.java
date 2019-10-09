@@ -17,6 +17,8 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
+    @Autowired AssuntoTurmaService assuntoTurmaService;
+
     @PostMapping("/seguir")
     public TurmaUsuario seguirTurma(HttpSession httpSession, Long idTurma){
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
@@ -29,5 +31,13 @@ public class TurmaController {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         return turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
+    }
+
+    @RequestMapping("/sugerir/assunto")
+    public void sugerirAssunto(HttpSession httpSession, SugestaoAssuntoDTO sugestaoAssuntoDTO){
+        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
+        assuntoTurmaService.sugerirAssunto(sugestaoAssuntoDTO, idUsuario);
+
+
     }
 }

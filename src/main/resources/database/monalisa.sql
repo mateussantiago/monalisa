@@ -162,3 +162,29 @@ CREATE TABLE public.postagem (
     CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma),
     CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor) REFERENCES public.usuario (id_usuario)
 );
+
+------------------------------------------------------------
+--DROP SEQUENCE public.seq_id_postagem;
+CREATE SEQUENCE public.seq_id_denuncia
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Permissions
+ALTER SEQUENCE public.seq_id_denuncia OWNER TO postgres;
+GRANT ALL ON SEQUENCE public.seq_id_denuncia TO postgres;
+
+-- Drop table
+--DROP TABLE public.denuncia;
+CREATE TABLE public.denuncia (
+	id_denuncia int4 NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	id_postagem int4 NOT NULL,
+	id_usuario_autor_denuncia int4 NOT NULL,
+	motivacao varchar(200) NOT NULL,
+	CONSTRAINT pk_denuncia PRIMARY KEY (id_denuncia),
+    CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor_denuncia) REFERENCES public.usuario (id_usuario),
+    CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES public.postagem (id_postagem)
+);

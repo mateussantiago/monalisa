@@ -27,4 +27,12 @@ public class AssuntoService {
     public List<Assunto> buscarAssuntoPorNome(String assunto){
         return assuntoRepository.buscarAssuntoPorNome(assunto);
     }
+
+    public Assunto buscarAssuntoPorNomeExato(String nome){
+        return assuntoRepository.buscarAssuntoPorNomeExato(nome);
+    }
+
+    public List<Assunto> buscarPorUsuario(Long id) {
+        return assuntoRepository.buscarPorIdUsuario(id);
+    }
 }
