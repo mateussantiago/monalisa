@@ -18,13 +18,13 @@ public class Denuncia implements Serializable {
     @Column(name = "motivacao")
     private String motivacao;
 
-    @NotNull
-    @Column(name = "id_usuario_autor_denuncia")
-    private Long idUsuario;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_usuario_autor")
+    private Usuario usuarioAutor;
 
-    @NotNull
-    @Column (name = "id_postagem")
-    private Long idPostagem;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_postagem")
+    private Postagem postagem;
 
     @NotNull
     @Column (name = "value")
@@ -46,27 +46,27 @@ public class Denuncia implements Serializable {
         this.motivacao = motivacao;
     }
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuarioAutor() {
+        return usuarioAutor;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuarioAutor(Usuario usuarioAutor) {
+        this.usuarioAutor = usuarioAutor;
     }
 
-    public Long getIdPostagem() {
-        return idPostagem;
+    public Postagem getPostagem() {
+        return postagem;
     }
 
-    public void setIdPostagem(Long idPostagem) {
-        this.idPostagem = idPostagem;
+    public void setPostagem(Postagem postagem) {
+        this.postagem = postagem;
     }
 
-    public boolean isAtivo() {
+    public Boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
 }

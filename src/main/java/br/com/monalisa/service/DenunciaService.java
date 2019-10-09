@@ -46,8 +46,6 @@ public class DenunciaService {
 
         Denuncia denuncia = new Denuncia();
         denuncia.setAtivo(true);
-        denuncia.setIdPostagem(denunciaDTO.getIdPostagem());
-        denuncia.setIdUsuario(idUsuario);
         denuncia.setMotivacao(denunciaDTO.getMotivacao());
         denuncia = salvar(denuncia);
 

@@ -164,7 +164,7 @@ CREATE TABLE public.postagem (
 );
 
 ------------------------------------------------------------
---DROP SEQUENCE public.seq_id_postagem;
+--DROP SEQUENCE public.seq_id_denuncia;
 CREATE SEQUENCE public.seq_id_denuncia
 	INCREMENT BY 1
 	MINVALUE 1
@@ -172,19 +172,15 @@ CREATE SEQUENCE public.seq_id_denuncia
 	CACHE 1
 	NO CYCLE;
 
--- Permissions
-ALTER SEQUENCE public.seq_id_denuncia OWNER TO postgres;
-GRANT ALL ON SEQUENCE public.seq_id_denuncia TO postgres;
-
 -- Drop table
 --DROP TABLE public.denuncia;
 CREATE TABLE public.denuncia (
 	id_denuncia int4 NOT NULL,
-	ativo bool NOT NULL DEFAULT true,
 	id_postagem int4 NOT NULL,
-	id_usuario_autor_denuncia int4 NOT NULL,
-	motivacao varchar(200) NOT NULL,
+	id_usuario_autor int4 NOT NULL,
+	motivacao varchar(1000) NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
 	CONSTRAINT pk_denuncia PRIMARY KEY (id_denuncia),
-    CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor_denuncia) REFERENCES public.usuario (id_usuario),
+    CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor) REFERENCES public.usuario (id_usuario),
     CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES public.postagem (id_postagem)
 );

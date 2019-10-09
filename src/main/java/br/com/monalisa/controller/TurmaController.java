@@ -14,10 +14,9 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("turma")
 public class TurmaController {
+
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
-
-    @Autowired AssuntoTurmaService assuntoTurmaService;
 
     @PostMapping("/seguir")
     public TurmaUsuario seguirTurma(HttpSession httpSession, Long idTurma){
@@ -33,11 +32,4 @@ public class TurmaController {
         return turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
     }
 
-    @RequestMapping("/sugerir/assunto")
-    public void sugerirAssunto(HttpSession httpSession, SugestaoAssuntoDTO sugestaoAssuntoDTO){
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        assuntoTurmaService.sugerirAssunto(sugestaoAssuntoDTO, idUsuario);
-
-
-    }
 }
