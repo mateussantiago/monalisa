@@ -1,6 +1,5 @@
 package br.com.monalisa.dto;
 
-import br.com.monalisa.model.Postagem;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -11,10 +10,7 @@ public class PostagemDTO {
     private Long postagemGenitora;
 
     @NotNull
-    private Long turma;
-
-    @NotNull
-    private Long assunto;
+    private Long assuntoTurma;
 
     public String getTexto() {
         return texto;
@@ -32,19 +28,11 @@ public class PostagemDTO {
         this.postagemGenitora = postagemGenitora;
     }
 
-    public Long getTurma() {
-        return turma;
+    public Long getAssuntoTurma() {
+        return assuntoTurma;
     }
 
-    public void setTurma(Long turma) {
-        this.turma = turma;
-    }
-
-    public Long getAssunto() {
-        return assunto;
-    }
-
-    public void setAssunto(Long assunto) {
-        this.assunto = assunto;
+    public void setAssuntoTurma(Long assuntoTurma) {
+        this.assuntoTurma = assuntoTurma;
     }
 }

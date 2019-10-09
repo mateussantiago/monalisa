@@ -25,6 +25,27 @@
         </div>
     </nav>
 
+    <div class="card my-4">
+        <div class="card-header">
+            <h5>Poste suas dúvidas</h5>
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <select class="form-control" id="selectAssuntoTurma">
+                        <option>Selecione qual o assunto da sua dúvida</option>
+                        <tr th:each="assuntoTurma : ${assuntoTurmasList}">
+                            <option th:text="${assuntoTurma.turma.nome} +' - '+ ${assuntoTurma.assunto.nome}" th:value="${assuntoTurma.idAssuntoTurma}"></option>
+                        </tr>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="textoDuvida" rows="3" placeholder="Digite sua dúvida"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <tr th:each="postagem : ${postagemList}">
         <div class="card card-outline-secondary my-4">
             <div class="card-header">

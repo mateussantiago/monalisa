@@ -50,17 +50,17 @@ public class PostagemService {
             throw new EntidadeNaoEncontradaException("Não existe uma postagem anterior com está referência para adicionar um comentário.");
         }
 
-        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorIdAssuntoEIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
+//        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorIdAssuntoEIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
 
-        if (assuntoTurma == null) {
-            throw new EntidadeNaoEncontradaException("Não foi possível identificar uma referência dessa turma com este assunto.");
-        }
+//        if (assuntoTurma == null) {
+//            throw new EntidadeNaoEncontradaException("Não foi possível identificar uma referência dessa turma com este assunto.");
+//        }
 
         Postagem postagem = new Postagem();
         postagem.setConteudo(postagemDTO.getTexto());
         postagem.setUsuarioAutor(usuario);
         postagem.setPostagemGenitora(postagemGenitora);
-        postagem.setAssuntoTurma(assuntoTurma);
+//        postagem.setAssuntoTurma(assuntoTurma);
 
         return salvar(postagem);
     }
