@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,16 +22,17 @@ public class PostagemController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping(value = "/postar")
+    @RequestMapping(value = "/postar", method = RequestMethod.POST)
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
-        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-
-        if (usuario == null){
-            throw new RuntimeException("Não existe usuário ativo nessa sessão");
+        try {
+            Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+            Postagem postagem = postagemService.postar(postagemDTO, usuario);
+        }
+        catch (Exception e) {
+            model.addAttribute("erroPostagem", e.getMessage());
         }
 
-        postagemService.postar(postagemDTO, usuario);
-        return "feed/feed";
+        return "redirect:/feed";
     }
 
     @PostMapping(value = "/{id}/gostar")
