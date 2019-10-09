@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -70,8 +71,8 @@ public class FeedController {
         return "feed/feed";
     }
 
-    @PostMapping(value = "/buscar")
-    public String buscar(Model model, String busca){
+    @RequestMapping(value = "/buscar")
+    public String buscar(@RequestParam(value = "buscarPor", required = false) String buscarPor, Model model, String busca){
         List<Turma> turmasEncontradasPorTags = turmaService.buscarTurmasPorTag(busca);
         List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
         List<Turma> turmasEncontradasPorNome = turmaService.buscarPorNome(busca);
@@ -83,6 +84,6 @@ public class FeedController {
 
         model.addAttribute("turmasEncontradasList", turmasEncontradas);
 
-        return "feed/feed";
+        return "re";
     }
 }

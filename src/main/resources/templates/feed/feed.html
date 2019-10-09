@@ -15,8 +15,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Pesquise por turmas" aria-label="Search">
+                        <form class="form-inline my-2 my-lg-0" th:action="@{/feed/buscar}" >
+                            <input class="form-control mr-sm-2" th:name="buscarPor" type="search" placeholder="Tag, Assuntos ou Turmas" aria-label="Search">
                             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Pesquisar</button>
                         </form>
                     </li>
