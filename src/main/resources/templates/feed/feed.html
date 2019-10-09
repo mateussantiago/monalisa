@@ -30,18 +30,19 @@
             <h5>Poste suas dúvidas</h5>
         </div>
         <div class="card-body">
-            <form>
+            <form th:object="${usuarioDTO}" th:action="@{/postagem/postar/}" method="post">
                 <div class="form-group">
-                    <select class="form-control" id="selectAssuntoTurma">
+                    <select class="form-control" id="selectAssuntoTurma" name="idAssuntoTurma">
                         <option>Selecione qual o assunto da sua dúvida</option>
                         <tr th:each="assuntoTurma : ${assuntoTurmasList}">
                             <option th:text="${assuntoTurma.turma.nome} +' - '+ ${assuntoTurma.assunto.nome}" th:value="${assuntoTurma.idAssuntoTurma}"></option>
                         </tr>
                     </select>
                 </div>
-                <div class="form-group">
-                    <textarea class="form-control" id="textoDuvida" rows="3" placeholder="Digite sua dúvida"></textarea>
+                <div class="form-group" >
+                    <textarea class="form-control" id="textoDuvida" rows="3" placeholder="Digite sua dúvida" name="conteudo"></textarea>
                 </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Enviar</button>
             </form>
         </div>
     </div>

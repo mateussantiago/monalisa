@@ -1,38 +1,34 @@
 package br.com.monalisa.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 public class PostagemDTO {
-    @NotBlank
-    private String texto;
 
-    private Long postagemGenitora;
+    private String conteudo;
 
-    @NotNull
-    private Long assuntoTurma;
+    private Long idPostagemGenitora;
 
-    public String getTexto() {
-        return texto;
+    private Long idAssuntoTurma;
+
+    public String getConteudo() {
+        return conteudo;
     }
 
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
     }
 
-    public Long getPostagemGenitora() {
-        return postagemGenitora;
+    public Long getIdPostagemGenitora() {
+        return idPostagemGenitora;
     }
 
-    public void setPostagemGenitora(Long postagemGenitora) {
-        this.postagemGenitora = postagemGenitora;
+    public void setIdPostagemGenitora(Long idPostagemGenitora) {
+        this.idPostagemGenitora = idPostagemGenitora;
     }
 
-    public Long getAssuntoTurma() {
-        return assuntoTurma;
+    public Long getIdAssuntoTurma() {
+        return idAssuntoTurma;
     }
 
-    public void setAssuntoTurma(Long assuntoTurma) {
-        this.assuntoTurma = assuntoTurma;
+    public void setIdAssuntoTurma(Long idAssuntoTurma) {
+        this.idAssuntoTurma = idAssuntoTurma;
     }
 }

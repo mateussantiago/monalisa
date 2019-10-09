@@ -2,6 +2,7 @@ package br.com.monalisa.service;
 
 import br.com.monalisa.dto.PostagemDTO;
 import br.com.monalisa.exception.EntidadeNaoEncontradaException;
+import br.com.monalisa.exception.PostagemSemConteudoException;
 import br.com.monalisa.model.AssuntoTurma;
 import br.com.monalisa.model.Postagem;
 import br.com.monalisa.model.Usuario;
@@ -44,23 +45,19 @@ public class PostagemService {
     }
 
     public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
-        Postagem postagemGenitora = postagemRepository.getOne(postagemDTO.getPostagemGenitora());
-
-        if (postagemGenitora == null) {
-            throw new EntidadeNaoEncontradaException("Não existe uma postagem anterior com está referência para adicionar um comentário.");
+        if (postagemDTO.getConteudo() == null || postagemDTO.getConteudo() == "") {
+            throw new PostagemSemConteudoException("A postagem não pode ter conteúdo vazio.");
         }
 
-//        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorIdAssuntoEIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
+        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorId(postagemDTO.getIdAssuntoTurma());
 
-//        if (assuntoTurma == null) {
-//            throw new EntidadeNaoEncontradaException("Não foi possível identificar uma referência dessa turma com este assunto.");
-//        }
-
+        if (assuntoTurma == null) {
+            throw new EntidadeNaoEncontradaException("Assunto da postagem não pode ser vazio.");
+        }
         Postagem postagem = new Postagem();
-        postagem.setConteudo(postagemDTO.getTexto());
+        postagem.setConteudo(postagemDTO.getConteudo());
+        postagem.setAssuntoTurma(assuntoTurma);
         postagem.setUsuarioAutor(usuario);
-        postagem.setPostagemGenitora(postagemGenitora);
-//        postagem.setAssuntoTurma(assuntoTurma);
 
         return salvar(postagem);
     }
