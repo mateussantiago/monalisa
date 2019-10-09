@@ -24,6 +24,13 @@ public class AssuntoTurma implements Serializable {
     @Column(name = "ativo")
     private boolean ativo;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuarioCriador;
+
+    @Column(name = "justificativa")
+    private String justificativa;
+
     public Assunto getAssunto() {
         return assunto;
     }
@@ -56,4 +63,11 @@ public class AssuntoTurma implements Serializable {
         this.idAssuntoTurma = idAssuntoTurma;
     }
 
+    public Usuario getUsuarioCriador() { return usuarioCriador; }
+
+    public void setUsuarioCriador(Usuario usuarioCriador) { this.usuarioCriador = usuarioCriador; }
+
+    public String getJustificativa() { return justificativa; }
+
+    public void setJustificativa(String justificativa) { this.justificativa = justificativa; }
 }
