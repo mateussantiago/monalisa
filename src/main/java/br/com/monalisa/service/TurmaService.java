@@ -1,6 +1,5 @@
 package br.com.monalisa.service;
 
-import br.com.monalisa.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.exception.RetornoDeBuscaVazioException;
 import br.com.monalisa.model.Turma;
 import br.com.monalisa.repository.TurmaRepository;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TurmaService  {
+public class TurmaService {
     @Autowired
     private TurmaRepository turmaRepository;
 
@@ -30,15 +29,15 @@ public class TurmaService  {
         return turmaRepository.save(turma);
     }
 
-    public List<Turma> buscarTurmasPorAssunto(String assunto){
+    public List<Turma> buscarTurmasPorAssunto(String assunto) {
         return turmaRepository.buscarTurmasPorAssunto(assunto);
     }
 
-    public List<Turma> buscarTurmasPorTag(String tag){
+    public List<Turma> buscarTurmasPorTag(String tag) {
         return turmaRepository.buscarTurmasPorTag(tag);
     }
 
-    public List<Turma> buscarTurmas(String busca){
+    public List<Turma> buscarTurmas(String busca) {
         List<Turma> turmasEncontradasPorTags = buscarTurmasPorTag(busca);
         List<Turma> turmasEncontradasPorAssunto = buscarTurmasPorAssunto(busca);
         List<Turma> turmasEncontradasPorNome = buscarPorNome(busca);
@@ -47,10 +46,9 @@ public class TurmaService  {
         turmasEncontradas.addAll(turmasEncontradasPorAssunto);
         turmasEncontradas.addAll(turmasEncontradasPorNome);
 
-        if(turmasEncontradas.isEmpty()){
+        if (turmasEncontradas.isEmpty())
             throw new RetornoDeBuscaVazioException("Nenhuma turma foi achada com o parâmetro de busca passado!");
-        }else{
-            return turmasEncontradas;
-        }
+
+        return turmasEncontradas;
     }
 }

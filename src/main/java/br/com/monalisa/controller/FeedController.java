@@ -71,16 +71,16 @@ public class FeedController {
         return "feed/feed";
     }
 
-    @PostMapping(value = "/buscar")
-    public String buscar(Model model, String busca){
-        try{
-            List<Turma> turmasEncontradas = turmaService.buscarTurmas(busca);
+    @RequestMapping(value = "/buscar")
+    public String buscar(@RequestParam(value = "buscarTurma", required = false) String buscarTurma, Model model, String busca) {
+        try {
+            List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma);
             model.addAttribute("turmasEncontradasList", turmasEncontradas);
-            return "feed/feed"; // pagina da busca
-        }catch(Exception e){
-            model.addAttribute("erroBusca",  e.getMessage());
+
+        } catch (Exception e) {
+            model.addAttribute("erroBusca", e.getMessage());
         }
 
-        return "feed/feed";
+        return "redirect:/feed";
     }
 }
