@@ -1,6 +1,8 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.model.*;
+import br.com.monalisa.model.Assunto;
+import br.com.monalisa.model.Turma;
+import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
