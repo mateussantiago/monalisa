@@ -27,6 +27,14 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSp
             "and ast.id_turma = :idTurma", nativeQuery = true)
     List<Postagem> buscarPostagensPorTurma(@Param("idTurma") Long idTurma);
 
+    @Query(value = "select * from postagem p " +
+            "join assunto_turma ast on ast.id_assunto_turma = p.id_assunto_turma " +
+            "where p.ativo is true " +
+            "and id_postagem_genitora is null " +
+            "and ast.id_turma = :idTurma " +
+            "and ast.id_assunto = :idAssunto", nativeQuery = true)
+    List<Postagem> buscarPostagensPorTurmaEAssunto(@Param("idTurma") Long idTurma, @Param("idAssunto") Long idAssunto);
+
     @Query(value = "select * from postagem where ativo is true", nativeQuery = true)
     List<Postagem> buscarTodos();
 

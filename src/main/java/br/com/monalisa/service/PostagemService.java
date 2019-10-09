@@ -24,9 +24,11 @@ public class PostagemService {
     }
 
     public List<Postagem> buscarPostagensPorTurma(Long idTurma){
-        List<Postagem> postagemList = postagemRepository.buscarPostagensPorTurma(idTurma);
+        return  postagemRepository.buscarPostagensPorTurma(idTurma);
+    }
 
-        return postagemList;
+    public List<Postagem> buscarPostagensPorTurmaEAssunto(Long idTurma, Long idAssunto){
+        return postagemRepository.buscarPostagensPorTurmaEAssunto(idTurma, idAssunto);
     }
 
     public List<Postagem> buscarTodos() {
