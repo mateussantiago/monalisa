@@ -1,20 +1,26 @@
 package br.com.monalisa.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 public class DenunciaDTO {
-    @NotNull
+
     public Long idPostagem;
 
-    @NotBlank
+    public Long idUsuarioDenunciador;
+
     public String motivacao;
 
     public Long getIdPostagem() {
         return idPostagem;
     }
 
+    public void setIdPostagem(Long idPostagem) {
+        this.idPostagem = idPostagem;
+    }
+
     public String getMotivacao() {
         return motivacao;
+    }
+
+    public void setMotivacao(String motivacao) {
+        this.motivacao = motivacao;
     }
 }
