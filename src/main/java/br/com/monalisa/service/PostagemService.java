@@ -7,6 +7,7 @@ import br.com.monalisa.model.AssuntoTurma;
 import br.com.monalisa.model.Postagem;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.repository.PostagemRepository;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,11 @@ public class PostagemService {
     }
 
     public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
+        Postagem postagemGenitora = null;
+
+        if (postagemDTO.getIdPostagemGenitora() != null){
+            postagemGenitora = buscarPorId(postagemDTO.getIdPostagemGenitora());
+        }
         if (postagemDTO.getConteudo() == null || postagemDTO.getConteudo() == "") {
             throw new PostagemSemConteudoException("A postagem não pode ter conteúdo vazio.");
         }
@@ -58,6 +64,7 @@ public class PostagemService {
         postagem.setConteudo(postagemDTO.getConteudo());
         postagem.setAssuntoTurma(assuntoTurma);
         postagem.setUsuarioAutor(usuario);
+        postagem.setPostagemGenitora(postagemGenitora);
 
         return salvar(postagem);
     }
