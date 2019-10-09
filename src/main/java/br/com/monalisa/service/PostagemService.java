@@ -2,7 +2,9 @@ package br.com.monalisa.service;
 
 import br.com.monalisa.dto.PostagemDTO;
 import br.com.monalisa.exception.EntidadeNaoEncontradaException;
-import br.com.monalisa.model.*;
+import br.com.monalisa.model.AssuntoTurma;
+import br.com.monalisa.model.Postagem;
+import br.com.monalisa.model.Usuario;
 import br.com.monalisa.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,6 @@ public class PostagemService {
 
     public List<Postagem> buscarPostagensPorTurma(Long idTurma){
         List<Postagem> postagemList = postagemRepository.buscarPostagensPorTurma(idTurma);
-
-        System.out.println("Chegou aqui");
 
         return postagemList;
     }

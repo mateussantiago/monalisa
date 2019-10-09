@@ -3,6 +3,7 @@ package br.com.monalisa.controller;
 import br.com.monalisa.dto.UsuarioDTO;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.UsuarioService;
+import org.hibernate.boot.spi.InFlightMetadataCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,10 +43,13 @@ public class LoginController {
 
     @RequestMapping(value = "/cadastro/novo", method = RequestMethod.POST)
     public String novoUsuario(UsuarioDTO usuarioDTO, Model model) {
-        Usuario usuario = usuarioService.registrarUsuario(usuarioDTO);
+        try {
+            Usuario novoUsuario = usuarioService.registrarUsuario(usuarioDTO);
 
-        if (usuario != null ){
             return "redirect:/login";
+        }
+        catch (Exception e) {
+            model.addAttribute("erroCadastro",  e.getMessage());
         }
 
         return "redirect:/";

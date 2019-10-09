@@ -14,12 +14,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpec
     @Query(value = "select * from usuario where ativo is true", nativeQuery = true)
     List<Usuario> buscarTodos();
 
-    @Query(value = "select * from usuario where id_usuario = :id", nativeQuery = true)
+    @Query(value = "select * from usuario where ativo is true and id_usuario = :id", nativeQuery = true)
     Usuario buscarPorId(@Param(value = "id") Long idUsuario);
 
-    @Query(value = "select * from usuario where email like :email", nativeQuery = true)
+    @Query(value = "select * from usuario where ativo is true and email like :email", nativeQuery = true)
     Usuario buscarPorEmail(@Param("email") String email);
 
-    @Query(value = "select * from usuario where login like :login", nativeQuery = true)
+    @Query(value = "select * from usuario where ativo is true and login like :login", nativeQuery = true)
     Usuario buscarPorLogin(@Param("login") String login);
 }
