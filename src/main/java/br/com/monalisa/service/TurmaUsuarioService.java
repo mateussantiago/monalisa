@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class TurmaUsuarioService {
+
 	@Autowired
 	private TurmaUsuarioRepository turmaUsuarioRepository;
 
@@ -26,7 +27,7 @@ public class TurmaUsuarioService {
 		return turmaUsuarioRepository.save(turmaUsuario);
 	}
 
-	public List<TurmaUsuario> buscarPorIdUsuario(Long idUsuario) {
+	public List<TurmaUsuario> buscarPorIdUsuario(Long idUsuario) throws EntidadeNaoEncontradaException {
 		return turmaUsuarioRepository.buscarPorIdUsuario(idUsuario);
 	}
 
@@ -50,7 +51,7 @@ public class TurmaUsuarioService {
 		return turmaUsuarioRepository.save(turmaUsuario);
 	}
 
-	public TurmaUsuario deixarSeguirTurma(Long idTurma, Long idUsuario) {
+	public TurmaUsuario deixarSeguirTurma(Long idTurma, Long idUsuario) throws OperacaoInvalidaException {
 		TurmaUsuario turmaUsuario = turmaUsuarioRepository.buscarPorIdTurmaEIdUsuario(idTurma, idUsuario);
 
 		if (turmaUsuario == null){

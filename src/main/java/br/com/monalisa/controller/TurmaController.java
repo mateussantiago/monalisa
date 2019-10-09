@@ -1,6 +1,8 @@
 package br.com.monalisa.controller;
 
 
+import br.com.monalisa.exception.OperacaoInvalidaException;
+import br.com.monalisa.model.Turma;
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.TurmaUsuarioService;
@@ -18,18 +20,36 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
-    @PostMapping("/seguir")
-    public TurmaUsuario seguirTurma(HttpSession httpSession, Long idTurma){
+    @RequestMapping("/seguir")
+    public String seguirTurma(HttpSession httpSession, Long idTurma){
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        return turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), idTurma);
+        try {
+            TurmaUsuario turmaUsuario = turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), idTurma);
+
+            return "/feed";
+        }
+        catch (EnumConstantNotPresentException e) {
+            e.printStackTrace();
+        }
+
+        return "/buscar-turmas";
     }
 
-    @PostMapping("/desseguir")
-    public TurmaUsuario desseguirTurma(HttpSession httpSession, Long idTurma){
+    @PostMapping("/deixar-seguir")
+    public String deixarSeguirTurma(HttpSession httpSession, Long idTurma){
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        return turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
+        try {
+            turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
+
+            return "minhas-turmas";
+        }
+        catch (OperacaoInvalidaException e) {
+            e.printStackTrace();
+        }
+
+        return "/feed";
     }
 
 }
