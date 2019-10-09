@@ -30,7 +30,7 @@
             <h5>Poste suas dúvidas</h5>
         </div>
         <div class="card-body">
-            <form th:object="${usuarioDTO}" th:action="@{/postagem/postar/}" method="post">
+            <form th:object="${postagemDTO}" th:action="@{/postagem/postar/}" method="post">
                 <div class="form-group">
                     <select class="form-control" id="selectAssuntoTurma" name="idAssuntoTurma">
                         <div th:if="${assuntoTurma} != null">
@@ -48,7 +48,7 @@
                 <div class="form-group" >
                     <textarea class="form-control" id="textoDuvida" rows="3" placeholder="Digite sua dúvida" name="conteudo"></textarea>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Enviar</button>
+                <button class="btn btn-primary" type="submit">Postar</button>
             </form>
         </div>
     </div>
@@ -61,9 +61,9 @@
             <div th:text="${postagem.assuntoTurma.assunto.nome}" class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;"></div>
             <div class="card-body">
                 <div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">
                     <div class="media-body">
-                        <p class="mt-0" th:text="${postagem.usuarioAutor.login}">
+                        <p class="mt-0" style="font-weight: bold; color: #000;" th:text="${postagem.usuarioAutor.login}">
                             <br>
                             <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
@@ -72,15 +72,28 @@
                     </div>
                 </div>
                 <hr>
+                <h5>Respostas</h5>
                 <!-- Comment with nested comments -->
                 <div th:each="resposta : ${postagem.respostas}" class="media mt-4">
-                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">
                     <div class="media-body">
-                        <p class="mt-0" th:text="${resposta.usuarioAutor.login}">
+                        <p class="mt-0" style="font-weight: bold; color: #000;" th:text="${resposta.usuarioAutor.login}">
                             <br>
                             <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
                         <p th:text="${resposta.conteudo}"></p>
+                    </div>
+                </div>
+                <div class="media mb-4">
+                    <div class="card-body">
+                        <form th:object="${postagemDTO}" th:action="@{/postagem/postar/}" method="post">
+                            <input type="hidden" th:value="${postagem.idPostagem}" name="idPostagemGenitora">
+                            <input type="hidden" th:value="${postagem.assuntoTurma.idAssuntoTurma}" name="idAssuntoTurma">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="2" placeholder="Escreva um comentário" name="conteudo"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Responder</button>
+                        </form>
                     </div>
                 </div>
             </div>
