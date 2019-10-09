@@ -63,7 +63,7 @@
                 <div class="media mb-4">
                     <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">
                     <div class="media-body">
-                        <p class="mt-0" style="font-weight: bold; color: #000;" th:text="${postagem.usuarioAutor.login}">
+                        <p class="mt-0" style="font-weight: bold; color: #000000" th:text="${postagem.usuarioAutor.login}">
                             <br>
                             <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
@@ -77,7 +77,7 @@
                 <div th:each="resposta : ${postagem.respostas}" class="media mt-4">
                     <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">
                     <div class="media-body">
-                        <p class="mt-0" style="font-weight: bold; color: #000;" th:text="${resposta.usuarioAutor.login}">
+                        <p class="mt-0" style="font-weight: bold; color: #000000" th:text="${resposta.usuarioAutor.login}">
                             <br>
                             <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
