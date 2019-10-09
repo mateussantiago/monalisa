@@ -74,7 +74,7 @@ public class AssuntoTurmaService {
             assunto.setAtivo(false);
             assunto.setDescricao(descricao_assunto);
             assunto.setNome(nome_assunto);
-            assunto.setUsuarioCriador(usuario);
+//            assunto.setUsuarioCriador(usuario);
 
             assunto = assuntoService.salvar(assunto);
         }
@@ -86,8 +86,8 @@ public class AssuntoTurmaService {
             assuntoTurma = new AssuntoTurma();
             assuntoTurma.setAssunto(assunto);
             assuntoTurma.setAtivo(false);
-            assuntoTurma.setJustificativa(justificativa_sugestao);
-            assuntoTurma.setUsuarioCriador(usuario);
+//            assuntoTurma.setJustificativa(justificativa_sugestao);
+//            assuntoTurma.setUsuarioCriador(usuario);
             assuntoTurma.setTurma(turma);
         }
 

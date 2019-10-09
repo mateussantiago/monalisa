@@ -1,8 +1,10 @@
 package br.com.monalisa.controller;
 
 
+import br.com.monalisa.dto.SugestaoAssuntoDTO;
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.model.Usuario;
+import br.com.monalisa.service.AssuntoTurmaService;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,8 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
-    @Autowired AssuntoTurmaService assuntoTurmaService;
+    @Autowired
+    private AssuntoTurmaService assuntoTurmaService;
 
     @PostMapping("/seguir")
     public TurmaUsuario seguirTurma(HttpSession httpSession, Long idTurma){
