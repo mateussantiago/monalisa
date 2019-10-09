@@ -23,8 +23,7 @@ public class PostagemController {
 
     @PostMapping(value = "/postar")
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        Usuario usuario = usuarioService.buscarPorId(idUsuario);
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         if (usuario == null){
             throw new RuntimeException("Não existe usuário ativo nessa sessão");

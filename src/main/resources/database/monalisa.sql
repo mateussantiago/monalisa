@@ -47,11 +47,12 @@ CREATE SEQUENCE public.seq_id_turma
 
 -- Drop table
 --DROP TABLE public.turma;
-CREATE TABLE public.tag (
-	id_tag int4 NOT NULL,
+CREATE TABLE public.turma (
+	id_turma int4 NOT NULL,
 	nome varchar(250) NOT NULL,
+	descricao varchar(1024) NULL,
 	ativo bool NOT NULL DEFAULT true,
-	CONSTRAINT pk_tag PRIMARY KEY (id_tag)
+	CONSTRAINT pk_turma PRIMARY KEY (id_turma)
 );
 
 ------------------------------------------------------------
