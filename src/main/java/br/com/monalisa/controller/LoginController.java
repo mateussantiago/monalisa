@@ -52,6 +52,6 @@ public class LoginController {
             model.addAttribute("erroCadastro",  e.getMessage());
         }
 
-        return "redirect:/";
+        return "login/cadastro";
     }
 }
