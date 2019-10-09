@@ -71,11 +71,11 @@ public class FeedController {
         return "feed/feed";
     }
 
+        List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
     @RequestMapping(value = "/buscar")
     public String buscar(@RequestParam(value = "buscarPor", required = false) String buscarPor, Model model, String busca){
-        List<Turma> turmasEncontradasPorTags = turmaService.buscarTurmasPorTag(busca);
-        List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
         List<Turma> turmasEncontradasPorNome = turmaService.buscarPorNome(busca);
+        List<Turma> turmasEncontradasPorTags = turmaService.buscarTurmasPorTag(busca);
 
         List<Turma> turmasEncontradas = turmasEncontradasPorTags;
         turmasEncontradas.addAll(turmasEncontradasPorAssunto);
