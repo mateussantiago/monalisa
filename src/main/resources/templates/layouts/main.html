@@ -34,7 +34,7 @@
                     <li>
                         <a th:text="${turmaUsuario.turma.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.turma.idTurma}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
                         <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.turma.idTurma}">
-                            <a>Todos os assuntos</a>
+                            <a th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}">Todos os assuntos</a>
                             <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"></a>
                         </ul>
                     </li>

@@ -21,6 +21,14 @@ public class PostagemService {
         return postagemRepository.buscarPrincipais(usuario.getIdUsuario());
     }
 
+    public List<Postagem> buscarPostagensPorTurma(Long idTurma){
+        List<Postagem> postagemList = postagemRepository.buscarPostagensPorTurma(idTurma);
+
+        System.out.println("Chegou aqui");
+
+        return postagemList;
+    }
+
     public List<Postagem> buscarTodos() {
         return postagemRepository.buscarTodos();
     }

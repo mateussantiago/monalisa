@@ -46,14 +46,14 @@ public class FeedController {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
-        model.addAttribute("assuntoTurmaList", assuntoTurmaService.buscarPorIdTurma(idTurma));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPorTurma(idTurma));
 
         return "feed/feed";
     }
 
     @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
     public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
-                            HttpSession httpSession) {
+                                   HttpSession httpSession) {
         return "";
     }
 
