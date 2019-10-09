@@ -71,7 +71,6 @@ public class FeedController {
         return "feed/feed";
     }
 
-<<<<<<< Updated upstream
         List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
     @RequestMapping(value = "/buscar")
     public String buscar(@RequestParam(value = "buscarPor", required = false) String buscarPor, Model model, String busca){
@@ -82,12 +81,6 @@ public class FeedController {
         turmasEncontradas.addAll(turmasEncontradasPorAssunto);
         turmasEncontradas.addAll(turmasEncontradasPorNome);
 
-=======
-    @RequestMapping(value = "/buscar")
-    public String buscar(@RequestParam(value = "buscarPor", required = false) String buscarPor, Model model, String busca){
-        List<Turma> turmasEncontradas = tagTurmaService.buscarTurmasPorTag(busca);
-        List<Assunto> assuntosEncontrados = assuntoService.buscarAssuntoPorNome(busca);
->>>>>>> Stashed changes
 
         model.addAttribute("turmasEncontradasList", turmasEncontradas);
 
