@@ -1,49 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layouts/main :: head}">
-</head>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:include="layouts/main :: page">
+<div th:fragment="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
 
-<body>
-<nav th:replace="~{layouts/main :: navbar}"></nav>
-<!-- Page Content -->
-<div class="container" style="padding-top: 56px;">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Menu</span>
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
 
-    <div class="row">
-        <div class="col-lg-3">
-            <br>
-            <div class="list-group">
-                <tr th:each="turmaUsuario: ${turmaUsuarioList}">
-                    <a th:text="${turmaUsuario.turma.nome}" th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}" class="list-group-item active"></a>
-                </tr>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <form class="form-inline my-2 my-lg-0">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Pesquise por turmas" aria-label="Search">
+                            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Pesquisar</button>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- /.col-lg-3 -->
+    </nav>
 
-        <div class="col-lg-9">
-            <div class="card card-outline-secondary my-4">
-                <div class="card-header">
-                    <h5>Assuntos</h5>
-                </div>
-                <div class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;">
-                    <div class="list-group">
-                        <tr th:each="assuntoTurma: ${assuntoTurmaList}">
-                            <a th:text="${assuntoTurma.assunto.nome}" th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma},
-                            idAssunto=${assuntoTurma.assunto.idAssunto  })}"></a>
-                        </tr>
+    <tr th:each="postagem : ${postagemList}">
+        <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+                <h5 th:text="${postagem.assuntoTurma.turma.nome}"></h5>
+            </div>
+            <div th:text="${postagem.assuntoTurma.assunto.nome}" class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;"></div>
+            <div class="card-body">
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <p class="mt-0" th:text="${postagem.usuarioAutor.login}">
+                            <br>
+                            <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>
+                        </p>
+                        <p th:text="${postagem.conteudo}"></p>
+                    </p>
                     </div>
                 </div>
                 <hr>
+                <!-- Comment with nested comments -->
+                <div th:each="resposta : ${postagem.respostas}" class="media mt-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <p class="mt-0" th:text="${resposta.usuarioAutor.login}">
+                            <br>
+                            <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>
+                        </p>
+                        <p th:text="${resposta.conteudo}"></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </tr>
 </div>
-<!-- /.container -->
-
-<footer th:replace="~{layouts/main :: footer}"></footer>
-
-<!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
 </html>

@@ -1,13 +1,7 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.model.Assunto;
-import br.com.monalisa.model.AssuntoTurma;
-import br.com.monalisa.model.Turma;
-import br.com.monalisa.model.TurmaUsuario;
-import br.com.monalisa.service.AssuntoService;
-import br.com.monalisa.service.AssuntoTurmaService;
-import br.com.monalisa.service.TagTurmaService;
-import br.com.monalisa.service.TurmaUsuarioService;
+import br.com.monalisa.model.*;
+import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,37 +28,32 @@ public class FeedController {
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
+    @Autowired
+    private PostagemService postagemService;
+
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        if (turmaUsuarioList != null && turmaUsuarioList.size() > 0) {
-            Turma primeiraTurma = turmaUsuarioList.get(0).getTurma();
-            List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma( primeiraTurma.getIdTurma());
-            model.addAttribute("assuntoTurmaList", assuntoTurmaList);
-        }
-
-        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
 
         return "feed/feed";
     }
 
     @RequestMapping(value = "/turma/{idTurma}")
     public String turma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
-        Long idUsuario = (Long) httpSession.getAttribute("usuarioLogado");
-        List<TurmaUsuario> turmaUsuarioList = turmaUsuarioService.buscarPorIdUsuario(idUsuario);
-        List<AssuntoTurma> assuntoTurmaList = assuntoTurmaService.buscarPorIdTurma(idTurma);
-        model.addAttribute("turmaUsuarioList", turmaUsuarioList);
-        model.addAttribute("assuntoTurmaList", assuntoTurmaList);
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPorTurma(idTurma));
 
         return "feed/feed";
     }
 
     @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
     public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
-                            HttpSession httpSession) {
-
+                                   HttpSession httpSession) {
         return "";
     }
 
