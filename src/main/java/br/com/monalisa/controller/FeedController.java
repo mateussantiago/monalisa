@@ -39,6 +39,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
+        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscaPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }
@@ -49,6 +50,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPorTurma(idTurma));
+        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscarPorIdTurma(idTurma));
 
         return "feed/feed";
     }
@@ -60,6 +62,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPorTurmaEAssunto(idTurma, idAssunto));
+        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscarPorIdTurma(idTurma));
 
         return "feed/feed";
     }

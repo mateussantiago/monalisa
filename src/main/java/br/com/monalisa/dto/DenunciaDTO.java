@@ -16,6 +16,14 @@ public class DenunciaDTO {
         this.idPostagem = idPostagem;
     }
 
+    public Long getIdUsuarioDenunciador() {
+        return idUsuarioDenunciador;
+    }
+
+    public void setIdUsuarioDenunciador(Long idUsuarioDenunciador) {
+        this.idUsuarioDenunciador = idUsuarioDenunciador;
+    }
+
     public String getMotivacao() {
         return motivacao;
     }

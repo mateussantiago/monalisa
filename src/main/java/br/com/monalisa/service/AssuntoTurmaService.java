@@ -48,6 +48,9 @@ public class AssuntoTurmaService {
         return assuntoTurmaRepository.buscarPorIdTurma(idTurma);
     }
 
+    public List<AssuntoTurma> buscaPorIdUsuario(Long idUsuario) {
+        return assuntoTurmaRepository.buscaPorIdUsuario(idUsuario);
+    }
     public AssuntoTurma sugerirAssunto(SugestaoAssuntoDTO sugestaoAssuntoDTO, Long idUsuario){
 
         Usuario usuario = usuarioService.buscarPorId(idUsuario);
