@@ -71,19 +71,16 @@ public class FeedController {
         return "feed/feed";
     }
 
-        List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
-    @RequestMapping(value = "/buscar")
-    public String buscar(@RequestParam(value = "buscarPor", required = false) String buscarPor, Model model, String busca){
-        List<Turma> turmasEncontradasPorNome = turmaService.buscarPorNome(busca);
-        List<Turma> turmasEncontradasPorTags = turmaService.buscarTurmasPorTag(busca);
+    @PostMapping(value = "/buscar")
+    public String buscar(Model model, String busca){
+        try{
+            List<Turma> turmasEncontradas = turmaService.buscarTurmas(busca);
+            model.addAttribute("turmasEncontradasList", turmasEncontradas);
+            return "feed/feed"; // pagina da busca
+        }catch(Exception e){
+            model.addAttribute("erroBusca",  e.getMessage());
+        }
 
-        List<Turma> turmasEncontradas = turmasEncontradasPorTags;
-        turmasEncontradas.addAll(turmasEncontradasPorAssunto);
-        turmasEncontradas.addAll(turmasEncontradasPorNome);
-
-
-        model.addAttribute("turmasEncontradasList", turmasEncontradas);
-
-        return "re";
+        return "feed/feed";
     }
 }
