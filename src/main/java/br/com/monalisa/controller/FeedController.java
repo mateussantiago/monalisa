@@ -72,16 +72,13 @@ public class FeedController {
 
     @PostMapping(value = "/buscar")
     public String buscar(Model model, String busca){
-        List<Turma> turmasEncontradasPorTags = turmaService.buscarTurmasPorTag(busca);
-        List<Turma> turmasEncontradasPorAssunto = turmaService.buscarTurmasPorAssunto(busca);
-        List<Turma> turmasEncontradasPorNome = turmaService.buscarPorNome(busca);
-
-        List<Turma> turmasEncontradas = turmasEncontradasPorTags;
-        turmasEncontradas.addAll(turmasEncontradasPorAssunto);
-        turmasEncontradas.addAll(turmasEncontradasPorNome);
-
-
-        model.addAttribute("turmasEncontradasList", turmasEncontradas);
+        try{
+            List<Turma> turmasEncontradas = turmaService.buscarTurmas(busca);
+            model.addAttribute("turmasEncontradasList", turmasEncontradas);
+            return "feed/feed"; // pagina da busca
+        }catch(Exception e){
+            model.addAttribute("erroBusca",  e.getMessage());
+        }
 
         return "feed/feed";
     }
