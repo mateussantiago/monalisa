@@ -2,7 +2,6 @@ package br.com.monalisa.controller;
 
 
 import br.com.monalisa.exception.OperacaoInvalidaException;
-import br.com.monalisa.model.Turma;
 import br.com.monalisa.model.TurmaUsuario;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.TurmaUsuarioService;
@@ -21,15 +20,14 @@ public class TurmaController {
     private TurmaUsuarioService turmaUsuarioService;
 
     @RequestMapping("/seguir")
-    public String seguirTurma(HttpSession httpSession, Long idTurma){
+    public String seguirTurma(HttpSession httpSession, Long idTurma) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         try {
             TurmaUsuario turmaUsuario = turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), idTurma);
 
             return "/feed";
-        }
-        catch (EnumConstantNotPresentException e) {
+        } catch (EnumConstantNotPresentException e) {
             e.printStackTrace();
         }
 
@@ -37,15 +35,14 @@ public class TurmaController {
     }
 
     @PostMapping("/deixar-seguir")
-    public String deixarSeguirTurma(HttpSession httpSession, Long idTurma){
+    public String deixarSeguirTurma(HttpSession httpSession, Long idTurma) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         try {
             turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
 
             return "minhas-turmas";
-        }
-        catch (OperacaoInvalidaException e) {
+        } catch (OperacaoInvalidaException e) {
             e.printStackTrace();
         }
 

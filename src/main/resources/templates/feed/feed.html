@@ -33,10 +33,16 @@
             <form th:object="${usuarioDTO}" th:action="@{/postagem/postar/}" method="post">
                 <div class="form-group">
                     <select class="form-control" id="selectAssuntoTurma" name="idAssuntoTurma">
-                        <option>Selecione qual o assunto da sua dúvida</option>
-                        <tr th:each="assuntoTurma : ${assuntoTurmasList}">
-                            <option th:text="${assuntoTurma.turma.nome} +' - '+ ${assuntoTurma.assunto.nome}" th:value="${assuntoTurma.idAssuntoTurma}"></option>
-                        </tr>
+                        <div th:if="${assuntoTurma} != null">
+                            <option th:text="${assuntoTurma.turma.nome} +' - '+ ${assuntoTurma.assunto.nome}"
+                                    th:value="${assuntoTurma.idAssuntoTurma}"></option>
+                        </div>
+                        <div th:if="${assuntoTurma} == null">
+                            <option>Selecione qual o assunto da sua dúvida</option>
+                            <tr th:each="assuntoTurma : ${assuntoTurmasList}">
+                                <option th:text="${assuntoTurma.turma.nome} +' - '+ ${assuntoTurma.assunto.nome}" th:value="${assuntoTurma.idAssuntoTurma}"></option>
+                            </tr>
+                        </div>
                     </select>
                 </div>
                 <div class="form-group" >
