@@ -22,15 +22,16 @@ public class LoginController {
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {
-        if (error != null && error){
+
+        if (error != null && error)
             model.addAttribute("erroEntrar", "Usuário e/ou senha inválidos.");
-        }
 
         return "login/login";
     }
 
     @RequestMapping(value = "/cadastro", method = RequestMethod.GET)
     public String registrar(Model model) {
+
         return "login/cadastro";
     }
 
