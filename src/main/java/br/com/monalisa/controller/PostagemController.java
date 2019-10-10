@@ -35,17 +35,17 @@ public class PostagemController {
         return "redirect:/feed";
     }
 
-    @PostMapping(value = "/{id}/gostar")
+    @RequestMapping(value = "/{id}/gostar")
     public String gostar(Model model, @PathVariable(value = "id") Long id){
         postagemService.gostar(id);
 
-        return "feed/feed";
+        return "redirect:/feed";
     }
 
-    @PostMapping(value = "/{id}/desgostar")
+    @RequestMapping(value = "/{id}/desgostar")
     public String desgostar(Model model, @PathVariable(value = "id") Long id){
         postagemService.desgostar(id);
 
-        return "feed/feed";
+        return "redirect:/feed";
     }
 }

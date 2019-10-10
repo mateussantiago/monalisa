@@ -44,7 +44,10 @@
                             <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
                         <p th:text="${postagem.conteudo}"></p>
-                    </p>
+                    </div>
+                    <div class="media mb-4" style="padding: 0.5em">
+                        <a th:href="@{/postagem/{id}/gostar(id=${postagem.idPostagem})}"><span class="oi oi-thumb-up"></span></a>
+                        <a th:href="@{/postagem/{id}/desgostar(id=${postagem.idPostagem})}"><span class="oi oi-thumb-down"></span></a>
                     </div>
                 </div>
                 <hr>
@@ -58,6 +61,10 @@
                             <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
                         <p th:text="${resposta.conteudo}"></p>
+                    </div>
+                    <div class="media mb-4" style="padding: 0.5em">
+                        <a> <span class="oi oi-thumb-up"></span></a>
+                        <a><span class="oi oi-thumb-down"></span></a>
                     </div>
                 </div>
                 <div class="media mb-4">
