@@ -21,6 +21,15 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
+    @RequestMapping
+    public String gerenciarTurmas(Model model, HttpSession httpSession){
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+
+        return "turmas/turmas";
+    }
+
     @RequestMapping("/seguir/{idTurma}")
     public String seguirTurma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
