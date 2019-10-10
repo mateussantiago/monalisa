@@ -58,12 +58,9 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container-fluid">
 
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <button type="button" id="sidebarCollapse" class="btn btn-light">
                             <i class="fas fa-align-left"></i>
-                            <span>Menu</span>
-                        </button>
-                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <i class="fas fa-align-justify"></i>
+                            <span class="navbar-toggler-icon"></span>
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -71,7 +68,7 @@
                                 <li class="nav-item active">
                                     <form class="form-inline my-2 my-lg-0" th:action="@{/feed/buscar}" >
                                         <input class="form-control mr-sm-2" th:name="buscarTurma" type="search" placeholder="Tag, Assuntos ou Turmas" aria-label="Search">
-                                        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Pesquisar</button>
+                                        <button class="btn btn-info my-2 my-sm-0" type="submit">Pesquisar</button>
                                     </form>
                                 </li>
                             </ul>
