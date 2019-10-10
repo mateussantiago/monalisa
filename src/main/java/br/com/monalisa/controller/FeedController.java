@@ -77,8 +77,10 @@ public class FeedController {
             List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma);
             model.addAttribute("turmasEncontradasList", turmasEncontradas);
 
+            return "feed/buscar";
+
         } catch (Exception e) {
-            model.addAttribute("erroBusca", e.getMessage());
+            model.addAttribute("erro", e.getMessage());
         }
 
         return "redirect:/feed";
