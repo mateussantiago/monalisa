@@ -21,12 +21,6 @@ public class FeedController {
     private TurmaUsuarioService turmaUsuarioService;
 
     @Autowired
-    private TagTurmaService tagTurmaService;
-
-    @Autowired
-    private AssuntoService assuntoService;
-
-    @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
     @Autowired
@@ -75,6 +69,7 @@ public class FeedController {
             Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
             List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma, usuario.getIdUsuario());
             model.addAttribute("turmasEncontradasList", turmasEncontradas);
+            model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
             return "feed/buscar";
 
