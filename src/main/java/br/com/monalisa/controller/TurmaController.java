@@ -7,6 +7,8 @@ import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,19 +21,18 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
-    @RequestMapping("/seguir")
-    public String seguirTurma(HttpSession httpSession, Long idTurma) {
+    @RequestMapping("/seguir/{idTurma}")
+    public String seguirTurma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         try {
-            TurmaUsuario turmaUsuario = turmaUsuarioService.seguirTurma(usuario.getIdUsuario(), idTurma);
+            TurmaUsuario turmaUsuario = turmaUsuarioService.seguirTurma(idTurma, usuario.getIdUsuario());
 
-            return "/feed";
         } catch (EnumConstantNotPresentException e) {
-            e.printStackTrace();
+            model.addAttribute("erro", e.getMessage());
         }
 
-        return "/buscar-turmas";
+        return "redirect:/feed";
     }
 
     @PostMapping("/deixar-seguir")

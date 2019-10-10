@@ -21,7 +21,7 @@ public class TurmaUsuario implements Serializable {
 	private Usuario usuario;
 
 	@Column(name = "ativo")
-	private Boolean ativo;
+	private Boolean ativo = true;
 
 	public Long getIdTurmaUsuario() {
 		return idTurmaUsuario;

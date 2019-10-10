@@ -32,7 +32,7 @@ public class Usuario implements Serializable {
     private String senha;
 
     @Column(name = "ativo")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     public Long getIdUsuario() {
         return idUsuario;

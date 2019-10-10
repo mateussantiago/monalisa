@@ -23,7 +23,7 @@ public class Turma implements Serializable {
     private String descricao;
 
     @Column(name = "ativo")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     @OneToMany(mappedBy = "turma")
     private List<AssuntoTurma> assuntoTurmas;

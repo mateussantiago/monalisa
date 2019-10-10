@@ -69,7 +69,6 @@ public class FeedController {
             Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
             List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma, usuario.getIdUsuario());
             model.addAttribute("turmasEncontradasList", turmasEncontradas);
-            model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
             return "feed/buscar";
 

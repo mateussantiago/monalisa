@@ -23,7 +23,7 @@ public class Assunto implements Serializable {
     private String descricao;
 
     @Column(name = "ativo")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     public Long getIdAssunto() {
         return idAssunto;

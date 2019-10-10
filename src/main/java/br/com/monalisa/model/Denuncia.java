@@ -28,7 +28,7 @@ public class Denuncia implements Serializable {
 
     @NotNull
     @Column (name = "value")
-    private Boolean ativo;
+    private Boolean ativo = true;
 
     public Long getIdDenuncia() {
         return idDenuncia;
