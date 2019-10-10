@@ -70,9 +70,10 @@ public class FeedController {
     }
 
     @RequestMapping(value = "/buscar")
-    public String buscar(@RequestParam(value = "buscarTurma", required = false) String buscarTurma, Model model, String busca) {
+    public String buscar(@RequestParam(value = "buscarTurma", required = false) String buscarTurma, Model model, HttpSession httpSession) {
         try {
-            List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma);
+            Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+            List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma, usuario.getIdUsuario());
             model.addAttribute("turmasEncontradasList", turmasEncontradas);
 
             return "feed/buscar";

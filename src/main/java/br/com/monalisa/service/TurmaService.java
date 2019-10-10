@@ -21,26 +21,26 @@ public class TurmaService {
         return turmaRepository.buscarPorId(id);
     }
 
-    public List<Turma> buscarPorNome(String nome) {
-        return turmaRepository.buscarPorNome(nome);
+    public List<Turma> buscarPorNome(String nome, Long idUsuario) {
+        return turmaRepository.buscarPorNome(nome,idUsuario);
     }
 
     public Turma salvar(Turma turma) {
         return turmaRepository.save(turma);
     }
 
-    public List<Turma> buscarTurmasPorAssunto(String assunto) {
-        return turmaRepository.buscarTurmasPorAssunto(assunto);
+    public List<Turma> buscarTurmasPorAssunto(String assunto, Long idUsuario) {
+        return turmaRepository.buscarTurmasPorAssunto(assunto, idUsuario);
     }
 
-    public List<Turma> buscarTurmasPorTag(String tag) {
-        return turmaRepository.buscarTurmasPorTag(tag);
+    public List<Turma> buscarTurmasPorTag(String tag, Long idUsuario) {
+        return turmaRepository.buscarTurmasPorTag(tag, idUsuario);
     }
 
-    public List<Turma> buscarTurmas(String busca) {
-        List<Turma> turmasEncontradasPorTags = buscarTurmasPorTag(busca);
-        List<Turma> turmasEncontradasPorAssunto = buscarTurmasPorAssunto(busca);
-        List<Turma> turmasEncontradasPorNome = buscarPorNome(busca);
+    public List<Turma> buscarTurmas(String busca, Long idUsuario) {
+        List<Turma> turmasEncontradasPorTags = buscarTurmasPorTag(busca, idUsuario);
+        List<Turma> turmasEncontradasPorAssunto = buscarTurmasPorAssunto(busca, idUsuario);
+        List<Turma> turmasEncontradasPorNome = buscarPorNome(busca, idUsuario);
 
         List<Turma> turmasEncontradas = turmasEncontradasPorTags;
         turmasEncontradas.addAll(turmasEncontradasPorAssunto);
