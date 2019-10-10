@@ -36,15 +36,25 @@ public class PostagemController {
     }
 
     @RequestMapping(value = "/{id}/gostar")
-    public String gostar(Model model, @PathVariable(value = "id") Long id){
-        postagemService.gostar(id);
+    public String gostar(Model model, @PathVariable(value = "id") Long id, HttpSession httpSession){
+        try {
+            Postagem postagem = postagemService.gostar(id);
+
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
 
         return "redirect:/feed";
     }
 
     @RequestMapping(value = "/{id}/desgostar")
-    public String desgostar(Model model, @PathVariable(value = "id") Long id){
-        postagemService.desgostar(id);
+    public String desgostar(Model model, @PathVariable(value = "id") Long id, HttpSession httpSession){
+        try {
+            Postagem postagem = postagemService.desgostar(id);
+
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
 
         return "redirect:/feed";
     }
