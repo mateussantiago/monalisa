@@ -19,7 +19,7 @@ public class Tag implements Serializable {
     private String nome;
 
     @Column(name = "ativo")
-    private boolean ativo;
+    private boolean ativo = true;
 
     public Long getIdTag() { return idTag; }
 

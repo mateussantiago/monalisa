@@ -9,25 +9,31 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSpecificationExecutor<Postagem> {
-    @Query(value = "select p.* " +
-            "from postagem p, assunto_turma ast, turma t, turma_usuario tu, usuario u " +
+    @Query(value = "select * from postagem p " +
+            "join assunto_turma ast on ast.id_assunto_turma = p.id_assunto_turma " +
+            "join turma t on t.id_turma = ast.id_turma " +
+            "join turma_usuario tu on tu.id_turma = t.id_turma " +
             "where p.ativo is true " +
-            "and id_postagem_genitora is null " +
-            "and p.id_assunto_turma = ast.id_assunto_turma " +
-            "and ast.id_turma = t.id_turma " +
-            "and t.id_turma = tu.id_turma " +
+            "and p.id_postagem_genitora is null " +
             "and tu.id_usuario = :idUsuario", nativeQuery = true)
     List<Postagem> buscarPrincipais(@Param("idUsuario") Long idUsuario);
 
-    @Query(value = "select p.* " +
-            "from postagem p, assunto_turma ast " +
+    @Query(value = "select * from postagem p " +
+            "join assunto_turma ast on ast.id_assunto_turma = p.id_assunto_turma " +
             "where p.ativo is true " +
             "and id_postagem_genitora is null " +
             "and ast.id_turma = :idTurma", nativeQuery = true)
     List<Postagem> buscarPostagensPorTurma(@Param("idTurma") Long idTurma);
+
+    @Query(value = "select * from postagem p " +
+            "join assunto_turma ast on ast.id_assunto_turma = p.id_assunto_turma " +
+            "where p.ativo is true " +
+            "and id_postagem_genitora is null " +
+            "and ast.id_turma = :idTurma " +
+            "and ast.id_assunto = :idAssunto", nativeQuery = true)
+    List<Postagem> buscarPostagensPorTurmaEAssunto(@Param("idTurma") Long idTurma, @Param("idAssunto") Long idAssunto);
 
     @Query(value = "select * from postagem where ativo is true", nativeQuery = true)
     List<Postagem> buscarTodos();

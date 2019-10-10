@@ -22,7 +22,7 @@ public class AssuntoTurma implements Serializable {
     private Turma turma;
 
     @Column(name = "ativo")
-    private boolean ativo;
+    private boolean ativo = true;
 
     public Assunto getAssunto() {
         return assunto;
@@ -55,5 +55,5 @@ public class AssuntoTurma implements Serializable {
     public void setIdAssuntoTurma(Long idAssuntoTurma) {
         this.idAssuntoTurma = idAssuntoTurma;
     }
-
+    
 }

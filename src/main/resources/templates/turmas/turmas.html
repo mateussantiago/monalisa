@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:include="layouts/main :: page">
+<div th:fragment="content">
+    <tr th:each="turmaUsuario : ${turmaUsuarioList}">
+        <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-10"><h5 th:text="${turmaUsuario.turma.nome}"></h5></div>
+                    <div class="col-md-2">
+                        <a class="btn btn-danger"  th:href="@{/turma/deixar-de-seguir/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}">Deixar de seguir</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="media mb-4" th:text="${turmaUsuario.turma.descricao}"></div>
+            </div>
+        </div>
+    </tr>
+</div>
+</html>

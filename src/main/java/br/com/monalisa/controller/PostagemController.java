@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,29 +22,40 @@ public class PostagemController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @PostMapping(value = "/postar")
+    @RequestMapping(value = "/postar", method = RequestMethod.POST)
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
-        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-
-        if (usuario == null){
-            throw new RuntimeException("Não existe usuário ativo nessa sessão");
+        try {
+            Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+            Postagem postagem = postagemService.postar(postagemDTO, usuario);
+        }
+        catch (Exception e) {
+            model.addAttribute("erro", e.getMessage());
         }
 
-        postagemService.postar(postagemDTO, usuario);
-        return "feed/feed";
+        return "redirect:/feed";
     }
 
-    @PostMapping(value = "/{id}/gostar")
-    public String gostar(Model model, @PathVariable(value = "id") Long id){
-        postagemService.gostar(id);
+    @RequestMapping(value = "/{id}/gostar")
+    public String gostar(Model model, @PathVariable(value = "id") Long id, HttpSession httpSession){
+        try {
+            Postagem postagem = postagemService.gostar(id);
 
-        return "feed/feed";
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
+        return "redirect:/feed";
     }
 
-    @PostMapping(value = "/{id}/desgostar")
-    public String desgostar(Model model, @PathVariable(value = "id") Long id){
-        postagemService.desgostar(id);
+    @RequestMapping(value = "/{id}/desgostar")
+    public String desgostar(Model model, @PathVariable(value = "id") Long id, HttpSession httpSession){
+        try {
+            Postagem postagem = postagemService.desgostar(id);
 
-        return "feed/feed";
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
+        return "redirect:/feed";
     }
 }

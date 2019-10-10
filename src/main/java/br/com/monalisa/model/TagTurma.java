@@ -22,7 +22,7 @@ public class TagTurma implements Serializable {
     private Turma turma;
 
     @Column(name = "ativo")
-    private boolean ativo;
+    private boolean ativo = true;
 
     public Long getIdTagTurma() {
         return idTagTurma;

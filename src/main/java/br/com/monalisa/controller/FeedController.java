@@ -1,13 +1,14 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.model.*;
+import br.com.monalisa.model.Turma;
+import br.com.monalisa.model.Usuario;
 import br.com.monalisa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -20,16 +21,13 @@ public class FeedController {
     private TurmaUsuarioService turmaUsuarioService;
 
     @Autowired
-    private TagTurmaService tagTurmaService;
-
-    @Autowired
-    private AssuntoService assuntoService;
-
-    @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
     @Autowired
     private PostagemService postagemService;
+
+    @Autowired
+    private TurmaService turmaService;
 
     @RequestMapping("")
     public String feed(Model model, HttpSession httpSession) {
@@ -37,6 +35,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
+        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscaPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }
@@ -47,6 +46,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPorTurma(idTurma));
+        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscarPorIdTurma(idTurma));
 
         return "feed/feed";
     }
@@ -54,17 +54,30 @@ public class FeedController {
     @RequestMapping(value = "/turma/{idTurma}/assunto/{idAssunto}")
     public String assuntoPostagens(@PathVariable("idTurma") Long idTurma, @PathVariable("idAssunto") Long idAssunto, Model model,
                                    HttpSession httpSession) {
-        return "";
-    }
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-    @PostMapping(value = "/buscar")
-    public String buscar(Model model, String busca){
-        List<Turma> turmasEncontradas = tagTurmaService.buscarTurmasPorTag(busca);
-        List<Assunto> assuntosEncontrados = assuntoService.buscarAssuntoPorNome(busca);
-
-        model.addAttribute("turmasEncontradasList", turmasEncontradas);
-        model.addAttribute("assuntosEncontradisList", assuntosEncontrados);
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPorTurmaEAssunto(idTurma, idAssunto));
+        model.addAttribute("assuntoTurma", assuntoTurmaService.buscarPorIdAssuntoEIdTurma(idAssunto, idTurma));
 
         return "feed/feed";
+    }
+
+    @RequestMapping(value = "/buscar")
+    public String buscar(@RequestParam(value = "buscarTurma", required = false) String buscarTurma, Model model, HttpSession httpSession) {
+        try {
+            Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+            List<Turma> turmasEncontradas = turmaService.buscarTurmas(buscarTurma, usuario.getIdUsuario());
+
+            model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+            model.addAttribute("turmasEncontradasList", turmasEncontradas);
+
+            return "feed/buscar";
+
+        } catch (Exception e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
+        return "redirect:/feed";
     }
 }

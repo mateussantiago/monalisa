@@ -13,6 +13,7 @@
 
     <!-- Custom styles for this template -->
     <link th:href="@{/css/monalisa-feed.css}" rel="stylesheet">
+    <link th:href="@{/open-iconic/font/css/open-iconic-bootstrap.css}" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
@@ -28,6 +29,15 @@
             </div>
 
             <ul class="list-unstyled components">
+                <li>
+                    <a th:href="@{/feed}">Início</a>
+                </li>
+                <li>
+                    <a th:href="@{/turma}">Gerenciar suas turmas</a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled components">
                 <p><b>Suas turmas</b></p>
 
                 <tr th:each="turmaUsuario: ${turmaUsuarioList}">
@@ -35,7 +45,8 @@
                         <a th:text="${turmaUsuario.turma.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.turma.idTurma}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
                         <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.turma.idTurma}">
                             <a th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}">Todos os assuntos</a>
-                            <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"></a>
+                            <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"
+                               th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma}, idAssunto=${assuntoTurma.assunto.idAssunto})}"></a>
                         </ul>
                     </li>
                 </tr>
@@ -45,6 +56,32 @@
         <!-- Page Content  -->
         <div id="content">
             <div id="container-fluid" class="container">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-light">
+                            <i class="fas fa-align-left"></i>
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <form class="form-inline my-2 my-lg-0" th:action="@{/feed/buscar}" >
+                                        <input class="form-control mr-sm-2" th:name="buscarTurma" type="search" placeholder="Tag, Assuntos ou Turmas" aria-label="Search">
+                                        <button class="btn btn-info my-2 my-sm-0" type="submit">Pesquisar</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div th:if="${erro} != null" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div  th:text="${erro}"></div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div th:include="this :: content"></div>
             </div>
         </div>

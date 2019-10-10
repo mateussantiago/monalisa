@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +21,11 @@ public class LoginController {
     private UsuarioService usuarioService;
 
     @RequestMapping("")
-    public String login(Model model) {
+    public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {
+
+        if (error != null && error)
+            model.addAttribute("erroEntrar", "Usuário e/ou senha inválidos.");
+
         return "login/login";
     }
 
@@ -42,12 +47,16 @@ public class LoginController {
 
     @RequestMapping(value = "/cadastro/novo", method = RequestMethod.POST)
     public String novoUsuario(UsuarioDTO usuarioDTO, Model model) {
-        Usuario usuario = usuarioService.registrarUsuario(usuarioDTO);
+        try {
+            Usuario novoUsuario = usuarioService.registrarUsuario(usuarioDTO);
 
-        if (usuario != null ){
             return "redirect:/login";
         }
+        catch (Exception e) {
+            model.addAttribute("erroCadastro",  e.getMessage());
+        }
 
-        return "redirect:/";
+        return "login/cadastro";
     }
+
 }

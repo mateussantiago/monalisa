@@ -155,10 +155,32 @@ CREATE TABLE public.postagem (
 	curtidas_positivas int4 NULL DEFAULT 0,
 	curtidas_negativas int4 NULL DEFAULT 0,
 	id_postagem_genitora int4 NULL,
-	id_assunto_turma int4 NULL,
+	id_assunto_turma int4 NOT NULL,
 	id_usuario_autor int4 NOT NULL,
 	CONSTRAINT pk_postagem PRIMARY KEY (id_postagem),
 	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem_genitora) REFERENCES public.postagem (id_postagem),
     CONSTRAINT fk_assunto_turma FOREIGN KEY (id_assunto_turma) REFERENCES public.assunto_turma (id_assunto_turma),
     CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor) REFERENCES public.usuario (id_usuario)
+);
+
+------------------------------------------------------------
+--DROP SEQUENCE public.seq_id_denuncia;
+CREATE SEQUENCE public.seq_id_denuncia
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Drop table
+--DROP TABLE public.denuncia;
+CREATE TABLE public.denuncia (
+	id_denuncia int4 NOT NULL,
+	id_postagem int4 NOT NULL,
+	id_usuario_autor int4 NOT NULL,
+	motivacao varchar(1000) NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	CONSTRAINT pk_denuncia PRIMARY KEY (id_denuncia),
+    CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor) REFERENCES public.usuario (id_usuario),
+    CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES public.postagem (id_postagem)
 );

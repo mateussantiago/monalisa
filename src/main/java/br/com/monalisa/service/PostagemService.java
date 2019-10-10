@@ -2,8 +2,12 @@ package br.com.monalisa.service;
 
 import br.com.monalisa.dto.PostagemDTO;
 import br.com.monalisa.exception.EntidadeNaoEncontradaException;
-import br.com.monalisa.model.*;
+import br.com.monalisa.exception.PostagemSemConteudoException;
+import br.com.monalisa.model.AssuntoTurma;
+import br.com.monalisa.model.Postagem;
+import br.com.monalisa.model.Usuario;
 import br.com.monalisa.repository.PostagemRepository;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +26,11 @@ public class PostagemService {
     }
 
     public List<Postagem> buscarPostagensPorTurma(Long idTurma){
-        List<Postagem> postagemList = postagemRepository.buscarPostagensPorTurma(idTurma);
+        return  postagemRepository.buscarPostagensPorTurma(idTurma);
+    }
 
-        System.out.println("Chegou aqui");
-
-        return postagemList;
+    public List<Postagem> buscarPostagensPorTurmaEAssunto(Long idTurma, Long idAssunto){
+        return postagemRepository.buscarPostagensPorTurmaEAssunto(idTurma, idAssunto);
     }
 
     public List<Postagem> buscarTodos() {
@@ -42,23 +46,25 @@ public class PostagemService {
     }
 
     public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
-        Postagem postagemGenitora = postagemRepository.getOne(postagemDTO.getPostagemGenitora());
+        Postagem postagemGenitora = null;
 
-        if (postagemGenitora == null) {
-            throw new EntidadeNaoEncontradaException("Não existe uma postagem anterior com está referência para adicionar um comentário.");
+        if (postagemDTO.getIdPostagemGenitora() != null){
+            postagemGenitora = buscarPorId(postagemDTO.getIdPostagemGenitora());
+        }
+        if (postagemDTO.getConteudo() == null || postagemDTO.getConteudo() == "") {
+            throw new PostagemSemConteudoException("A postagem não pode ter conteúdo vazio.");
         }
 
-        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorIdAssuntoEIdTurma(postagemDTO.getAssunto(), postagemDTO.getTurma());
+        AssuntoTurma assuntoTurma = assuntoTurmaService.buscarPorId(postagemDTO.getIdAssuntoTurma());
 
         if (assuntoTurma == null) {
-            throw new EntidadeNaoEncontradaException("Não foi possível identificar uma referência dessa turma com este assunto.");
+            throw new EntidadeNaoEncontradaException("Assunto da postagem não pode ser vazio.");
         }
-
         Postagem postagem = new Postagem();
-        postagem.setConteudo(postagemDTO.getTexto());
+        postagem.setConteudo(postagemDTO.getConteudo());
+        postagem.setAssuntoTurma(assuntoTurma);
         postagem.setUsuarioAutor(usuario);
         postagem.setPostagemGenitora(postagemGenitora);
-        postagem.setAssuntoTurma(assuntoTurma);
 
         return salvar(postagem);
     }
