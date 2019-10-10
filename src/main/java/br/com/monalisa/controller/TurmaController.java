@@ -21,7 +21,7 @@ public class TurmaController {
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
 
-    @RequestMapping
+    @RequestMapping("")
     public String gerenciarTurmas(Model model, HttpSession httpSession){
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
@@ -44,19 +44,18 @@ public class TurmaController {
         return "redirect:/feed";
     }
 
-    @PostMapping("/deixar-seguir")
-    public String deixarSeguirTurma(HttpSession httpSession, Long idTurma) {
+    @RequestMapping("/deixar-de-seguir/{idTurma}")
+    public String deixarSeguirTurma(@PathVariable("idTurma") Long idTurma, Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
         try {
-            turmaUsuarioService.deixarSeguirTurma(usuario.getIdUsuario(), idTurma);
+            turmaUsuarioService.deixarSeguirTurma(idTurma, usuario.getIdUsuario());
 
-            return "minhas-turmas";
         } catch (OperacaoInvalidaException e) {
-            e.printStackTrace();
+            model.addAttribute("erro", e.getMessage());
         }
 
-        return "/feed";
+        return "redirect:/feed";
     }
 
 }

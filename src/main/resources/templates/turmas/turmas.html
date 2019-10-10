@@ -6,7 +6,9 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-10"><h5 th:text="${turmaUsuario.turma.nome}"></h5></div>
-                    <div class="col-md-2"><button class="btn btn-danger" type="submit">Deixar de seguir</button></div>
+                    <div class="col-md-2">
+                        <a class="btn btn-danger"  th:href="@{/turma/deixar-de-seguir/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}">Deixar de seguir</a>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
