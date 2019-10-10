@@ -44,7 +44,20 @@
                             <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
                         <p th:text="${postagem.conteudo}"></p>
-                    </p>
+                    </div>
+                    <div class="media mb-4" style="padding: 0.3em">
+                        <a th:href="@{/postagem/{id}/gostar(id=${postagem.idPostagem})}">
+                            <div class="row">
+                                <div class="col-md-4"><span class="oi oi-thumb-up"></span></div>
+                                <div class="col-md-4"><p th:text="${postagem.curtidasPositivas}"></p></div>
+                            </div>
+                        </a>
+                        <a th:href="@{/postagem/{id}/desgostar(id=${postagem.idPostagem})}">
+                            <div class="row">
+                                <div class="col-md-4"><span class="oi oi-thumb-down"></span></div>
+                                <div class="col-md-4"><p th:text="${postagem.curtidasNegativas}"></p></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <hr>
@@ -58,6 +71,20 @@
                             <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>
                         </p>
                         <p th:text="${resposta.conteudo}"></p>
+                    </div>
+                    <div class="media mb-4" style="padding: 0.5em">
+                        <a th:href="@{/postagem/{id}/gostar(id=${resposta.idPostagem})}">
+                            <div class="row">
+                                <div class="col-md-4"><span class="oi oi-thumb-up"></span></div>
+                                <div class="col-md-4"><p th:text="${resposta.curtidasPositivas}"></p></div>
+                            </div>
+                        </a>
+                        <a th:href="@{/postagem/{id}/desgostar(id=${resposta.idPostagem})}">
+                            <div class="row">
+                                <div class="col-md-4"><span class="oi oi-thumb-down"></span></div>
+                                <div class="col-md-4"><p th:text="${resposta.curtidasNegativas}"></p></div>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <div class="media mb-4">

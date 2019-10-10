@@ -35,17 +35,27 @@ public class PostagemController {
         return "redirect:/feed";
     }
 
-    @PostMapping(value = "/{id}/gostar")
-    public String gostar(Model model, @PathVariable(value = "id") Long id){
-        postagemService.gostar(id);
+    @RequestMapping(value = "/{id}/gostar")
+    public String gostar(Model model, @PathVariable(value = "id") Long id, HttpSession httpSession){
+        try {
+            Postagem postagem = postagemService.gostar(id);
 
-        return "feed/feed";
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
+        return "redirect:/feed";
     }
 
-    @PostMapping(value = "/{id}/desgostar")
-    public String desgostar(Model model, @PathVariable(value = "id") Long id){
-        postagemService.desgostar(id);
+    @RequestMapping(value = "/{id}/desgostar")
+    public String desgostar(Model model, @PathVariable(value = "id") Long id, HttpSession httpSession){
+        try {
+            Postagem postagem = postagemService.desgostar(id);
 
-        return "feed/feed";
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
+        return "redirect:/feed";
     }
 }
