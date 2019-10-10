@@ -29,7 +29,7 @@ public class PostagemController {
             Postagem postagem = postagemService.postar(postagemDTO, usuario);
         }
         catch (Exception e) {
-            model.addAttribute("erroPostagem", e.getMessage());
+            model.addAttribute("erro", e.getMessage());
         }
 
         return "redirect:/feed";

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:include="layouts/main :: page">
+<div th:fragment="content">
+    <tr th:each="turma : ${turmasEncontradasList}">
+        <div class="card card-outline-secondary my-4">
+            <div class="card-header">
+                <h5 th:text="${turma.nome}"></h5>
+            </div>
+            <div class="card-body">
+                <div class="media mb-4">
+                </div>
+            </div>
+        </div>
+    </tr>
+</div>
+</html>
