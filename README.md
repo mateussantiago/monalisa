@@ -64,8 +64,11 @@ Caso não você não saiba como configurar varáveis de ambiente na sua IDE, sub
 configurações: 
 
 > `spring.datasource.driver-class-name = org.postgresql.Driver`
+>
 > `spring.datasource.url= jdbc:postgresql://[Host do seu banco]:5432/monalisa`
+>
 > `spring.datasource.username=[Usuário do seu banco]`
+>
 > `spring.datasource.password=[Senha do seu banco]`
 
 Feito isso, execute o arquivo `MonalisaApplication` como um projeto java e pronto!
