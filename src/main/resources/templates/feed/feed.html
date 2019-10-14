@@ -48,14 +48,14 @@
                     <div class="media mb-4" style="padding: 0.3em">
                         <a th:href="@{/postagem/{id}/gostar(id=${postagem.idPostagem})}">
                             <div class="row">
-                                <div class="col-md-4"><span class="oi oi-thumb-up"></span></div>
-                                <div class="col-md-4"><p th:text="${postagem.curtidasPositivas}"></p></div>
+                                <div class="col-md-1" style="color: green;"><span class="oi oi-thumb-up"></span></div>
+                                <div class="col-md-7"><p style="color: green;" th:text="${postagem.curtidasPositivas}"></p></div>
                             </div>
                         </a>
                         <a th:href="@{/postagem/{id}/desgostar(id=${postagem.idPostagem})}">
                             <div class="row">
-                                <div class="col-md-4"><span class="oi oi-thumb-down"></span></div>
-                                <div class="col-md-4"><p th:text="${postagem.curtidasNegativas}"></p></div>
+                                <div class="col-md-1" style="color: red;"><span class="oi oi-thumb-down"></span></div>
+                                <div class="col-md-7"><p style="color: red;" th:text="${postagem.curtidasNegativas}"></p></div>
                             </div>
                         </a>
                     </div>
@@ -75,14 +75,14 @@
                     <div class="media mb-4" style="padding: 0.5em">
                         <a th:href="@{/postagem/{id}/gostar(id=${resposta.idPostagem})}">
                             <div class="row">
-                                <div class="col-md-4"><span class="oi oi-thumb-up"></span></div>
-                                <div class="col-md-4"><p th:text="${resposta.curtidasPositivas}"></p></div>
+                                <div class="col-md-1" style="color: green;"><span class="oi oi-thumb-up"></span></div>
+                                <div class="col-md-7"><p style="color: green;" th:text="${resposta.curtidasPositivas}"></p></div>
                             </div>
                         </a>
                         <a th:href="@{/postagem/{id}/desgostar(id=${resposta.idPostagem})}">
                             <div class="row">
-                                <div class="col-md-4"><span class="oi oi-thumb-down"></span></div>
-                                <div class="col-md-4"><p th:text="${resposta.curtidasNegativas}"></p></div>
+                                <div class="col-md-1" style="color: red;"><span class="oi oi-thumb-down"></span></div>
+                                <div class="col-md-7"><p style="color: red;" th:text="${resposta.curtidasNegativas}"></p></div>
                             </div>
                         </a>
                     </div>
