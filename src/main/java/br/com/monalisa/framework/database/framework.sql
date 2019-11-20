@@ -59,6 +59,14 @@ CREATE TABLE public.topico (
 	CONSTRAINT fk_topico FOREIGN KEY (id_conteudo) REFERENCES conteudo(id_conteudo);
 );
 
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_postagem;
+CREATE SEQUENCE public.seq_id_postagem
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
 
 -- Drop table
 --DROP TABLE public.postagem;
@@ -96,4 +104,27 @@ CREATE TABLE public.conteudo_usuario (
 	CONSTRAINT pk_conteudo_usuario PRIMARY KEY (id_conteudo_usuario, id_conteudo, id_usuario),
 	CONSTRAINT fk_conteudo FOREIGN KEY (id_conteudo) REFERENCES conteudo(id_conteudo),
 	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_denuncia;
+CREATE SEQUENCE public.seq_id_denuncia
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Drop table
+-- DROP TABLE public.denuncia;
+CREATE TABLE public.denuncia (
+	id_denuncia int4 NOT NULL,
+	tipo_denuncia varchar(20) NOT NULL,
+	id_usuario_autor int4 NOT NULL,
+	id_postagem int4 NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	processada bool NOT NULL DEFAULT false,
+	CONSTRAINT pk_denuncia PRIMARY KEY (id_denuncia),
+	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario_autor) REFERENCES usuario(id_usuario),
+	CONSTRAINT fk_postagem FOREIGN KEY (id_postagem) REFERENCES postagem(id_postagem)
 );
