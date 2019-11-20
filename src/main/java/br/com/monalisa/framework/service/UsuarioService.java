@@ -12,6 +12,8 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    public Usuario buscarPorId(Long idUsuario){ return usuarioRepository.buscarPorId(idUsuario); }
+
     public Usuario registrarUsuario(Usuario usuario) throws Exception {
         Usuario usuarioValidacao = usuarioRepository.buscarPorEmail(usuario.getEmail());
 
