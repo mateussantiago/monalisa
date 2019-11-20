@@ -29,7 +29,8 @@ public class ConteudoService {
         return conteudoRepository.save(conteudo);
     }
 
-    public List<Conteudo> buscarConteudos(String busca, Long idUsuario) {
+    public List<Conteudo> buscarConteudos(String busca) {
+
         List<Conteudo> conteudosEncontrados = buscadorConteudo.execute(busca);
 
         if (conteudosEncontrados.isEmpty())

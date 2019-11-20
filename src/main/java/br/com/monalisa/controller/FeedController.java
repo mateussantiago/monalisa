@@ -26,7 +26,7 @@ public class FeedController {
     public String buscar(@RequestParam(value = "palavraBusca", required = false) String palavraBusca, Model model, HttpSession httpSession) {
         try {
             Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-            List<Conteudo> conteudosEncontrados = conteudoService.buscarConteudos(palavraBusca, usuario.getIdUsuario());
+            List<Conteudo> conteudosEncontrados = conteudoService.buscarConteudos(palavraBusca);
 
             model.addAttribute("conteudosUsuario", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
             model.addAttribute("conteudosEncontradosList", conteudosEncontrados);
