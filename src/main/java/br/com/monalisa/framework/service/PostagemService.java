@@ -1,6 +1,6 @@
 package br.com.monalisa.framework.service;
 
-import br.com.monalisa.exception.EntidadeNaoEncontradaException;
+import br.com.monalisa.framework.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.framework.model.Postagem;
 import br.com.monalisa.framework.repository.PostagemRepository;
 import br.com.monalisa.framework.utils.ComparadorPostagem;
@@ -11,23 +11,23 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public abstract class PostagemService {
-
-    private ComparadorPostagem comparadorPostagem;
+public class PostagemService {
 
     @Autowired
     private PostagemRepository postagemRepository;
+
+    private ComparadorPostagem comparadorPostagem;
 
     public Postagem salvar(Postagem postagem) {
         return postagemRepository.save(postagem);
     }
 
-    public void remover(Long idPostagem) {
-        postagemRepository.remover(idPostagem);
-    }
-
     public Postagem buscarPorId(Long idPostagem) {
         return postagemRepository.buscarPorId(idPostagem);
+    }
+
+    public void remover(Long idPostagem) {
+        postagemRepository.remover(idPostagem);
     }
 
     public Postagem gostar(Long idPostagem) {

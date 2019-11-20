@@ -1,9 +1,6 @@
 package br.com.monalisa.framework.model;
 
 
-import br.com.monalisa.model.AssuntoTurma;
-import br.com.monalisa.model.Usuario;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -32,15 +29,15 @@ public class Postagem implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_postagem_genitora")
-    private br.com.monalisa.model.Postagem postagemGenitora;
+    private Postagem postagemGenitora;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_usuario_autor")
     private Usuario usuarioAutor;
 
-    @ManyToOne
-    @JoinColumn(name = "id_assunto_turma")
-    private AssuntoTurma assuntoTurma;
+    @OneToOne
+    @JoinColumn(name = "id_topico")
+    private Topico topico;
 
     public Long getIdPostagem() {
         return idPostagem;
@@ -82,11 +79,11 @@ public class Postagem implements Serializable {
         this.curtidasNegativas = curtidasNegativas;
     }
 
-    public br.com.monalisa.model.Postagem getPostagemGenitora() {
+    public Postagem getPostagemGenitora() {
         return postagemGenitora;
     }
 
-    public void setPostagemGenitora(br.com.monalisa.model.Postagem postagemGenitora) {
+    public void setPostagemGenitora(Postagem postagemGenitora) {
         this.postagemGenitora = postagemGenitora;
     }
 
@@ -98,11 +95,11 @@ public class Postagem implements Serializable {
         this.usuarioAutor = usuarioAutor;
     }
 
-    public AssuntoTurma getAssuntoTurma() {
-        return assuntoTurma;
+    public Topico getTopico() {
+        return topico;
     }
 
-    public void setAssuntoTurma(AssuntoTurma assuntoTurma) {
-        this.assuntoTurma = assuntoTurma;
+    public void setTopico(Topico topico) {
+        this.topico = topico;
     }
 }

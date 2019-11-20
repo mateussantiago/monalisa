@@ -1,4 +1,4 @@
-package br.com.monalisa.framework;
+package br.com.monalisa.serie;
 
 import br.com.monalisa.framework.model.Postagem;
 import br.com.monalisa.framework.utils.ComparadorPostagem;

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSpecificationExecutor<Postagem> {
@@ -16,7 +17,6 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSp
 
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE public.postagem SET ativo = false WHERE id_postagem = :idPostagem")
+    @Query(value = "UPDATE postagem SET ativo = false WHERE id_postagem = :idPostagem", nativeQuery = true)
     void remover(@Param(value = "idPostagem") Long idPostagem);
-
 }

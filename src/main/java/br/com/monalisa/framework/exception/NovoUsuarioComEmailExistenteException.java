@@ -1,6 +1,7 @@
-package br.com.monalisa.exception;
+package br.com.monalisa.framework.exception;
 
 public class NovoUsuarioComEmailExistenteException extends Exception {
+
     public NovoUsuarioComEmailExistenteException() {
 
     }

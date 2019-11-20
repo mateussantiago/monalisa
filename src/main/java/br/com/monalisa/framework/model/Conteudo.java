@@ -1,36 +1,32 @@
-package br.com.monalisa.model;
+package br.com.monalisa.framework.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Table(schema = "public", name = "assunto")
-public class Assunto implements Serializable {
-
+@Table(schema = "public", name = "conteudo")
+public class Conteudo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
-    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_assunto", allocationSize = 1)
-    @Column(name = "id_assunto")
-    private Long idAssunto;
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_conteudo", allocationSize = 1)
+    @Column(name = "id_conteudo")
+    private Long idConteudo;
 
-    @NotBlank
     @Column(name = "nome")
     private String nome;
 
-    @NotBlank
     @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "ativo")
     private Boolean ativo = true;
 
-    public Long getIdAssunto() {
-        return idAssunto;
+    public Long getIdConteudo() {
+        return idConteudo;
     }
 
-    public void setIdAssunto(Long idAssunto) {
-        this.idAssunto = idAssunto;
+    public void setIdConteudo(Long idConteudo) {
+        this.idConteudo = idConteudo;
     }
 
     public String getNome() {
@@ -56,5 +52,4 @@ public class Assunto implements Serializable {
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
     }
-
 }

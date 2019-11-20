@@ -1,4 +1,5 @@
-package br.com.monalisa.exception;
+package br.com.monalisa.framework.exception;
+
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -6,11 +7,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.persistence.EntityNotFoundException;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class RetornoDeBuscaVazioException extends EntityNotFoundException {
-    public RetornoDeBuscaVazioException() {
+public class EntidadeNaoEncontradaException extends EntityNotFoundException {
+    public EntidadeNaoEncontradaException() {
     }
 
-    public RetornoDeBuscaVazioException(String message) {
+    public EntidadeNaoEncontradaException(String message) {
         super(message);
     }
 }

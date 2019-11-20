@@ -1,39 +1,36 @@
-package br.com.monalisa.model;
+package br.com.monalisa.framework.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
-@Table(schema = "public", name = "turma")
-public class Turma implements Serializable {
+@Table(schema = "public", name = "topico")
+public class Topico implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
-    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_turma", allocationSize = 1)
-    @Column(name = "id_turma")
-    private Long idTurma;
+    @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_topico", allocationSize = 1)
+    @Column(name = "id_topico")
+    private Long idTopico;
 
-    @NotBlank
     @Column(name = "nome")
     private String nome;
 
-    @NotBlank
     @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "ativo")
     private Boolean ativo = true;
 
-    @OneToMany(mappedBy = "turma")
-    private List<AssuntoTurma> assuntoTurmas;
+    @OneToOne
+    @JoinColumn(name = "id_conteudo")
+    private Conteudo conteudo;
 
-    public Long getIdTurma() {
-        return idTurma;
+    public Long getIdTopico() {
+        return idTopico;
     }
 
-    public void setIdTurma(Long idTurma) {
-        this.idTurma = idTurma;
+    public void setIdTopico(Long idTopico) {
+        this.idTopico = idTopico;
     }
 
     public String getNome() {
@@ -60,11 +57,11 @@ public class Turma implements Serializable {
         this.ativo = ativo;
     }
 
-    public List<AssuntoTurma> getAssuntoTurmas() {
-        return assuntoTurmas;
+    public Conteudo getConteudo() {
+        return conteudo;
     }
 
-    public void setAssuntoTurmas(List<AssuntoTurma> assuntoTurmas) {
-        this.assuntoTurmas = assuntoTurmas;
+    public void setConteudo(Conteudo conteudo) {
+        this.conteudo = conteudo;
     }
 }

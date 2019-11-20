@@ -1,7 +1,7 @@
 package br.com.monalisa.config;
 
-import br.com.monalisa.model.Usuario;
-import br.com.monalisa.service.UsuarioService;
+import br.com.monalisa.framework.model.Usuario;
+import br.com.monalisa.framework.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

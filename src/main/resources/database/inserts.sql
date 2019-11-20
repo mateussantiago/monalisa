@@ -6,7 +6,7 @@ INSERT INTO usuario(id_usuario, nome, login, email, senha, ativo) VALUES
 ALTER SEQUENCE seq_id_turma RESTART WITH 4
 ;
 INSERT INTO public.turma (id_turma, nome, descricao, ativo) VALUES
-(1, 'Cálculo 1', 'Disciplina de cálculo 1', true),
+(1, 'Cálculo 1' , 'Disciplina de cálculo 1', true),
 (2, 'Probabilidade', 'Disciplina de probabilidade', true),
 (3, 'Fundamentos matemáticos para a computação 1', 'Disciplina de FMC1', true),
 (4, 'Gramática 1', 'Disciplina que ensina a escrever', true),
