@@ -6,3 +6,17 @@ INSERT INTO public.conteudo (id_conteudo, nome, descricao, ativo) VALUES
 (5, 'Mr. Robot', 'Elliot é um jovem programador que trabalha como engenheiro de segurança virtual durante o dia, e como hacker vigilante durante a noite. Elliot se vê em uma encruzilhada quando é recrutado para destruir a firma que ele é pago para proteger.', true);
 ALTER SEQUENCE seq_id_conteudo RESTART WITH 6;
 
+INSERT INTO public.topico (id_topico, nome, descricao, ativo, id_conteudo) VALUES
+(1, 'Temporada 1', 'Dicussão sobre a temporada de Breaking Bad.', true, 2),
+(2, 'Temporada 1', 'Dicussão sobre a temporada de Game of Thrones.', true, 4);
+ALTER SEQUENCE seq_id_topico RESTART WITH 3;
+
+INSERT INTO public.usuario (id_usuario, nome, login, email, senha, ativo) VALUES
+(1, 'Lebron James', 'lebron', 'lebron@gmail.com', '$2a$10$.u0rPjLmw7fjJYOGUAXALeuURu..uObou1t/tlc41OVrbHZAmH0/y', true);
+ALTER SEQUENCE seq_id_topico RESTART WITH 2;
+
+INSERT INTO public.conteudo_usuario (id_conteudo_usuario, id_conteudo, id_usuario, ativo) VALUES
+(1, 1, 1, true),
+(2, 2, 1, true),
+(3, 3, 1, true);
+ALTER SEQUENCE seq_id_conteudo_usuario RESTART WITH 4;

@@ -1,6 +1,8 @@
 package br.com.monalisa.controller;
 
+import br.com.monalisa.framework.model.ConteudoUsuario;
 import br.com.monalisa.framework.model.Usuario;
+import br.com.monalisa.framework.service.ConteudoUsuarioService;
 import br.com.monalisa.framework.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +21,13 @@ public class LoginController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private ConteudoUsuarioService conteudoUsuarioService;
+
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {
+        usuarioService.buscarPorEmail("mateus@gmail.com");
+        conteudoUsuarioService.buscarPorIdUsuario(Long.valueOf(1));
 
         if (error != null && error)
             model.addAttribute("erroEntrar", "Usuário e/ou senha inválidos.");

@@ -76,3 +76,24 @@ CREATE TABLE public.postagem (
     CONSTRAINT fk_topico FOREIGN KEY (id_topico) REFERENCES public.topico (id_topico),
     CONSTRAINT fk_usuario_autor FOREIGN KEY (id_usuario_autor) REFERENCES public.usuario (id_usuario)
 );
+
+------------------------------------------------------------
+-- DROP SEQUENCE public.seq_id_conteudo_usuario;
+CREATE SEQUENCE public.seq_id_conteudo_usuario
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 999999999999999999
+	CACHE 1
+	NO CYCLE;
+
+-- Drop table
+-- DROP TABLE public.conteudo_usuario;
+CREATE TABLE public.conteudo_usuario (
+	id_conteudo_usuario int4 NOT NULL,
+	id_conteudo int4 NOT NULL,
+	id_usuario int4 NOT NULL,
+	ativo bool NOT NULL DEFAULT true,
+	CONSTRAINT pk_conteudo_usuario PRIMARY KEY (id_conteudo_usuario, id_conteudo, id_usuario),
+	CONSTRAINT fk_conteudo FOREIGN KEY (id_conteudo) REFERENCES conteudo(id_conteudo),
+	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+);
