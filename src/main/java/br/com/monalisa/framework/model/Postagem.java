@@ -35,6 +35,10 @@ public class Postagem implements Serializable {
     @JoinColumn(name = "id_usuario_autor")
     private Usuario usuarioAutor;
 
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "id_conteudo_topico")
+//    private ConteudoTopico conteudoTopico;
+
     @OneToOne
     @JoinColumn(name = "id_topico")
     private Topico topico;
