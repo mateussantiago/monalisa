@@ -27,8 +27,6 @@ public class LoginController {
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {
-        usuarioService.buscarPorEmail("mateus@gmail.com");
-        conteudoUsuarioService.buscarPorIdUsuario(Long.valueOf(1));
 
         if (error != null && error)
             model.addAttribute("erroEntrar", "Usuário e/ou senha inválidos.");
@@ -54,7 +52,6 @@ public class LoginController {
 
     @RequestMapping(value = "/cadastro/novo", method = RequestMethod.POST)
     public String novoUsuario(UsuarioDTO usuarioDTO, Model model) {
-        System.out.println("oiiiiiii");
         try {
             Usuario novoUsuario = usuarioService.registrarUsuario(usuarioDTO);
 

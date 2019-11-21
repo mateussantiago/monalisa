@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("feed")
 public class FeedController {
 
     @Autowired
@@ -38,5 +39,19 @@ public class FeedController {
         }
 
         return "redirect:/feed";
+    }
+
+    @RequestMapping("")
+    public String feed(Model model, HttpSession httpSession) {
+        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+
+        System.out.println(usuario.getNome());
+
+
+//        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+//        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
+//        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscaPorIdUsuario(usuario.getIdUsuario()));
+
+        return "feed/feed";
     }
 }
