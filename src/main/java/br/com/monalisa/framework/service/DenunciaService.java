@@ -5,8 +5,11 @@ import br.com.monalisa.framework.model.Denuncia;
 import br.com.monalisa.framework.model.Postagem;
 import br.com.monalisa.framework.model.Usuario;
 import br.com.monalisa.framework.repository.DenunciaRepository;
+import br.com.monalisa.framework.utils.Punicao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DenunciaService {
@@ -16,6 +19,9 @@ public class DenunciaService {
 
     @Autowired
     private PostagemService postagemService;
+
+    @Autowired
+    private PunicaoService punicaoService;
 
     @Autowired
     private DenunciaRepository denunciaRepository;
@@ -45,6 +51,19 @@ public class DenunciaService {
         denunciaCriada.setProcessada(false);
         denunciaCriada.setMotivacao(motivacao);
 
+        denunciaCriada = salvar(denunciaCriada);
+
+        punicaoService.talvezPunir(idPostagem);
+
         return salvar(denunciaCriada);
+    }
+
+    public List<Denuncia> recuperarDenunciasPorIdPostagem(Long idPostagem){
+        List<Denuncia> denunciasRecuperadas = denunciaRepository.recuperarDenunciasPorIdPostagem(idPostagem);
+
+        if (denunciasRecuperadas.isEmpty())
+            throw new EntidadeNaoEncontradaException("Nenhuma denuncia relacionada à postagem passada foi achada!");
+
+        return denunciasRecuperadas;
     }
 }
