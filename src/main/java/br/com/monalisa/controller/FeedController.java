@@ -4,6 +4,9 @@ import br.com.monalisa.framework.model.Conteudo;
 import br.com.monalisa.framework.model.Usuario;
 import br.com.monalisa.framework.service.ConteudoService;
 import br.com.monalisa.framework.service.ConteudoUsuarioService;
+import br.com.monalisa.framework.service.PostagemService;
+import br.com.monalisa.service.AssuntoTurmaService;
+import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +25,15 @@ public class FeedController {
 
     @Autowired
     private ConteudoService conteudoService;
+
+    @Autowired
+    private TurmaUsuarioService turmaUsuarioService;
+
+    @Autowired
+    private AssuntoTurmaService assuntoTurmaService;
+
+    @Autowired
+    private  PostagemService postagemService; // usando a classe mae, nao vi necessiade de implementar uma filha
 
     @RequestMapping(value = "/buscar")
     public String buscar(@RequestParam(value = "palavraBusca", required = false) String palavraBusca, Model model, HttpSession httpSession) {
@@ -45,12 +57,9 @@ public class FeedController {
     public String feed(Model model, HttpSession httpSession) {
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        System.out.println(usuario.getNome());
-
-
-//        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
-//        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
-//        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscaPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
+        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }

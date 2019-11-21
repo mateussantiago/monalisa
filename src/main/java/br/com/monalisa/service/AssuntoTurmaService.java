@@ -1,4 +1,9 @@
 package br.com.monalisa.service;
 
-public class AssuntoTurmaService {
+import br.com.monalisa.framework.service.ConteudoTopicoService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AssuntoTurmaService extends ConteudoTopicoService {
+
 }
