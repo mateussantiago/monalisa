@@ -9,11 +9,22 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSpecificationExecutor<Postagem> {
 
     @Query(value = "select * from postagem where id_postagem = :idPostagem", nativeQuery = true)
     Postagem buscarPorId(@Param(value = "idPostagem") Long idPostagem);
+
+    @Query(value = "select * from postagem p " +
+            "join public.conteudo_topico ct on ct.id_conteudo_topico = p.id_conteudo_topico " +
+            "join public.conteudo c on c.id_conteudo = ct.id_conteudo " +
+            "join public.conteudo_usuario cu on cu.id_conteudo = c.id_conteudo " +
+            "where p.ativo is true " +
+            "and p.id_postagem_genitora is null " +
+            "and tu.id_usuario = :idUsuario", nativeQuery = true)
+    List<Postagem> buscarPrincipais(@Param("idUsuario") Long idUsuario);
 
 
     @Modifying(clearAutomatically = true)

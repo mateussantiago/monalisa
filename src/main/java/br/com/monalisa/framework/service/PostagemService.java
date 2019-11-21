@@ -2,6 +2,7 @@ package br.com.monalisa.framework.service;
 
 import br.com.monalisa.framework.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.framework.model.Postagem;
+import br.com.monalisa.framework.model.Usuario;
 import br.com.monalisa.framework.repository.PostagemRepository;
 import br.com.monalisa.framework.utils.ComparadorPostagem;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,9 @@ public class PostagemService {
         Collections.sort(postagens, comparadorPostagem);
 
         return postagens;
+    }
+
+    public List<Postagem> buscarPostagensPrincipais(Usuario usuario){
+        return postagemRepository.buscarPrincipais(usuario.getIdUsuario());
     }
 }
