@@ -41,38 +41,3 @@ respectivas respostas.
 Os arquivos HTML que compõem o front-end do projeto se encontram na pasta `src/main/resources/templates`.
 
 #### Executando o projeto
-
-Para executar o projeto, primeiramente clone esse repositório em sua máquina.
-
-Posteriormente, abra o repositório na sua IDE de preferência. 
-Nós desenvolvedores desse projeto preferimos O **Intellij IDEA**, mas você pode usar a que você achar melhor de acordo 
-com sua experiência.
-
-Em seguida, crie um banco de dados Postgres chamado `monalisa` e execute a query de criação das tabelas no schema que se 
-encontra em `src/main/resources/database` chamada `monalisa.sql`; e a query de inserção de dados de testes do 
-arquivo `inserts.sql`.
-
-Depois, abra o arquivo `application.properties` em `src/main/resources` e configure as variáveis de ambiente de acordo
-com as seguintes descrições:
-
-1. `${DATABASE_URL}`: O HOST do seu banco de dados. Por exemplo: localhost ou 127.0.0.1;
-2. `${DATABASE_NAME}`: O nome do seu banco de dados. Nesse caso, monalisa, que você criou logo acima.
-3. `${DATABASE_USERNAME}`: O usuário do seu banco de dados postgres. 
-4. `${DATABASE_PASSWORD}`: A senha do seu banco de dados postgres. 
-
-Caso não você não saiba como configurar varáveis de ambiente na sua IDE, substitua essas linhas para as seguintes 
-configurações: 
-
-> `spring.datasource.driver-class-name = org.postgresql.Driver`  
-> `spring.datasource.url= jdbc:postgresql://[Host do seu banco]:5432/monalisa`  
-> `spring.datasource.username=[Usuário do seu banco]`  
-> `spring.datasource.password=[Senha do seu banco]`  
-
-Feito isso, execute o arquivo `MonalisaApplication` como um projeto java e pronto!
-
-Acesse o link **localhost:8080**  no seu navegador e aproveite a Monalisa.
-
-#### Links com os vídeos executando o sistema
-
-1. https://youtu.be/VVug-CVVODU
-2. https://youtu.be/nt-7zxX-IiA

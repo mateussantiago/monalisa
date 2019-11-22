@@ -1,4 +1,4 @@
-package br.com.config;
+package br.com.framework.config;
 
 import br.com.framework.model.Usuario;
 import br.com.framework.service.UsuarioService;

@@ -18,8 +18,8 @@ public class Postagem implements Serializable {
     private Boolean ativo = true;
 
     @NotBlank
-    @Column(name = "conteudo")
-    private String conteudo;
+    @Column(name = "texto")
+    private String texto;
 
     @Column(name = "curtidas_positivas")
     private Long curtidasPositivas = 0L;
@@ -34,10 +34,6 @@ public class Postagem implements Serializable {
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_usuario_autor")
     private Usuario usuarioAutor;
-
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "id_conteudo_topico")
-//    private ConteudoTopico conteudoTopico;
 
     @OneToOne
     @JoinColumn(name = "id_topico")
@@ -59,12 +55,12 @@ public class Postagem implements Serializable {
         this.ativo = ativo;
     }
 
-    public String getConteudo() {
-        return conteudo;
+    public String getTexto() {
+        return texto;
     }
 
-    public void setConteudo(String conteudo) {
-        this.conteudo = conteudo;
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
 
     public Long getCurtidasPositivas() {

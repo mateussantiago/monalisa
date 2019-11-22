@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org" th:include="layouts/main :: page">
 <div th:fragment="content">
-    <tr th:each="turma : ${turmasEncontradasList}">
+    <tr th:each="turma : ${conteudosEncontradosList}">
         <div class="card card-outline-secondary my-4">
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-11"><h5 th:text="${turma.nome}"></h5></div>
-                    <div class="col-md-1"><a class="btn btn-success" th:href="@{/turma/seguir/{idTurma}(idTurma=${turma.idTurma})}">Seguir</a></div>
+                    <div class="col-md-1"><a class="btn btn-success" th:href="@{/turma/seguir/{idTurma}(idTurma=${turma.idConteudo})}">Seguir</a></div>
                 </div>
             </div>
             <div class="card-body">

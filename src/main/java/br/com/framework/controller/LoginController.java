@@ -1,6 +1,6 @@
-package br.com.controller;
+package br.com.framework.controller;
 
-import br.com.dto.UsuarioDTO;
+import br.com.framework.dto.UsuarioDTO;
 import br.com.framework.model.Usuario;
 import br.com.framework.service.ConteudoUsuarioService;
 import br.com.monalisa.service.UsuarioMonalisaService;
@@ -20,9 +20,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UsuarioMonalisaService usuarioService;
-
-    @Autowired
-    private ConteudoUsuarioService conteudoUsuarioService;
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {

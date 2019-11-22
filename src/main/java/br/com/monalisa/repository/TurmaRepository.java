@@ -11,22 +11,20 @@ import java.util.List;
 @Repository
 public interface TurmaRepository extends ConteudoRepository {
 
-    @Query(value = "select c.* from conteudo c " +
-            "where c.id_conteudo not in ( " +
-            "select c.id_conteudo from conteudo c " +
-            "join conteudo_usuario cu on cu.id_conteudo = c.id_conteudo " +
-            "where cu.id_usuario = :idUsuario) " +
-            "and lower(c.nome) like concat('%', lower(cast(:nome as text)), '%');",
+    @Query(value = "select distinct c.* from conteudo c " +
+            "where lower(c.nome) like concat('%', lower(cast(:nome as text)), '%');",
             nativeQuery = true)
     List<Conteudo> buscarTurmasPorNome(@Param("nome") String nome);
 
-    @Query(value = "select c.* from conteudo c " +
+    @Query(value = "select distinct c.* from conteudo c " +
             "join conteudo_topico ct on ct.id_conteudo = c.id_conteudo " +
             "join topico t on t.id_topico = ct.id_topico " +
-            "where c.id_conteudo not in ( " +
-            "	select c.id_conteudo from conteudo c " +
-            "	join conteudo_usuario cu on cu.id_conteudo = c.id_conteudo " +
-            "	where cu.id_usuario = :idUsuario) " +
-            "and lower(t.nome) like concat('%', lower(cast(:topico as text)), '%');", nativeQuery = true)
+            "where lower(t.nome) like concat('%', lower(cast(:topico as text)), '%');", nativeQuery = true)
     List<Conteudo> buscarTurmaPorAssunto(@Param("topico") String topico);
+
+    @Query(value = "select distinct c.* from conteudo c " +
+            "join conteudo_tag ct on ct.id_conteudo = c.id_conteudo " +
+            "join tag t on t.id_tag = ct.id_tag " +
+            "where lower(t.nome) like concat('%', lower(cast(:tag as text)), '%');", nativeQuery = true)
+    List<Conteudo> buscarTurmasPorTag(@Param(value = "tag") String tag);
 }

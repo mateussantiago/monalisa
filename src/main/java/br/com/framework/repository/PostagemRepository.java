@@ -16,12 +16,12 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSp
     Postagem buscarPorId(@Param(value = "idPostagem") Long idPostagem);
 
     @Query(value = "select * from postagem p " +
-            "join public.conteudo_topico ct on ct.id_conteudo_topico = p.id_conteudo_topico " +
-            "join public.conteudo c on c.id_conteudo = ct.id_conteudo " +
+            "join public.topico t on t.id_topico = p.id_topico " +
+            "join public.conteudo c on c.id_conteudo = t.id_conteudo " +
             "join public.conteudo_usuario cu on cu.id_conteudo = c.id_conteudo " +
             "where p.ativo is true " +
             "and p.id_postagem_genitora is null " +
-            "and tu.id_usuario = :idUsuario", nativeQuery = true)
+            "and cu.id_usuario = :idUsuario", nativeQuery = true)
     List<Postagem> buscarPrincipais(@Param("idUsuario") Long idUsuario);
 
     @Modifying(clearAutomatically = true)

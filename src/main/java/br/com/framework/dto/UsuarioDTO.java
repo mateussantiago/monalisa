@@ -1,4 +1,4 @@
-package br.com.dto;
+package br.com.framework.dto;
 
 public class UsuarioDTO {
 

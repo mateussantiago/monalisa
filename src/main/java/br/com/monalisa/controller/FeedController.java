@@ -1,4 +1,4 @@
-package br.com.controller;
+package br.com.monalisa.controller;
 
 import br.com.framework.model.Conteudo;
 import br.com.framework.model.Usuario;
@@ -6,6 +6,7 @@ import br.com.framework.service.ConteudoService;
 import br.com.framework.service.ConteudoUsuarioService;
 import br.com.framework.service.PostagemService;
 import br.com.monalisa.service.AssuntoTurmaService;
+import br.com.monalisa.service.TurmaService;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,10 +26,10 @@ public class FeedController {
 
     @Autowired
     private ConteudoService conteudoService;
-
+    
     @Autowired
     private TurmaUsuarioService turmaUsuarioService;
-
+    
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
@@ -47,10 +48,12 @@ public class FeedController {
             return "feed/buscar";
 
         } catch (Exception e) {
-            model.addAttribute("erro", e.getMessage());
-        }
+            e.printStackTrace();
 
-        return "redirect:/feed";
+            model.addAttribute("erro", e.getMessage());
+
+            return "redirect:/feed";
+        }
     }
 
     @RequestMapping("")
@@ -59,7 +62,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
-        model.addAttribute("assuntoTurmasList", assuntoTurmaService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("assuntoTurmaList", assuntoTurmaService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }

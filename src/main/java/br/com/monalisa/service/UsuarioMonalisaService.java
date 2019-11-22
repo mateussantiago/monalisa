@@ -1,6 +1,6 @@
 package br.com.monalisa.service;
 
-import br.com.dto.UsuarioDTO;
+import br.com.framework.dto.UsuarioDTO;
 import br.com.framework.exception.NovoUsuarioComEmailExistenteException;
 import br.com.framework.model.Usuario;
 import br.com.framework.repository.UsuarioRepository;
