@@ -1,15 +1,16 @@
 package br.com.monalisa.service;
 
-import br.com.monalisa.dto.UsuarioDTO;
-import br.com.monalisa.framework.exception.NovoUsuarioComEmailExistenteException;
-import br.com.monalisa.framework.model.Usuario;
-import br.com.monalisa.framework.repository.UsuarioRepository;
+import br.com.dto.UsuarioDTO;
+import br.com.framework.exception.NovoUsuarioComEmailExistenteException;
+import br.com.framework.model.Usuario;
+import br.com.framework.repository.UsuarioRepository;
+import br.com.framework.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioMonalisaService extends br.com.monalisa.framework.service.UsuarioService {
+public class UsuarioMonalisaService extends UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;

@@ -1,6 +1,6 @@
 package br.com.monalisa.service;
 
-import br.com.monalisa.framework.service.ConteudoTopicoService;
+import br.com.framework.service.ConteudoTopicoService;
 import org.springframework.stereotype.Service;
 
 @Service
