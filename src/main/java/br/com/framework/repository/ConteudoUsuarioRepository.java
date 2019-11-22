@@ -15,4 +15,11 @@ public interface ConteudoUsuarioRepository extends JpaRepository<ConteudoUsuario
             "where conu.id_usuario = :idUsuario " +
             "and conu.ativo is true", nativeQuery = true)
     List<ConteudoUsuario> buscarPorIdUsuario(@Param(value = "idUsuario") Long idUsuario);
+
+    @Query(value = "select distinct conu.* from public.conteudo_usuario conu " +
+            "where conu.id_usuario = :idUsuario " +
+            "and conu.id_conteudo = :idConteudo " +
+            "and conu.ativo is true", nativeQuery = true)
+    ConteudoUsuario buscarPorIdConteudoIdUsuario(@Param(value = "idConteudo") Long idConteudo,
+                                                       @Param(value = "idUsuario") Long idUsuario);
 }

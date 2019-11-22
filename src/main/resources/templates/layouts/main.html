@@ -33,23 +33,23 @@
                     <a th:href="@{/feed}">Início</a>
                 </li>
                 <li>
+                    <ul class="list-unstyled components">
+                        <p><b>Suas turmas</b></p>
+
+                        <tr th:each="turmaUsuario: ${turmaUsuarioList}">
+                            <li>
+                                <a th:text="${turmaUsuario.conteudo.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.conteudo.idConteudo}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
+                                <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.conteudo.idConteudo}">
+                                    <a>Todos os assuntos</a>
+                                    <a th:each="assuntoTurma : ${turmaUsuario.conteudo.conteudoTopicos}" th:text="${assuntoTurma.topico.nome}"></a>
+                                </ul>
+                            </li>
+                        </tr>
+                    </ul>
+                </li>
+                <li>
                     <a th:href="@{/turma}">Gerenciar suas turmas</a>
                 </li>
-            </ul>
-
-            <ul class="list-unstyled components">
-                <p><b>Suas turmas</b></p>
-
-                <tr th:each="turmaUsuario: ${turmaUsuarioList}">
-                    <li>
-<!--                        <a th:text="${turmaUsuario.turma.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.turma.idTurma}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>-->
-<!--                        <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.turma.idTurma}">-->
-<!--                            <a th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.turma.idTurma})}">Todos os assuntos</a>-->
-<!--                            <a th:each="assuntoTurma : ${turmaUsuario.turma.assuntoTurmas}" th:text="${assuntoTurma.assunto.nome}"-->
-<!--                               th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.turma.idTurma}, idAssunto=${assuntoTurma.assunto.idAssunto})}"></a>-->
-<!--                        </ul>-->
-                    </li>
-                </tr>
             </ul>
         </nav>
 

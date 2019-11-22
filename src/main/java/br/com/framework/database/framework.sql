@@ -102,6 +102,7 @@ CREATE TABLE public.conteudo_usuario (
 	id_usuario int4 NOT NULL,
 	ativo bool NOT NULL DEFAULT true,
 	CONSTRAINT pk_conteudo_usuario PRIMARY KEY (id_conteudo_usuario, id_conteudo, id_usuario),
+	CONSTRAINT unique_conteudo_usuario UNIQUE (id_conteudo, id_usuario),
 	CONSTRAINT fk_conteudo FOREIGN KEY (id_conteudo) REFERENCES conteudo(id_conteudo),
 	CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 );

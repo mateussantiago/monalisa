@@ -1,6 +1,9 @@
 package br.com.framework.service;
 
+import br.com.framework.dto.PostagemDTO;
 import br.com.framework.exception.EntidadeNaoEncontradaException;
+import br.com.framework.exception.PostagemSemConteudoException;
+import br.com.framework.model.Topico;
 import br.com.framework.repository.PostagemRepository;
 import br.com.framework.model.Postagem;
 import br.com.framework.model.Usuario;
@@ -17,7 +20,19 @@ public class PostagemService {
     @Autowired
     private PostagemRepository postagemRepository;
 
+    @Autowired
+    private TopicoService topicoService;
+
+    @Autowired
     private ComparadorPostagem comparadorPostagem;
+
+    public PostagemService() {
+        this(null);
+    }
+
+    public PostagemService(ComparadorPostagem comparadorPostagem) {
+        this.comparadorPostagem = comparadorPostagem;
+    }
 
     public Postagem salvar(Postagem postagem) {
         return postagemRepository.save(postagem);
@@ -25,6 +40,30 @@ public class PostagemService {
 
     public Postagem buscarPorId(Long idPostagem) {
         return postagemRepository.buscarPorId(idPostagem);
+    }
+
+    public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
+        Postagem postagemGenitora = null;
+
+        if (postagemDTO.getIdPostagemGenitora() != null){
+            postagemGenitora = buscarPorId(postagemDTO.getIdPostagemGenitora());
+        }
+        if (postagemDTO.getTexto() == null || postagemDTO.getTexto() == "") {
+            throw new PostagemSemConteudoException("A postagem não pode ter conteúdo vazio.");
+        }
+
+        Topico topico = topicoService.buscarPorId(postagemDTO.getIdTopico());
+
+        if (topico == null) {
+            throw new EntidadeNaoEncontradaException("Assunto da postagem não pode ser vazio.");
+        }
+        Postagem postagem = new Postagem();
+        postagem.setTexto(postagemDTO.getTexto());
+        postagem.setTopico(topico);
+        postagem.setUsuarioAutor(usuario);
+        postagem.setPostagemGenitora(postagemGenitora);
+
+        return salvar(postagem);
     }
 
     public void remover(Long idPostagem) {
@@ -62,6 +101,9 @@ public class PostagemService {
     }
 
     public List<Postagem> buscarPostagensPrincipais(Usuario usuario){
-        return postagemRepository.buscarPrincipais(usuario.getIdUsuario());
+        List<Postagem> postagens = postagemRepository.buscarPrincipais(usuario.getIdUsuario());
+        postagens = ordenarPostagens(postagens);
+
+        return postagens;
     }
 }

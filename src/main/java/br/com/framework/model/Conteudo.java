@@ -2,6 +2,7 @@ package br.com.framework.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(schema = "public", name = "conteudo")
@@ -20,6 +21,9 @@ public class Conteudo implements Serializable {
 
     @Column(name = "ativo")
     private Boolean ativo = true;
+
+    @OneToMany(mappedBy = "conteudo")
+    private List<ConteudoTopico> conteudoTopicos;
 
     public Long getIdConteudo() {
         return idConteudo;
@@ -51,5 +55,13 @@ public class Conteudo implements Serializable {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public List<ConteudoTopico> getConteudoTopicos() {
+        return conteudoTopicos;
+    }
+
+    public void setConteudoTopicos(List<ConteudoTopico> conteudoTopicos) {
+        this.conteudoTopicos = conteudoTopicos;
     }
 }
