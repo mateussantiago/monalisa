@@ -27,11 +27,11 @@ public class Denuncia implements Serializable {
     private Postagem postagem;
 
     @NotNull
-    @Column (name = "ativo")
+    @Column(name = "ativo")
     private Boolean ativo = true;
 
     @NotNull
-    @Column (name = "processada")
+    @Column(name = "processada")
     private Boolean processada = false;
 
     public Long getIdDenuncia() {

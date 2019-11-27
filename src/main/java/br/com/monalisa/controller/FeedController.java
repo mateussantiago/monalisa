@@ -6,12 +6,10 @@ import br.com.framework.service.ConteudoService;
 import br.com.framework.service.ConteudoUsuarioService;
 import br.com.framework.service.PostagemService;
 import br.com.monalisa.service.AssuntoTurmaService;
-import br.com.monalisa.service.TurmaService;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
