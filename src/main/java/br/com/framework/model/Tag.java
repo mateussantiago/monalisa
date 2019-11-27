@@ -1,4 +1,4 @@
-package br.com.monalisa.model;
+package br.com.framework.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package br.com.framework.dto;
+package br.com.monalisa.dto;
 
 public class PostagemDTO {
     private String texto;

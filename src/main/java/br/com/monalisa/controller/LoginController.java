@@ -1,8 +1,7 @@
-package br.com.framework.controller;
+package br.com.monalisa.controller;
 
-import br.com.framework.dto.UsuarioDTO;
+import br.com.monalisa.dto.UsuarioDTO;
 import br.com.framework.model.Usuario;
-import br.com.framework.service.ConteudoUsuarioService;
 import br.com.monalisa.service.UsuarioMonalisaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

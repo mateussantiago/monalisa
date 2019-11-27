@@ -1,6 +1,6 @@
 package br.com.framework.service;
 
-import br.com.framework.dto.PostagemDTO;
+import br.com.monalisa.dto.PostagemDTO;
 import br.com.framework.exception.EntidadeNaoEncontradaException;
 import br.com.framework.exception.PostagemSemConteudoException;
 import br.com.framework.model.Topico;

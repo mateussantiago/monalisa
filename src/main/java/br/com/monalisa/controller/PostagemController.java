@@ -1,6 +1,6 @@
-package br.com.framework.controller;
+package br.com.monalisa.controller;
 
-import br.com.framework.dto.PostagemDTO;
+import br.com.monalisa.dto.PostagemDTO;
 import br.com.framework.model.Postagem;
 import br.com.framework.model.Usuario;
 import br.com.framework.service.PostagemService;

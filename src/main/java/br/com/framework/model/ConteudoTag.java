@@ -1,6 +1,4 @@
-package br.com.monalisa.model;
-
-import br.com.framework.model.Conteudo;
+package br.com.framework.model;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package br.com.framework.controller;
+package br.com.monalisa.controller;
 
 import br.com.framework.exception.OperacaoInvalidaException;
 import br.com.framework.model.ConteudoUsuario;

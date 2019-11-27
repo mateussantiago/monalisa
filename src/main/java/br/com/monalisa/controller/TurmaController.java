@@ -1,6 +1,5 @@
 package br.com.monalisa.controller;
 
-import br.com.framework.controller.ConteudoController;
 import br.com.framework.model.Usuario;
 import br.com.monalisa.service.TurmaUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
