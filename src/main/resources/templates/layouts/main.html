@@ -40,8 +40,10 @@
                             <li>
                                 <a th:text="${turmaUsuario.conteudo.nome}" th:href="@{'#homeSubmenu' + ${turmaUsuario.conteudo.idConteudo}}" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"></a>
                                 <ul class="collapse list-unstyled" th:id="'homeSubmenu' + ${turmaUsuario.conteudo.idConteudo}">
-                                    <a>Todos os assuntos</a>
-                                    <a th:each="assuntoTurma : ${turmaUsuario.conteudo.conteudoTopicos}" th:text="${assuntoTurma.topico.nome}"></a>
+                                    <a th:href="@{/feed/turma/{idTurma}(idTurma=${turmaUsuario.conteudo.idConteudo})}">Todos os assuntos</a>
+                                    <a th:each="assuntoTurma : ${turmaUsuario.conteudo.conteudoTopicos}"
+                                       th:text="${assuntoTurma.topico.nome}"
+                                       th:href="@{/feed/turma/{idTurma}/assunto/{idAssunto}(idTurma=${assuntoTurma.conteudo.idConteudo}, idAssunto=${assuntoTurma.topico.idTopico})}"></a>
                                 </ul>
                             </li>
                         </tr>

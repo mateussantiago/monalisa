@@ -3,14 +3,10 @@ package br.com.monalisa.utils;
 import br.com.framework.model.Conteudo;
 import br.com.framework.repository.ConteudoRepository;
 import br.com.framework.utils.BuscadorConteudo;
-import br.com.monalisa.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class BuscadorTurma extends BuscadorConteudo {
@@ -34,16 +30,9 @@ public class BuscadorTurma extends BuscadorConteudo {
     }
 
     @Override
-    public List<Conteudo> orderar(List<Conteudo> conteudos) {
-        conteudos.sort((t1, t2) -> {
-            if (t1.getIdConteudo() > t2.getIdConteudo()){
-                return 1;
-            }
-            else if(t1.getIdConteudo() < t2.getIdConteudo()){
-                return -1;
-            }
-            return 0;
-        });
+    public List<Conteudo> ordenar(List<Conteudo> conteudos) {
+        conteudos.sort(Comparator.comparing(Conteudo::getNome));
+
         return conteudos;
     }
 }

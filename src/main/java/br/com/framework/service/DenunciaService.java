@@ -20,9 +20,6 @@ public class DenunciaService {
     private PostagemService postagemService;
 
     @Autowired
-    private PunicaoService punicaoService;
-
-    @Autowired
     private DenunciaRepository denunciaRepository;
 
     public Denuncia salvar(Denuncia denuncia) {
@@ -48,8 +45,6 @@ public class DenunciaService {
         denuncia.setMotivacao(motivacao);
 
         denuncia = salvar(denuncia);
-
-        punicaoService.talvezPunir(idPostagem);
 
         return denuncia;
     }

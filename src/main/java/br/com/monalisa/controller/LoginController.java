@@ -1,8 +1,8 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.dto.UsuarioDTO;
 import br.com.framework.model.Usuario;
-import br.com.monalisa.service.UsuarioMonalisaService;
+import br.com.monalisa.dto.UsuarioDTO;
+import br.com.monalisa.service.CustomUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("login")
 public class LoginController {
     @Autowired
-    private UsuarioMonalisaService usuarioService;
+    private CustomUsuarioService usuarioService;
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {
@@ -48,7 +48,8 @@ public class LoginController {
     @RequestMapping(value = "/cadastro/novo", method = RequestMethod.POST)
     public String novoUsuario(UsuarioDTO usuarioDTO, Model model) {
         try {
-            Usuario novoUsuario = usuarioService.registrarUsuario(usuarioDTO);
+            Usuario novoUsuario = usuarioService.validarCamposUsuario(usuarioDTO);
+            usuarioService.registrarUsuario(novoUsuario);
 
             return "redirect:/login";
         }

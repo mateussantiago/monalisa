@@ -7,4 +7,5 @@ import java.util.Comparator;
 
 @Component
 public interface ComparadorPostagem extends Comparator<Postagem> {
+
 }

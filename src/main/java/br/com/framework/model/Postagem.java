@@ -4,6 +4,7 @@ package br.com.framework.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(schema = "public", name = "postagem")
@@ -38,6 +39,9 @@ public class Postagem implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_topico")
     private Topico topico;
+
+    @OneToMany(mappedBy = "postagemGenitora")
+    private List<Postagem> respostas;
 
     public Long getIdPostagem() {
         return idPostagem;
@@ -101,5 +105,13 @@ public class Postagem implements Serializable {
 
     public void setTopico(Topico topico) {
         this.topico = topico;
+    }
+
+    public List<Postagem> getRespostas() {
+        return respostas;
+    }
+
+    public void setRespostas(List<Postagem> respostas) {
+        this.respostas = respostas;
     }
 }
