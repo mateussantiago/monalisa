@@ -11,7 +11,7 @@ public abstract class BuscadorConteudo {
     public List<Conteudo> execute(String palavraBusca){
         List<Conteudo> conteudos = buscar(palavraBusca);
         conteudos = filtrar(conteudos);
-        conteudos = orderar(conteudos);
+        conteudos = ordenar(conteudos);
 
         return conteudos;
     }
@@ -20,5 +20,5 @@ public abstract class BuscadorConteudo {
 
     public abstract  List<Conteudo> filtrar(List<Conteudo> conteudos);
 
-    public abstract List<Conteudo> orderar(List<Conteudo> conteudos);
+    public abstract List<Conteudo> ordenar(List<Conteudo> conteudos);
 }

@@ -1,6 +1,7 @@
 package br.com.monalisa.dto;
 
 public class PostagemDTO {
+
     private String texto;
     private Long idPostagemGenitora;
     private Long idTopico;

@@ -1,9 +1,10 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.dto.PostagemDTO;
 import br.com.framework.model.Postagem;
+import br.com.framework.model.Topico;
 import br.com.framework.model.Usuario;
 import br.com.framework.service.PostagemService;
+import br.com.monalisa.dto.PostagemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,18 @@ public class PostagemController {
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
         try {
             Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-            Postagem postagem = postagemService.postar(postagemDTO, usuario);
+            Postagem postagem = new Postagem();
+            Postagem postagemGenitora = new Postagem();
+            Topico topico = new Topico();
+            topico.setIdTopico(postagemDTO.getIdTopico());
+            postagem.setTopico(topico);
+            postagem.setTexto(postagemDTO.getTexto());
+
+            if (postagemDTO.getIdPostagemGenitora() != null)
+                postagemGenitora.setIdPostagem(postagemDTO.getIdPostagemGenitora());
+
+            postagem.setPostagemGenitora(postagemGenitora);
+            postagem = postagemService.postar(postagem, usuario);
         }
         catch (Exception e) {
             e.printStackTrace();

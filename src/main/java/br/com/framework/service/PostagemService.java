@@ -1,12 +1,11 @@
 package br.com.framework.service;
 
-import br.com.monalisa.dto.PostagemDTO;
 import br.com.framework.exception.EntidadeNaoEncontradaException;
 import br.com.framework.exception.PostagemSemConteudoException;
-import br.com.framework.model.Topico;
-import br.com.framework.repository.PostagemRepository;
 import br.com.framework.model.Postagem;
+import br.com.framework.model.Topico;
 import br.com.framework.model.Usuario;
+import br.com.framework.repository.PostagemRepository;
 import br.com.framework.utils.ComparadorPostagem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,23 +41,26 @@ public class PostagemService {
         return postagemRepository.buscarPorId(idPostagem);
     }
 
-    public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
+    public List<Postagem> buscarPostagensPorConteudoETopico(Long idConteudo, Long idTopico) {
+        return postagemRepository.buscarPostagensPorConteudoETopico(idConteudo, idTopico);
+    }
+
+    public Postagem postar(Postagem postagem, Usuario usuario) {
         Postagem postagemGenitora = null;
 
-        if (postagemDTO.getIdPostagemGenitora() != null){
-            postagemGenitora = buscarPorId(postagemDTO.getIdPostagemGenitora());
+        if (postagem.getPostagemGenitora().getIdPostagem() != null){
+            postagemGenitora = buscarPorId(postagem.getPostagemGenitora().getIdPostagem());
         }
-        if (postagemDTO.getTexto() == null || postagemDTO.getTexto() == "") {
+        if (postagem.getTexto() == null || postagem.getTexto() == "") {
             throw new PostagemSemConteudoException("A postagem não pode ter conteúdo vazio.");
         }
 
-        Topico topico = topicoService.buscarPorId(postagemDTO.getIdTopico());
+        Topico topico = topicoService.buscarPorId(postagem.getTopico().getIdTopico());
 
         if (topico == null) {
             throw new EntidadeNaoEncontradaException("Assunto da postagem não pode ser vazio.");
         }
-        Postagem postagem = new Postagem();
-        postagem.setTexto(postagemDTO.getTexto());
+
         postagem.setTopico(topico);
         postagem.setUsuarioAutor(usuario);
         postagem.setPostagemGenitora(postagemGenitora);

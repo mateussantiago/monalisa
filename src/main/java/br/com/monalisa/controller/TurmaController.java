@@ -1,7 +1,7 @@
 package br.com.monalisa.controller;
 
 import br.com.framework.model.Usuario;
-import br.com.monalisa.service.TurmaUsuarioService;
+import br.com.framework.service.ConteudoUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +13,13 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("turma")
 public class TurmaController extends ConteudoController {
     @Autowired
-    private TurmaUsuarioService turmaUsuarioService;
+    private ConteudoUsuarioService conteudoUsuarioService;
 
     @RequestMapping("")
     public String gerenciarTurmas(Model model, HttpSession httpSession){
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
         return "turmas/turmas";
     }
