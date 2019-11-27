@@ -1,9 +1,8 @@
 package br.com.monalisa.controller;
 
-import br.com.monalisa.framework.model.ConteudoUsuario;
-import br.com.monalisa.framework.model.Usuario;
-import br.com.monalisa.framework.service.ConteudoUsuarioService;
-import br.com.monalisa.framework.service.UsuarioService;
+import br.com.monalisa.dto.UsuarioDTO;
+import br.com.framework.model.Usuario;
+import br.com.monalisa.service.UsuarioMonalisaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,15 +18,10 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("login")
 public class LoginController {
     @Autowired
-    private UsuarioService usuarioService;
-
-    @Autowired
-    private ConteudoUsuarioService conteudoUsuarioService;
+    private UsuarioMonalisaService usuarioService;
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {
-        usuarioService.buscarPorEmail("mateus@gmail.com");
-        conteudoUsuarioService.buscarPorIdUsuario(Long.valueOf(1));
 
         if (error != null && error)
             model.addAttribute("erroEntrar", "Usuário e/ou senha inválidos.");
@@ -49,5 +43,19 @@ public class LoginController {
         httpSession.setAttribute("usuarioLogado", usuario);
 
         return "redirect:/feed";
+    }
+
+    @RequestMapping(value = "/cadastro/novo", method = RequestMethod.POST)
+    public String novoUsuario(UsuarioDTO usuarioDTO, Model model) {
+        try {
+            Usuario novoUsuario = usuarioService.registrarUsuario(usuarioDTO);
+
+            return "redirect:/login";
+        }
+        catch (Exception e) {
+            model.addAttribute("erroCadastro",  e.getMessage());
+        }
+
+        return "login/cadastro";
     }
 }
