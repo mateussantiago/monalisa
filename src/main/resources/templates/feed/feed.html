@@ -61,33 +61,33 @@
                             </div>
                         </a>
                         <div>
-                            <a data-toggle="modal" data-target="#modalDenunciaPostagemPrincipal">
+                            <a data-toggle="modal" th:attr="data-target='#modalDenunciaPostagemPrincipal' + ${postagem.idPostagem}">
                                 <div style="color: red;"><span class="oi oi-ban"></span></div>
                             </a>
-<!--                            <div class="modal fade" id="modalDenunciaPostagemPrincipal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--                                <div class="modal-dialog" role="document">-->
-<!--                                    <div class="modal-content">-->
-<!--                                        <div class="modal-header">-->
-<!--                                            <h5 class="modal-title">Denunciar postagem</h5>-->
-<!--                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">-->
-<!--                                                <span aria-hidden="true">&times;</span>-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-<!--                                        <div class="modal-body">-->
-<!--                                            <form>-->
-<!--                                                <div class="form-group">-->
-<!--                                                    <select th:name="motivo" class="form-control" id="tipo-denuncia">-->
-<!--                                                        <option value="Conteúdo impróprio">Conteúdo impróprio</option>-->
-<!--                                                        <option value="Postagem fora do conteúdo">Postagem fora do conteúdo</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
+                            <div class="modal fade" th:id="'modalDenunciaPostagemPrincipal' + ${postagem.idPostagem}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Denunciar postagem</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <select th:name="motivo" class="form-control" id="tipo-denuncia">
+                                                        <option value="Conteúdo impróprio">Conteúdo impróprio</option>
+                                                        <option value="Postagem fora do conteúdo">Postagem fora do conteúdo</option>
+                                                    </select>
+                                                </div>
 
-<!--                                                <button class="btn btn-primary" type="submit">Denunciar</button>-->
-<!--                                            </form>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                                                <button class="btn btn-primary" type="submit">Denunciar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -116,9 +116,35 @@
                                 <div class="col-md-7"><p style="color: red;" th:text="${resposta.curtidasNegativas}"></p></div>
                             </div>
                         </a>
-                        <a>
-                            <div style="color: red;"><span class="oi oi-ban"></span></div>
-                        </a>
+                        <div>
+                            <a data-toggle="modal" th:attr="data-target='#modalDenunciaRespostaPrincipal' + ${resposta.idPostagem}">
+                                <div style="color: red;"><span class="oi oi-ban"></span></div>
+                            </a>
+                            <div class="modal fade" th:id="'modalDenunciaRespostaPrincipal' + ${resposta.idPostagem}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Denunciar postagem</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="form-group">
+                                                    <select th:name="motivo" class="form-control" id="tipo-denuncia">
+                                                        <option value="Conteúdo impróprio">Conteúdo impróprio</option>
+                                                        <option value="Postagem fora do conteúdo">Postagem fora do conteúdo</option>
+                                                    </select>
+                                                </div>
+
+                                                <button class="btn btn-primary" type="submit">Denunciar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="media mb-4">
