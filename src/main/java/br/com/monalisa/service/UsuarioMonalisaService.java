@@ -9,19 +9,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomUsuarioService extends UsuarioService {
+public class UsuarioMonalisaService extends UsuarioService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public Usuario validarCamposUsuario(UsuarioDTO usuarioDTO) throws Exception {
-        if (usuarioDTO.getNome().isEmpty() || usuarioDTO.getNome() == "")
+        if (usuarioDTO.getNome().isEmpty() || usuarioDTO.getNome().equals(""))
             throw new Exception("Nome não informado.");
-        if (usuarioDTO.getEmail().isEmpty() || usuarioDTO.getEmail() == "")
+        if (usuarioDTO.getEmail().isEmpty() || usuarioDTO.getEmail().equals(""))
             throw new Exception("Email não informado.");
-        if (usuarioDTO.getLogin().isEmpty() || usuarioDTO.getLogin() == "")
+        if (usuarioDTO.getLogin().isEmpty() || usuarioDTO.getLogin().equals(""))
             throw new Exception("Login não informado.");
-        if(usuarioDTO.getSenha().isEmpty() || usuarioDTO.getSenha() == "")
+        if(usuarioDTO.getSenha().isEmpty() || usuarioDTO.getSenha().equals(""))
             throw new Exception("Senha não informada.");
 
         Usuario usuario = new Usuario();

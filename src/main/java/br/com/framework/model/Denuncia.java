@@ -16,13 +16,13 @@ public class Denuncia implements Serializable {
 
     @NotBlank
     @Column(name = "tipo_denuncia")
-    private String motivacao;
+    private String tipoDenuncia;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_usuario_autor")
     private Usuario usuarioAutor;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_postagem")
     private Postagem postagem;
 
@@ -42,12 +42,12 @@ public class Denuncia implements Serializable {
         this.idDenuncia = idDenuncia;
     }
 
-    public String getMotivacao() {
-        return motivacao;
+    public String getTipoDenuncia() {
+        return tipoDenuncia;
     }
 
-    public void setMotivacao(String motivacao) {
-        this.motivacao = motivacao;
+    public void setTipoDenuncia(String tipoDenuncia) {
+        this.tipoDenuncia = tipoDenuncia;
     }
 
     public Usuario getUsuarioAutor() {

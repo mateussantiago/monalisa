@@ -2,7 +2,7 @@ package br.com.monalisa.controller;
 
 import br.com.framework.model.Usuario;
 import br.com.monalisa.dto.UsuarioDTO;
-import br.com.monalisa.service.CustomUsuarioService;
+import br.com.monalisa.service.UsuarioMonalisaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("login")
 public class LoginController {
     @Autowired
-    private CustomUsuarioService usuarioService;
+    private UsuarioMonalisaService usuarioService;
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {

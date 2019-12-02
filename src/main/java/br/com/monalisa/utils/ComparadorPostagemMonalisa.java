@@ -5,7 +5,7 @@ import br.com.framework.utils.ComparadorPostagem;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ComparadorPostagemImpl implements ComparadorPostagem {
+public class ComparadorPostagemMonalisa implements ComparadorPostagem {
 
     @Override
     public int compare(Postagem o1, Postagem o2) {

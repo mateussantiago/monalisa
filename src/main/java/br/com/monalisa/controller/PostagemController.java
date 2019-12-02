@@ -5,6 +5,7 @@ import br.com.framework.model.Topico;
 import br.com.framework.model.Usuario;
 import br.com.framework.service.PostagemService;
 import br.com.monalisa.dto.PostagemDTO;
+import br.com.monalisa.service.PostagemMonalisaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("postagem")
 public class PostagemController {
     @Autowired
-    private PostagemService postagemService;
+    private PostagemMonalisaService postagemService;
 
     @RequestMapping(value = "/postar", method = RequestMethod.POST)
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
@@ -66,5 +67,10 @@ public class PostagemController {
         }
 
         return "redirect:/feed";
+    }
+
+    @RequestMapping(value = "/{id}/denunciar")
+    public String denunciar(){
+
     }
 }
