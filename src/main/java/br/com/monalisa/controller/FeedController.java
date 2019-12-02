@@ -24,22 +24,13 @@ public class FeedController {
     private ConteudoUsuarioService conteudoUsuarioService;
     
     @Autowired
-    private TopicoService topicoService;
+    private TurmaUsuarioService turmaUsuarioService;
+    
+    @Autowired
+    private AssuntoTurmaService assuntoTurmaService;
 
     @Autowired
     private  PostagemService postagemService;
-
-
-    @RequestMapping("")
-    public String feed(Model model, HttpSession httpSession) {
-        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-
-        model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
-        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
-        model.addAttribute("assuntoTurmaList", topicoService.buscarPorIdUsuario(usuario.getIdUsuario()));
-
-        return "feed/feed";
-    }
 
     @RequestMapping(value = "/buscar")
     public String buscar(@RequestParam(value = "palavraBusca", required = false) String palavraBusca, Model model, HttpSession httpSession) {
@@ -67,9 +58,9 @@ public class FeedController {
 
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
-        model.addAttribute("postagemList", postagemService.buscarPostagensPorConteudoETopico(idTurma, idAssunto));
-//        model.addAttribute("assuntoTurma", topicoService.buscarPorIdAssuntoEIdTurma(idAssunto, idTurma));
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
+        model.addAttribute("assuntoTurmaList", assuntoTurmaService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }

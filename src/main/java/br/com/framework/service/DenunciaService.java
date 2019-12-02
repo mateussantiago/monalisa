@@ -42,7 +42,7 @@ public class DenunciaService {
 
         denuncia = salvar(denuncia);
 
-        punicaoService.punir(postagem);
+        punicaoService.talvezPunir(idPostagem);
 
         return denuncia;
     }

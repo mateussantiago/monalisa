@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("login")
 public class LoginController {
     @Autowired
-    private UsuarioMonalisaService usuarioService;
+    private CustomUsuarioService usuarioService;
 
     @RequestMapping("")
     public String login(@RequestParam(value = "error", required = false) Boolean error, Model model) {

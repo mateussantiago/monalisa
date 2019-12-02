@@ -112,20 +112,4 @@ public class Postagem implements Serializable {
     public void setTopico(Topico topico) {
         this.topico = topico;
     }
-
-    public List<Postagem> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(List<Postagem> respostas) {
-        this.respostas = respostas;
-    }
-
-    public List<Denuncia> getDenuncias() {
-        return denuncias;
-    }
-
-    public void setDenuncias(List<Denuncia> denuncias) {
-        this.denuncias = denuncias;
-    }
 }
