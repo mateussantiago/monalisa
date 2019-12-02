@@ -74,9 +74,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form th:action="@{/postagem/denunciar}" method="post">
                                                 <div class="form-group">
-                                                    <select th:name="motivo" class="form-control" id="tipo-denuncia">
+                                                    <input type="hidden" name="id" th:value="${postagem.idPostagem}">
+                                                    <select name="motivacao" class="form-control">
                                                         <option value="Conteúdo impróprio">Conteúdo impróprio</option>
                                                         <option value="Postagem fora do conteúdo">Postagem fora do conteúdo</option>
                                                     </select>
@@ -117,10 +118,10 @@
                             </div>
                         </a>
                         <div>
-                            <a data-toggle="modal" th:attr="data-target='#modalDenunciaRespostaPrincipal' + ${resposta.idPostagem}">
+                            <a data-toggle="modal" th:attr="data-target='#modalDenunciaResposta' + ${resposta.idPostagem}">
                                 <div style="color: red;"><span class="oi oi-ban"></span></div>
                             </a>
-                            <div class="modal fade" th:id="'modalDenunciaRespostaPrincipal' + ${resposta.idPostagem}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" th:id="'modalDenunciaResposta' + ${resposta.idPostagem}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -130,9 +131,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form th:action="@{/postagem/denunciar}" method="post">
                                                 <div class="form-group">
-                                                    <select th:name="motivo" class="form-control" id="tipo-denuncia">
+                                                    <input type="hidden" name="id" th:value="${resposta.idPostagem}">
+                                                    <select name="motivacao" class="form-control">
                                                         <option value="Conteúdo impróprio">Conteúdo impróprio</option>
                                                         <option value="Postagem fora do conteúdo">Postagem fora do conteúdo</option>
                                                     </select>

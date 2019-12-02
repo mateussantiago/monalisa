@@ -72,8 +72,8 @@ public class PostagemController {
         return "redirect:/feed";
     }
 
-    @RequestMapping(value = "/{id}/denunciar")
-    public String denunciar(@PathVariable(value = "id") Long id, String motivacao, HttpSession httpSession, Model model){
+    @RequestMapping(value = "/denunciar")
+    public String denunciar(Long id, String motivacao, HttpSession httpSession, Model model){
         try {
             Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 

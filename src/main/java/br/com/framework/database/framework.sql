@@ -120,7 +120,7 @@ CREATE SEQUENCE public.seq_id_denuncia
 -- DROP TABLE public.denuncia;
 CREATE TABLE public.denuncia (
 	id_denuncia int4 NOT NULL,
-	tipo_denuncia varchar(20) NOT NULL,
+	tipo_denuncia varchar(250) NOT NULL,
 	ativo bool NOT NULL DEFAULT true,
 	processada bool NOT NULL DEFAULT false,
 	id_usuario_autor int4 NOT NULL,

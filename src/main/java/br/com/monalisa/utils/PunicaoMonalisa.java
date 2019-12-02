@@ -40,10 +40,10 @@ public class PunicaoMonalisa implements Punicao {
         if (!denunciasForaConteudo.isEmpty()){
             if (denunciasForaConteudo.size() >= 5){
                 denunciasConteudoImproprio.get(0).getPostagem().setAtivo(false);
-            }
 
-            for (Denuncia denuncia : denunciasForaConteudo){
-                denuncia.setProcessada(true);
+                for (Denuncia denuncia : denunciasForaConteudo){
+                    denuncia.setProcessada(true);
+                }
             }
         }
 
