@@ -17,25 +17,13 @@ public class PunicaoMonalisa implements Punicao {
 
     @Override
     public void punir(Postagem postagem) {
-        analisarPunicaoParaAplicar(postagem);
+        punirForaConteudo( postagem );
+        punirConteudoImproprio( postagem );
     }
 
-    public void analisarPunicaoParaAplicar(Postagem postagem){
-        List<Denuncia> denunciasConteudoImproprio = denunciaRepository.buscarDenunciasPorTipo(postagem.getIdPostagem(),
-                                                                                        "Conteúdo impróprio");
-
+    private void punirForaConteudo(Postagem postagem){
         List<Denuncia> denunciasForaConteudo = denunciaRepository.buscarDenunciasPorTipo(postagem.getIdPostagem(),
                                                                                     "Postagem fora do conteúdo");
-
-        if (!denunciasConteudoImproprio.isEmpty()){
-            if (denunciasConteudoImproprio.size() >= 2){
-                denunciasConteudoImproprio.get(0).getPostagem().getUsuarioAutor().setAtivo(false);
-
-                for (Denuncia denuncia : denunciasConteudoImproprio){
-                    denuncia.setProcessada(true);
-                }
-            }
-        }
 
         if (!denunciasForaConteudo.isEmpty()){
             if (denunciasForaConteudo.size() >= 5){
@@ -47,9 +35,23 @@ public class PunicaoMonalisa implements Punicao {
             }
         }
 
-        List<Denuncia> todasDenuncias = new ArrayList<>(denunciasConteudoImproprio);
-        todasDenuncias.addAll(denunciasForaConteudo);
+        denunciaRepository.saveAll( denunciasForaConteudo );
+    }
 
-        denunciaRepository.saveAll(todasDenuncias);
+    private void punirConteudoImproprio(Postagem postagem){
+        List<Denuncia> denunciasConteudoImproprio = denunciaRepository.buscarDenunciasPorTipo(postagem.getIdPostagem(),
+                "Conteúdo impróprio");
+
+        if (!denunciasConteudoImproprio.isEmpty()){
+            if (denunciasConteudoImproprio.size() >= 2){
+                denunciasConteudoImproprio.get(0).getPostagem().getUsuarioAutor().setAtivo(false);
+
+                for (Denuncia denuncia : denunciasConteudoImproprio){
+                    denuncia.setProcessada(true);
+                }
+            }
+        }
+
+        denunciaRepository.saveAll( denunciasConteudoImproprio );
     }
 }
