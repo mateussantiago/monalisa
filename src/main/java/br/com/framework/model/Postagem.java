@@ -34,7 +34,7 @@ public class Postagem implements Serializable {
     @JoinColumn(name = "id_postagem_genitora")
     private Postagem postagemGenitora;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_usuario_autor")
     private Usuario usuarioAutor;
 

@@ -1,6 +1,5 @@
 package br.com.framework.service;
 
-import br.com.framework.exception.EntidadeNaoEncontradaException;
 import br.com.framework.model.Topico;
 import br.com.framework.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +21,9 @@ public class TopicoService {
         Optional<Topico> topico = topicoRepository.findById(id);
 
         return topico.orElse( null );
+    }
+
+    public List<Topico> buscarPorIdUsuario(Long idUsuario){
+        return topicoRepository.buscaPorIdUsuario(idUsuario);
     }
 }

@@ -28,13 +28,7 @@ public class DenunciaService {
         return denunciaRepository.save(denuncia);
     }
 
-    public Denuncia denunciar(Long idUsuario, Long idPostagem, String motivacao) {
-        Usuario usuario = usuarioService.buscarPorId(idUsuario);
-
-        if (usuario == null) {
-            throw new EntidadeNaoEncontradaException("Usuario não encontrado");
-        }
-
+    public Denuncia denunciar(Long idPostagem, String motivacao, Usuario usuario) {
         Postagem postagem = postagemService.buscarPorId(idPostagem);
 
         if (postagem == null) {

@@ -10,14 +10,14 @@
                 <div class="form-group">
                     <select class="form-control" id="selectAssuntoTurma" name="idTopico">
                         <div th:if="${assuntoTurma} != null">
-                            <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.topico.nome}"
-                                    th:value="${assuntoTurma.topico.idTopico}"></option>
+                            <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.nome}"
+                                    th:value="${assuntoTurma.idTopico}"></option>
                         </div>
                         <div th:if="${assuntoTurma} == null">
                             <option>Selecione qual o assunto da sua dúvida</option>
                             <tr th:each="assuntoTurma : ${assuntoTurmaList}">
-                                <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.topico.nome}"
-                                        th:value="${assuntoTurma.topico.idTopico}"></option>
+                                <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.nome}"
+                                        th:value="${assuntoTurma.idTopico}"></option>
                             </tr>
                         </div>
                     </select>

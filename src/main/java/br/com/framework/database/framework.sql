@@ -131,27 +131,6 @@ CREATE TABLE public.denuncia (
 );
 
 ------------------------------------------------------------
--- DROP SEQUENCE public.seq_id_conteudo_topico;
-CREATE SEQUENCE public.seq_id_conteudo_topico
-	INCREMENT BY 1
-	MINVALUE 1
-	MAXVALUE 999999999999999999
-	CACHE 1
-	NO CYCLE;
-
--- Drop table
--- DROP TABLE public.conteudo_topico;
-CREATE TABLE public.conteudo_topico (
-	id_conteudo_topico int4 NOT NULL,
-	id_conteudo int4 NOT NULL,
-	id_topico int4 NOT NULL,
-	ativo bool NOT NULL DEFAULT true,
-	CONSTRAINT pk_conteudo_topico PRIMARY KEY (id_conteudo_topico, id_conteudo, id_topico),
-	CONSTRAINT fk_conteudo FOREIGN KEY (id_conteudo) REFERENCES conteudo(id_conteudo),
-	CONSTRAINT fk_topico FOREIGN KEY (id_topico) REFERENCES topico(id_topico)
-);
-
-------------------------------------------------------------
 --DROP SEQUENCE public.seq_id_tag;
 CREATE SEQUENCE public.seq_id_tag
 	INCREMENT BY 1

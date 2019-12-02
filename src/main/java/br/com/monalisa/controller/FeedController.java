@@ -2,10 +2,7 @@ package br.com.monalisa.controller;
 
 import br.com.framework.model.Conteudo;
 import br.com.framework.model.Usuario;
-import br.com.framework.service.ConteudoService;
-import br.com.framework.service.ConteudoTopicoService;
-import br.com.framework.service.ConteudoUsuarioService;
-import br.com.framework.service.PostagemService;
+import br.com.framework.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +24,7 @@ public class FeedController {
     private ConteudoUsuarioService conteudoUsuarioService;
     
     @Autowired
-    private ConteudoTopicoService conteudoTopicoService;
+    private TopicoService topicoService;
 
     @Autowired
     private  PostagemService postagemService;
@@ -39,7 +36,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
-        model.addAttribute("assuntoTurmaList", conteudoTopicoService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("assuntoTurmaList", topicoService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }
@@ -72,7 +69,7 @@ public class FeedController {
 
         model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
         model.addAttribute("postagemList", postagemService.buscarPostagensPorConteudoETopico(idTurma, idAssunto));
-        //model.addAttribute("assuntoTurma", assuntoTurmaService.buscarPorIdAssuntoEIdTurma(idAssunto, idTurma));
+//        model.addAttribute("assuntoTurma", topicoService.buscarPorIdAssuntoEIdTurma(idAssunto, idTurma));
 
         return "feed/feed";
     }
