@@ -2,6 +2,7 @@ package br.com.framework.service;
 
 import br.com.framework.exception.EntidadeNaoEncontradaException;
 import br.com.framework.exception.PostagemSemConteudoException;
+import br.com.framework.model.Denuncia;
 import br.com.framework.model.Postagem;
 import br.com.framework.model.Topico;
 import br.com.framework.model.Usuario;
@@ -15,7 +16,6 @@ import java.util.List;
 
 @Service
 public class PostagemService {
-
     @Autowired
     private PostagemRepository postagemRepository;
 
@@ -41,11 +41,7 @@ public class PostagemService {
         return postagemRepository.buscarPorId(idPostagem);
     }
 
-    public List<Postagem> buscarPostagensPorConteudoETopico(Long idConteudo, Long idTopico) {
-        return postagemRepository.buscarPostagensPorConteudoETopico(idConteudo, idTopico);
-    }
-
-    public Postagem postar(Postagem postagem, Usuario usuario) {
+    public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
         Postagem postagemGenitora = null;
 
         if (postagem.getPostagemGenitora().getIdPostagem() != null){
@@ -66,10 +62,6 @@ public class PostagemService {
         postagem.setPostagemGenitora(postagemGenitora);
 
         return salvar(postagem);
-    }
-
-    public void remover(Long idPostagem) {
-        postagemRepository.remover(idPostagem);
     }
 
     public Postagem gostar(Long idPostagem) {
@@ -96,8 +88,9 @@ public class PostagemService {
         return salvar(postagem);
     }
 
-    public List<Postagem> ordenarPostagens(List<Postagem> postagens) {
-        Collections.sort(postagens, comparadorPostagem);
+    public List<Postagem> buscarPostagensPorConteudoETopico(Long idConteudo, Long idTopico) {
+        List<Postagem> postagens = postagemRepository.buscarPostagensPorConteudoETopico(idConteudo, idTopico);
+        postagens = ordenarPostagens(postagens);
 
         return postagens;
     }

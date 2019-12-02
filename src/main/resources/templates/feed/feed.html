@@ -10,14 +10,14 @@
                 <div class="form-group">
                     <select class="form-control" id="selectAssuntoTurma" name="idTopico">
                         <div th:if="${assuntoTurma} != null">
-                            <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.topico.nome}"
-                                    th:value="${assuntoTurma.topico.idTopico}"></option>
+                            <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.nome}"
+                                    th:value="${assuntoTurma.idTopico}"></option>
                         </div>
                         <div th:if="${assuntoTurma} == null">
                             <option>Selecione qual o assunto da sua dúvida</option>
                             <tr th:each="assuntoTurma : ${assuntoTurmaList}">
-                                <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.topico.nome}"
-                                        th:value="${assuntoTurma.topico.idTopico}"></option>
+                                <option th:text="${assuntoTurma.conteudo.nome} +' - '+ ${assuntoTurma.nome}"
+                                        th:value="${assuntoTurma.idTopico}"></option>
                             </tr>
                         </div>
                     </select>
@@ -31,78 +31,78 @@
         </div>
     </div>
 
-    <tr th:each="postagem : ${postagemList}">
-        <div class="card card-outline-secondary my-4">
-            <div class="card-header">
-                <h5 th:text="${postagem.topico.conteudo.nome}"></h5>
-            </div>
-            <div th:text="${postagem.topico.nome}" class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;"></div>
-            <div class="card-body">
-                <div class="media mb-4">
-                    <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">
-                    <div class="media-body">
-                        <p class="mt-0" style="font-weight: bold; color: #000000" th:text="${postagem.usuarioAutor.login}">
-                            <br>
-                            <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>
-                        </p>
-                        <p th:text="${postagem.texto}"></p>
-                    </div>
-                    <div class="media mb-4" style="padding: 0.3em">
-                        <a th:href="@{/postagem/{id}/gostar(id=${postagem.idPostagem})}">
-                            <div class="row">
-                                <div class="col-md-1" style="color: green;"><span class="oi oi-thumb-up"></span></div>
-                                <div class="col-md-7"><p style="color: green;" th:text="${postagem.curtidasPositivas}"></p></div>
-                            </div>
-                        </a>
-                        <a th:href="@{/postagem/{id}/desgostar(id=${postagem.idPostagem})}">
-                            <div class="row">
-                                <div class="col-md-1" style="color: red;"><span class="oi oi-thumb-down"></span></div>
-                                <div class="col-md-7"><p style="color: red;" th:text="${postagem.curtidasNegativas}"></p></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <hr>
-                <h5>Respostas</h5>
-                <!-- Comment with nested comments -->
-                <div th:each="resposta : ${postagem.respostas}" class="media mt-4">
-                    <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">
-                    <div class="media-body">
-                        <p class="mt-0" style="font-weight: bold; color: #000000" th:text="${resposta.usuarioAutor.login}">
-                            <br>
-                            <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>
-                        </p>
-                        <p th:text="${resposta.texto}"></p>
-                    </div>
-                    <div class="media mb-4" style="padding: 0.5em">
-                        <a th:href="@{/postagem/{id}/gostar(id=${resposta.idPostagem})}">
-                            <div class="row">
-                                <div class="col-md-1" style="color: green;"><span class="oi oi-thumb-up"></span></div>
-                                <div class="col-md-7"><p style="color: green;" th:text="${resposta.curtidasPositivas}"></p></div>
-                            </div>
-                        </a>
-                        <a th:href="@{/postagem/{id}/desgostar(id=${resposta.idPostagem})}">
-                            <div class="row">
-                                <div class="col-md-1" style="color: red;"><span class="oi oi-thumb-down"></span></div>
-                                <div class="col-md-7"><p style="color: red;" th:text="${resposta.curtidasNegativas}"></p></div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="media mb-4">
-                    <div class="card-body">
-                        <form th:object="${postagemDTO}" th:action="@{/postagem/postar/}" method="post">
-                            <input type="hidden" th:value="${postagem.idPostagem}" name="idPostagemGenitora">
-                            <input type="hidden" th:value="${postagem.topico.idTopico}" name="idTopico">
-                            <div class="form-group">
-                                <textarea class="form-control" rows="2" placeholder="Escreva um comentário" name="texto"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Responder</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </tr>
+    <!--    <tr th:each="postagem : ${postagemList}">-->
+    <!--        <div class="card card-outline-secondary my-4">-->
+    <!--            <div class="card-header">-->
+    <!--                <h5 th:text="${postagem.assuntoTurma.turma.nome}"></h5>-->
+    <!--            </div>-->
+    <!--            <div th:text="${postagem.assuntoTurma.assunto.nome}" class="card-header" style="font-size: 0.9em; padding: 0.5rem 0.7rem;"></div>-->
+    <!--            <div class="card-body">-->
+    <!--                <div class="media mb-4">-->
+    <!--                    <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">-->
+    <!--                    <div class="media-body">-->
+    <!--                        <p class="mt-0" style="font-weight: bold; color: #000000" th:text="${postagem.usuarioAutor.login}">-->
+    <!--                            <br>-->
+    <!--                            <small th:text="'Postado por ' + ${postagem.usuarioAutor.nome}" class="text-muted"></small>-->
+    <!--                        </p>-->
+    <!--                        <p th:text="${postagem.conteudo}"></p>-->
+    <!--                    </div>-->
+    <!--                    <div class="media mb-4" style="padding: 0.3em">-->
+    <!--                        <a th:href="@{/postagem/{id}/gostar(id=${postagem.idPostagem})}">-->
+    <!--                            <div class="row">-->
+    <!--                                <div class="col-md-1" style="color: green;"><span class="oi oi-thumb-up"></span></div>-->
+    <!--                                <div class="col-md-7"><p style="color: green;" th:text="${postagem.curtidasPositivas}"></p></div>-->
+    <!--                            </div>-->
+    <!--                        </a>-->
+    <!--                        <a th:href="@{/postagem/{id}/desgostar(id=${postagem.idPostagem})}">-->
+    <!--                            <div class="row">-->
+    <!--                                <div class="col-md-1" style="color: red;"><span class="oi oi-thumb-down"></span></div>-->
+    <!--                                <div class="col-md-7"><p style="color: red;" th:text="${postagem.curtidasNegativas}"></p></div>-->
+    <!--                            </div>-->
+    <!--                        </a>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <hr>-->
+    <!--                <h5>Respostas</h5>-->
+    <!--                &lt;!&ndash; Comment with nested comments &ndash;&gt;-->
+    <!--                <div th:each="resposta : ${postagem.respostas}" class="media mt-4">-->
+    <!--                    <img class="d-flex mr-3 rounded-circle" th:src="@{/img/user.png}" alt="">-->
+    <!--                    <div class="media-body">-->
+    <!--                        <p class="mt-0" style="font-weight: bold; color: #000000" th:text="${resposta.usuarioAutor.login}">-->
+    <!--                            <br>-->
+    <!--                            <small th:text="'Postado por ' + ${resposta.usuarioAutor.nome}" class="text-muted"></small>-->
+    <!--                        </p>-->
+    <!--                        <p th:text="${resposta.conteudo}"></p>-->
+    <!--                    </div>-->
+    <!--                    <div class="media mb-4" style="padding: 0.5em">-->
+    <!--                        <a th:href="@{/postagem/{id}/gostar(id=${resposta.idPostagem})}">-->
+    <!--                            <div class="row">-->
+    <!--                                <div class="col-md-1" style="color: green;"><span class="oi oi-thumb-up"></span></div>-->
+    <!--                                <div class="col-md-7"><p style="color: green;" th:text="${resposta.curtidasPositivas}"></p></div>-->
+    <!--                            </div>-->
+    <!--                        </a>-->
+    <!--                        <a th:href="@{/postagem/{id}/desgostar(id=${resposta.idPostagem})}">-->
+    <!--                            <div class="row">-->
+    <!--                                <div class="col-md-1" style="color: red;"><span class="oi oi-thumb-down"></span></div>-->
+    <!--                                <div class="col-md-7"><p style="color: red;" th:text="${resposta.curtidasNegativas}"></p></div>-->
+    <!--                            </div>-->
+    <!--                        </a>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <div class="media mb-4">-->
+    <!--                    <div class="card-body">-->
+    <!--                        <form th:object="${postagemDTO}" th:action="@{/postagem/postar/}" method="post">-->
+    <!--                            <input type="hidden" th:value="${postagem.idPostagem}" name="idPostagemGenitora">-->
+    <!--                            <input type="hidden" th:value="${postagem.assuntoTurma.idAssuntoTurma}" name="idAssuntoTurma">-->
+    <!--                            <div class="form-group">-->
+    <!--                                <textarea class="form-control" rows="2" placeholder="Escreva um comentário" name="conteudo"></textarea>-->
+    <!--                            </div>-->
+    <!--                            <button type="submit" class="btn btn-primary">Responder</button>-->
+    <!--                        </form>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </tr>-->
 </div>
 </html>

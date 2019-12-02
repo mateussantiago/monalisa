@@ -23,7 +23,7 @@ public class Conteudo implements Serializable {
     private Boolean ativo = true;
 
     @OneToMany(mappedBy = "conteudo")
-    private List<ConteudoTopico> conteudoTopicos;
+    private List<Topico> topicos;
 
     public Long getIdConteudo() {
         return idConteudo;
@@ -57,11 +57,11 @@ public class Conteudo implements Serializable {
         this.ativo = ativo;
     }
 
-    public List<ConteudoTopico> getConteudoTopicos() {
-        return conteudoTopicos;
+    public List<Topico> getTopicos() {
+        return topicos;
     }
 
-    public void setConteudoTopicos(List<ConteudoTopico> conteudoTopicos) {
-        this.conteudoTopicos = conteudoTopicos;
+    public void setTopicos(List<Topico> topicos) {
+        this.topicos = topicos;
     }
 }

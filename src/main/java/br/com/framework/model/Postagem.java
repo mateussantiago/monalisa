@@ -1,6 +1,8 @@
 package br.com.framework.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -32,7 +34,7 @@ public class Postagem implements Serializable {
     @JoinColumn(name = "id_postagem_genitora")
     private Postagem postagemGenitora;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_usuario_autor")
     private Usuario usuarioAutor;
 
@@ -42,6 +44,10 @@ public class Postagem implements Serializable {
 
     @OneToMany(mappedBy = "postagemGenitora")
     private List<Postagem> respostas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "postagem")
+    private List<Denuncia> denuncias;
 
     public Long getIdPostagem() {
         return idPostagem;
@@ -105,13 +111,5 @@ public class Postagem implements Serializable {
 
     public void setTopico(Topico topico) {
         this.topico = topico;
-    }
-
-    public List<Postagem> getRespostas() {
-        return respostas;
-    }
-
-    public void setRespostas(List<Postagem> respostas) {
-        this.respostas = respostas;
     }
 }

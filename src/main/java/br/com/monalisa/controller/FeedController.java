@@ -2,10 +2,7 @@ package br.com.monalisa.controller;
 
 import br.com.framework.model.Conteudo;
 import br.com.framework.model.Usuario;
-import br.com.framework.service.ConteudoService;
-import br.com.framework.service.ConteudoTopicoService;
-import br.com.framework.service.ConteudoUsuarioService;
-import br.com.framework.service.PostagemService;
+import br.com.framework.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,22 +24,13 @@ public class FeedController {
     private ConteudoUsuarioService conteudoUsuarioService;
     
     @Autowired
-    private ConteudoTopicoService conteudoTopicoService;
+    private TurmaUsuarioService turmaUsuarioService;
+    
+    @Autowired
+    private AssuntoTurmaService assuntoTurmaService;
 
     @Autowired
     private  PostagemService postagemService;
-
-
-    @RequestMapping("")
-    public String feed(Model model, HttpSession httpSession) {
-        Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
-
-        model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
-        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
-        model.addAttribute("assuntoTurmaList", conteudoTopicoService.buscarPorIdUsuario(usuario.getIdUsuario()));
-
-        return "feed/feed";
-    }
 
     @RequestMapping(value = "/buscar")
     public String buscar(@RequestParam(value = "palavraBusca", required = false) String palavraBusca, Model model, HttpSession httpSession) {
@@ -70,9 +58,9 @@ public class FeedController {
 
         Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
 
-        model.addAttribute("turmaUsuarioList", conteudoUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
-        model.addAttribute("postagemList", postagemService.buscarPostagensPorConteudoETopico(idTurma, idAssunto));
-        model.addAttribute("assuntoTurmaList", conteudoTopicoService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("turmaUsuarioList", turmaUsuarioService.buscarPorIdUsuario(usuario.getIdUsuario()));
+        model.addAttribute("postagemList", postagemService.buscarPostagensPrincipais(usuario));
+        model.addAttribute("assuntoTurmaList", assuntoTurmaService.buscarPorIdUsuario(usuario.getIdUsuario()));
 
         return "feed/feed";
     }

@@ -17,8 +17,7 @@ public interface ConteudoRepository extends JpaRepository<Conteudo, Long>, JpaSp
     List<Conteudo> buscarConteudoPorNome(@Param("nome") String nome);
 
     @Query(value = "select distinct c.* from conteudo c " +
-            "join conteudo_topico ct on ct.id_conteudo = c.id_conteudo " +
-            "join topico t on t.id_topico = ct.id_topico " +
+            "join topico t on t.id_conteudo = c.id_conteudo " +
             "where lower(t.nome) like concat('%', lower(cast(:topico as text)), '%');", nativeQuery = true)
     List<Conteudo> buscarConteudoPorTopico(@Param("topico") String topico);
 

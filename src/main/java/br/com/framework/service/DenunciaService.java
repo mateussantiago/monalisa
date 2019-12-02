@@ -12,6 +12,8 @@ import java.util.List;
 
 @Service
 public class DenunciaService {
+    @Autowired
+    private DenunciaRepository denunciaRepository;
 
     @Autowired
     private UsuarioService usuarioService;
@@ -20,19 +22,13 @@ public class DenunciaService {
     private PostagemService postagemService;
 
     @Autowired
-    private DenunciaRepository denunciaRepository;
+    private PunicaoService punicaoService;
 
     public Denuncia salvar(Denuncia denuncia) {
         return denunciaRepository.save(denuncia);
     }
 
-    public Denuncia denunciar(Long idUsuario, Long idPostagem, String motivacao) {
-        Usuario usuario = usuarioService.buscarPorId(idUsuario);
-
-        if (usuario == null) {
-            throw new EntidadeNaoEncontradaException("Usuario não encontrado");
-        }
-
+    public Denuncia denunciar(Long idPostagem, String motivacao, Usuario usuario) {
         Postagem postagem = postagemService.buscarPorId(idPostagem);
 
         if (postagem == null) {
@@ -42,9 +38,11 @@ public class DenunciaService {
         Denuncia denuncia = new Denuncia();
         denuncia.setUsuarioAutor(usuario);
         denuncia.setPostagem(postagem);
-        denuncia.setMotivacao(motivacao);
+        denuncia.setTipoDenuncia(motivacao);
 
         denuncia = salvar(denuncia);
+
+        punicaoService.talvezPunir(idPostagem);
 
         return denuncia;
     }

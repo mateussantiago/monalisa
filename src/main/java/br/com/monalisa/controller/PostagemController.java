@@ -3,6 +3,7 @@ package br.com.monalisa.controller;
 import br.com.framework.model.Postagem;
 import br.com.framework.model.Topico;
 import br.com.framework.model.Usuario;
+import br.com.framework.service.DenunciaService;
 import br.com.framework.service.PostagemService;
 import br.com.monalisa.dto.PostagemDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import javax.servlet.http.HttpSession;
 public class PostagemController {
     @Autowired
     private PostagemService postagemService;
+
+    @Autowired
+    private DenunciaService denunciaService;
 
     @RequestMapping(value = "/postar", method = RequestMethod.POST)
     public String postar(Model model, HttpSession httpSession, PostagemDTO postagemDTO){
@@ -60,6 +64,20 @@ public class PostagemController {
     public String desgostar(Model model, @PathVariable(value = "id") Long id){
         try {
             Postagem postagem = postagemService.desgostar(id);
+
+        } catch (EnumConstantNotPresentException e) {
+            model.addAttribute("erro", e.getMessage());
+        }
+
+        return "redirect:/feed";
+    }
+
+    @RequestMapping(value = "/denunciar")
+    public String denunciar(Long id, String motivacao, HttpSession httpSession, Model model){
+        try {
+            Usuario usuario = (Usuario) httpSession.getAttribute("usuarioLogado");
+
+           denunciaService.denunciar(id, motivacao, usuario);
 
         } catch (EnumConstantNotPresentException e) {
             model.addAttribute("erro", e.getMessage());

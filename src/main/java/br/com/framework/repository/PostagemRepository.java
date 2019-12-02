@@ -21,7 +21,9 @@ public interface PostagemRepository extends JpaRepository<Postagem, Long>, JpaSp
             "join public.conteudo c on c.id_conteudo = t.id_conteudo " +
             "join public.conteudo_usuario cu on cu.id_conteudo = c.id_conteudo " +
             "where p.ativo is true " +
-            "and p.id_postagem_genitora is null " +
+            "and cu.ativo is true " +
+            "and p.id_postagem_gen" +
+            "itora is null " +
             "and cu.id_usuario = :idUsuario", nativeQuery = true)
     List<Postagem> buscarPrincipais(@Param("idUsuario") Long idUsuario);
 

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class BuscadorTurma extends BuscadorConteudo {
+public class BuscadorMonalisa extends BuscadorConteudo {
 
     @Autowired
     private ConteudoRepository conteudoRepository;
