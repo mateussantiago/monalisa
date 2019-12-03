@@ -13,6 +13,7 @@ import java.util.Set;
 
 @Repository
 public interface DenunciaRepository extends JpaRepository<Denuncia, Long>, JpaSpecificationExecutor<Denuncia> {
+
     @Query(value = "select distinct d.* from public.denuncia d " +
             "where d.id_postagem = :idPostagem " +
             "and d.ativo is true" +

@@ -41,17 +41,7 @@ public class PostagemService {
         return postagemRepository.buscarPorId(idPostagem);
     }
 
-    public void remover(Long idPostagem) {
-        postagemRepository.remover(idPostagem);
-    }
-
-    public List<Postagem> ordenarPostagens(List<Postagem> postagens) {
-        Collections.sort(postagens, comparadorPostagem);
-
-        return postagens;
-    }
-
-    public Postagem postar(Postagem postagem, Usuario usuario) {
+    public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
         Postagem postagemGenitora = null;
 
         if (postagem.getPostagemGenitora().getIdPostagem() != null){
