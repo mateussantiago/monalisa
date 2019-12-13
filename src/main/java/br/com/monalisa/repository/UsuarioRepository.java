@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpecificationExecutor<Usuario> {
@@ -15,11 +16,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpec
     List<Usuario> buscarTodos();
 
     @Query(value = "select * from usuario where ativo is true and id_usuario = :id", nativeQuery = true)
-    Usuario buscarPorId(@Param(value = "id") Long idUsuario);
+    Optional<Usuario> buscarPorId(@Param(value = "id") Long idUsuario);
 
     @Query(value = "select * from usuario where ativo is true and email like :email", nativeQuery = true)
-    Usuario buscarPorEmail(@Param("email") String email);
+    Optional<Usuario> buscarPorEmail(@Param("email") String email);
 
     @Query(value = "select * from usuario where ativo is true and login like :login", nativeQuery = true)
-    Usuario buscarPorLogin(@Param("login") String login);
+    Optional<Usuario> buscarPorLogin(@Param("login") String login);
 }

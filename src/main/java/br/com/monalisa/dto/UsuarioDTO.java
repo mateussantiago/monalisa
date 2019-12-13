@@ -1,16 +1,20 @@
 package br.com.monalisa.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UsuarioDTO {
 
+    @JsonProperty(value = "nome")
     public String nome;
 
+    @JsonProperty(value = "email")
     public String email;
 
+    @JsonProperty(value = "login")
     public String login;
 
+    @JsonProperty(value = "senha")
     public String senha;
-
-    public String confirmarSenha;
 
     public String getNome() {
         return nome;
@@ -44,11 +48,4 @@ public class UsuarioDTO {
         this.senha = senha;
     }
 
-    public String getConfirmarSenha() {
-        return confirmarSenha;
-    }
-
-    public void setConfirmarSenha(String confirmarSenha) {
-        this.confirmarSenha = confirmarSenha;
-    }
 }

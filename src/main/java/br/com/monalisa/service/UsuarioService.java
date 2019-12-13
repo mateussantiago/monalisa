@@ -1,12 +1,18 @@
 package br.com.monalisa.service;
 
 import br.com.monalisa.dto.UsuarioDTO;
+import br.com.monalisa.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.exception.NovoUsuarioComEmailExistenteException;
+import br.com.monalisa.exception.NovoUsuarioComLoginEmUsoException;
+import br.com.monalisa.exception.UsuarioComCampoNaoInformadoException;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -17,23 +23,21 @@ public class UsuarioService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Usuario registrarUsuario(UsuarioDTO usuarioDTO) throws Exception {
-        String validaoCampos = validarCamposUsuario(usuarioDTO);
-        Usuario usuarioValidacao = usuarioRepository.buscarPorEmail(usuarioDTO.getEmail());
+    public Usuario registrarUsuario(UsuarioDTO usuarioDTO) throws NovoUsuarioComEmailExistenteException,
+            NovoUsuarioComLoginEmUsoException, UsuarioComCampoNaoInformadoException {
 
-        if (validaoCampos != null) {
-            throw new Exception(validaoCampos);
-        }
+        String validacaoCamposUsuario = validarCamposUsuario(usuarioDTO);
+        Boolean usuarioComEmailCadastrado = usuarioRepository.buscarPorEmail(usuarioDTO.getEmail()).isPresent();
+        Boolean usuarioComLoginCadastrado = usuarioRepository.buscarPorLogin(usuarioDTO.getLogin()).isPresent();
 
-        if (usuarioValidacao != null) {
-            throw new NovoUsuarioComEmailExistenteException("Email informado já está cadastrado no sistema.");
-        }
+        if (!validacaoCamposUsuario.isEmpty())
+            throw new UsuarioComCampoNaoInformadoException(validacaoCamposUsuario);
 
-        usuarioValidacao = usuarioRepository.buscarPorLogin(usuarioDTO.getLogin());
+        if (usuarioComEmailCadastrado)
+            throw new NovoUsuarioComEmailExistenteException("Email informado já está em uso.");
 
-        if (usuarioValidacao != null) {
-            throw new Exception("Login informado já está cadastrado no sistema.");
-        }
+        else if (usuarioComLoginCadastrado)
+            throw new NovoUsuarioComEmailExistenteException("Login informado já está em uso.");
 
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDTO.getNome());
@@ -45,16 +49,25 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public Usuario buscarPorId(Long idUsuario) {
-        return usuarioRepository.buscarPorId(idUsuario);
+    public Usuario buscarPorId(Long idUsuario) throws EntidadeNaoEncontradaException {
+        Usuario usuario = usuarioRepository.buscarPorId(idUsuario).orElseThrow(() ->
+                new EntidadeNaoEncontradaException("Usuário com id informado não encontrado."));
+
+        return usuario;
     }
 
-    public Usuario buscarPorEmail(String email) {
-        return usuarioRepository.buscarPorEmail(email);
+    public Usuario buscarPorEmail(String email) throws EntidadeNaoEncontradaException {
+        Usuario usuario = usuarioRepository.buscarPorEmail(email).orElseThrow(() ->
+                new EntidadeNaoEncontradaException("Usuário com email informado não encontrado."));
+
+        return usuario;
     }
 
-    public Usuario buscarPorLogin(String login) {
-        return usuarioRepository.buscarPorLogin(login);
+    public Usuario buscarPorLogin(String login) throws EntidadeNaoEncontradaException {
+        Usuario usuario = usuarioRepository.buscarPorLogin(login).orElseThrow(() ->
+                new EntidadeNaoEncontradaException("Usuário com o login informado não encontrado."));
+
+        return usuario;
     }
 
     private String validarCamposUsuario(UsuarioDTO usuarioDTO) {
@@ -67,6 +80,6 @@ public class UsuarioService {
         if(usuarioDTO.getSenha().isEmpty() || usuarioDTO.getSenha() == "")
             return "Senha não informada.";
 
-        return null;
+        return "";
     }
 }
