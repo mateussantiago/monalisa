@@ -8,20 +8,13 @@ import br.com.monalisa.exception.UsuarioComCampoNaoInformadoException;
 import br.com.monalisa.model.Usuario;
 import br.com.monalisa.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.Optional;
 
 @Service
 public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     public Usuario registrarUsuario(UsuarioDTO usuarioDTO) throws NovoUsuarioComEmailExistenteException,
             NovoUsuarioComLoginEmUsoException, UsuarioComCampoNaoInformadoException {
@@ -37,13 +30,13 @@ public class UsuarioService {
             throw new NovoUsuarioComEmailExistenteException("Email informado já está em uso.");
 
         else if (usuarioComLoginCadastrado)
-            throw new NovoUsuarioComEmailExistenteException("Login informado já está em uso.");
+            throw new NovoUsuarioComLoginEmUsoException("Login informado já está em uso.");
 
         Usuario usuario = new Usuario();
         usuario.setNome(usuarioDTO.getNome());
         usuario.setLogin(usuarioDTO.getLogin());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
+        usuario.setSenha(usuarioDTO.getSenha());
         usuario.setAtivo(true);
 
         return usuarioRepository.save(usuario);
