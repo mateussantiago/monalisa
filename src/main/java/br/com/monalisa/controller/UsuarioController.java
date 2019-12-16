@@ -5,8 +5,8 @@ import br.com.monalisa.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.exception.NovoUsuarioComEmailExistenteException;
 import br.com.monalisa.exception.NovoUsuarioComLoginEmUsoException;
 import br.com.monalisa.exception.UsuarioComCampoNaoInformadoException;
-import br.com.monalisa.model.Usuario;
-import br.com.monalisa.service.UsuarioService;
+import br.com.monalisa.model.User;
+import br.com.monalisa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,13 +20,13 @@ import org.springframework.web.server.ResponseStatusException;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity registrarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
         try {
-            Usuario usuario = usuarioService.registrarUsuario(usuarioDTO);
+            User usuario = userService.registerUser(usuarioDTO);
 
             return ResponseEntity.status(HttpStatus.CREATED).headers(new HttpHeaders()).body(usuario);
 
@@ -50,7 +50,7 @@ public class UsuarioController {
     @RequestMapping(value = "/{idUsuario}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity usuarioPorId(@PathVariable("idUsuario") Long idUsuario) {
         try {
-            Usuario usuario = usuarioService.buscarPorId(idUsuario);
+            User usuario = userService.findById(idUsuario);
 
             return ResponseEntity.status(HttpStatus.OK).headers(new HttpHeaders()).body(usuario);
 

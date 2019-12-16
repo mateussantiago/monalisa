@@ -1,6 +1,6 @@
 package br.com.monalisa.repository;
 
-import br.com.monalisa.model.Usuario;
+import br.com.monalisa.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -11,16 +11,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>, JpaSpecificationExecutor<Usuario> {
+public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
     @Query(value = "select * from usuario where ativo is true", nativeQuery = true)
-    List<Usuario> buscarTodos();
+    List<User> findAll();
 
     @Query(value = "select * from usuario where ativo is true and id_usuario = :id", nativeQuery = true)
-    Optional<Usuario> buscarPorId(@Param(value = "id") Long idUsuario);
+    Optional<User> findById(@Param(value = "id") Long idUsuario);
 
     @Query(value = "select * from usuario where ativo is true and email like :email", nativeQuery = true)
-    Optional<Usuario> buscarPorEmail(@Param("email") String email);
+    Optional<User> findByEmail(@Param("email") String email);
 
     @Query(value = "select * from usuario where ativo is true and login like :login", nativeQuery = true)
-    Optional<Usuario> buscarPorLogin(@Param("login") String login);
+    Optional<User> findByLogin(@Param("login") String login);
 }

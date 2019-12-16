@@ -8,16 +8,16 @@ import java.util.Set;
 
 @Entity
 @Table(schema = "public", name = "usuario")
-public class Usuario implements Serializable {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqGenerator")
     @SequenceGenerator(name = "seqGenerator", sequenceName = "public.seq_id_usuario", allocationSize = 1)
     @Column(name = "id_usuario")
-    private Long idUsuario;
+    private Long idUser;
 
     @NotBlank
     @Column(name = "nome")
-    private String nome;
+    private String name;
 
     @NotBlank
     @Column(name = "email")
@@ -29,25 +29,25 @@ public class Usuario implements Serializable {
 
     @NotBlank
     @Column(name = "senha")
-    private String senha;
+    private String password;
 
     @Column(name = "ativo")
-    private Boolean ativo = true;
+    private Boolean active = true;
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -66,19 +66,22 @@ public class Usuario implements Serializable {
         this.login = login;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Boolean getAtivo() {
-        return ativo;
+    public Boolean getActive() {
+        return active;
+    }
+    public void setAtivo(Boolean active) {
+        this.active = active;
     }
 
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

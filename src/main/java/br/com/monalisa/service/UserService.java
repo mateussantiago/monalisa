@@ -5,23 +5,23 @@ import br.com.monalisa.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.exception.NovoUsuarioComEmailExistenteException;
 import br.com.monalisa.exception.NovoUsuarioComLoginEmUsoException;
 import br.com.monalisa.exception.UsuarioComCampoNaoInformadoException;
-import br.com.monalisa.model.Usuario;
-import br.com.monalisa.repository.UsuarioRepository;
+import br.com.monalisa.model.User;
+import br.com.monalisa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UsuarioService {
+public class UserService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UserRepository userRepository;
 
-    public Usuario registrarUsuario(UsuarioDTO usuarioDTO) throws NovoUsuarioComEmailExistenteException,
+    public User registerUser(UsuarioDTO usuarioDTO) throws NovoUsuarioComEmailExistenteException,
             NovoUsuarioComLoginEmUsoException, UsuarioComCampoNaoInformadoException {
 
         String validacaoCamposUsuario = validarCamposUsuario(usuarioDTO);
-        Boolean usuarioComEmailCadastrado = usuarioRepository.buscarPorEmail(usuarioDTO.getEmail()).isPresent();
-        Boolean usuarioComLoginCadastrado = usuarioRepository.buscarPorLogin(usuarioDTO.getLogin()).isPresent();
+        Boolean usuarioComEmailCadastrado = userRepository.findByEmail(usuarioDTO.getEmail()).isPresent();
+        Boolean usuarioComLoginCadastrado = userRepository.findByLogin(usuarioDTO.getLogin()).isPresent();
 
         if (!validacaoCamposUsuario.isEmpty())
             throw new UsuarioComCampoNaoInformadoException(validacaoCamposUsuario);
@@ -32,32 +32,32 @@ public class UsuarioService {
         else if (usuarioComLoginCadastrado)
             throw new NovoUsuarioComLoginEmUsoException("Login informado já está em uso.");
 
-        Usuario usuario = new Usuario();
-        usuario.setNome(usuarioDTO.getNome());
+        User usuario = new User();
+        usuario.setName(usuarioDTO.getNome());
         usuario.setLogin(usuarioDTO.getLogin());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setSenha(usuarioDTO.getSenha());
+        usuario.setPassword(usuarioDTO.getSenha());
         usuario.setAtivo(true);
 
-        return usuarioRepository.save(usuario);
+        return userRepository.save(usuario);
     }
 
-    public Usuario buscarPorId(Long idUsuario) throws EntidadeNaoEncontradaException {
-        Usuario usuario = usuarioRepository.buscarPorId(idUsuario).orElseThrow(() ->
+    public User findById(Long idUsuario) throws EntidadeNaoEncontradaException {
+        User usuario = userRepository.findById(idUsuario).orElseThrow(() ->
                 new EntidadeNaoEncontradaException("Usuário com id informado não encontrado."));
 
         return usuario;
     }
 
-    public Usuario buscarPorEmail(String email) throws EntidadeNaoEncontradaException {
-        Usuario usuario = usuarioRepository.buscarPorEmail(email).orElseThrow(() ->
+    public User findByEmail(String email) throws EntidadeNaoEncontradaException {
+        User usuario = userRepository.findByEmail(email).orElseThrow(() ->
                 new EntidadeNaoEncontradaException("Usuário com email informado não encontrado."));
 
         return usuario;
     }
 
-    public Usuario buscarPorLogin(String login) throws EntidadeNaoEncontradaException {
-        Usuario usuario = usuarioRepository.buscarPorLogin(login).orElseThrow(() ->
+    public User findByLogin(String login) throws EntidadeNaoEncontradaException {
+        User usuario = userRepository.findByLogin(login).orElseThrow(() ->
                 new EntidadeNaoEncontradaException("Usuário com o login informado não encontrado."));
 
         return usuario;

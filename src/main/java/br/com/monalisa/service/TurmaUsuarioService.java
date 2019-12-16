@@ -4,7 +4,7 @@ import br.com.monalisa.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.exception.OperacaoInvalidaException;
 import br.com.monalisa.model.Turma;
 import br.com.monalisa.model.TurmaUsuario;
-import br.com.monalisa.model.Usuario;
+import br.com.monalisa.model.User;
 import br.com.monalisa.repository.TurmaUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class TurmaUsuarioService {
 	private TurmaUsuarioRepository turmaUsuarioRepository;
 
 	@Autowired
-	private UsuarioService usuarioService;
+	private UserService userService;
 
 	@Autowired
 	private TurmaService turmaService;
@@ -38,7 +38,7 @@ public class TurmaUsuarioService {
 			throw new EntidadeNaoEncontradaException("Turma não encontrada.");
 		}
 
-		Usuario usuario = usuarioService.buscarPorId(idUsuario);
+		User usuario = userService.findById(idUsuario);
 
 		if (usuario == null){
 			throw new EntidadeNaoEncontradaException("Usuário não encontrado.");

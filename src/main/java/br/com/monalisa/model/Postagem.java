@@ -33,7 +33,7 @@ public class Postagem implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_usuario_autor")
-    private Usuario usuarioAutor;
+    private User usuarioAutor;
 
     @ManyToOne
     @JoinColumn(name = "id_assunto_turma")
@@ -74,11 +74,11 @@ public class Postagem implements Serializable {
         this.curtidasNegativas = curtidasNegativas;
     }
 
-    public Usuario getUsuarioAutor() {
+    public User getUsuarioAutor() {
         return usuarioAutor;
     }
 
-    public void setUsuarioAutor(Usuario usuarioAutor) {
+    public void setUsuarioAutor(User usuarioAutor) {
         this.usuarioAutor = usuarioAutor;
     }
 

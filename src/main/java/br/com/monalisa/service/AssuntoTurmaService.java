@@ -4,7 +4,7 @@ import br.com.monalisa.dto.SugestaoAssuntoDTO;
 import br.com.monalisa.model.Assunto;
 import br.com.monalisa.model.AssuntoTurma;
 import br.com.monalisa.model.Turma;
-import br.com.monalisa.model.Usuario;
+import br.com.monalisa.model.User;
 import br.com.monalisa.repository.AssuntoTurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class AssuntoTurmaService {
     private AssuntoTurmaRepository assuntoTurmaRepository;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService userService;
 
     @Autowired
     private AssuntoService assuntoService;
@@ -53,7 +53,7 @@ public class AssuntoTurmaService {
     }
     public AssuntoTurma sugerirAssunto(SugestaoAssuntoDTO sugestaoAssuntoDTO, Long idUsuario){
 
-        Usuario usuario = usuarioService.buscarPorId(idUsuario);
+        User usuario = userService.findById(idUsuario);
 
         if (usuario == null){
             throw new RuntimeException("Não existe usuário ativo nessa sessão");

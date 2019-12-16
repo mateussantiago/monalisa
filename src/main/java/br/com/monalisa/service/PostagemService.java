@@ -5,7 +5,7 @@ import br.com.monalisa.exception.EntidadeNaoEncontradaException;
 import br.com.monalisa.exception.PostagemSemConteudoException;
 import br.com.monalisa.model.AssuntoTurma;
 import br.com.monalisa.model.Postagem;
-import br.com.monalisa.model.Usuario;
+import br.com.monalisa.model.User;
 import br.com.monalisa.repository.PostagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,8 @@ public class PostagemService {
     @Autowired
     private AssuntoTurmaService assuntoTurmaService;
 
-    public List<Postagem> buscarPostagensPrincipais(Usuario usuario){
-        return postagemRepository.buscarPrincipais(usuario.getIdUsuario());
+    public List<Postagem> buscarPostagensPrincipais(User usuario){
+        return postagemRepository.buscarPrincipais(usuario.getIdUser());
     }
 
     public List<Postagem> buscarPostagensPorTurma(Long idTurma){
@@ -44,7 +44,7 @@ public class PostagemService {
         return postagemRepository.save(postagem);
     }
 
-    public Postagem postar(PostagemDTO postagemDTO, Usuario usuario) {
+    public Postagem postar(PostagemDTO postagemDTO, User usuario) {
         Postagem postagemGenitora = null;
 
         if (postagemDTO.getIdPostagemGenitora() != null){

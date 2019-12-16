@@ -18,7 +18,7 @@ public class TurmaUsuario implements Serializable {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
+	private User usuario;
 
 	@Column(name = "ativo")
 	private Boolean ativo = true;
@@ -39,11 +39,11 @@ public class TurmaUsuario implements Serializable {
 		this.turma = turma;
 	}
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 

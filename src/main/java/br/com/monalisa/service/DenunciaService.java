@@ -3,7 +3,7 @@ package br.com.monalisa.service;
 import br.com.monalisa.dto.DenunciaDTO;
 import br.com.monalisa.model.Denuncia;
 import br.com.monalisa.model.Postagem;
-import br.com.monalisa.model.Usuario;
+import br.com.monalisa.model.User;
 import br.com.monalisa.repository.DenunciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +14,7 @@ public class DenunciaService {
     private DenunciaRepository denunciaRepository;
 
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService userService;
 
     @Autowired
     private PostagemService postagemService;
@@ -32,7 +32,7 @@ public class DenunciaService {
     }
 
     public Denuncia denunciarPostagem(Long idUsuario, DenunciaDTO denunciaDTO){
-        Usuario usuario = usuarioService.buscarPorId(idUsuario);
+        User usuario = userService.findById(idUsuario);
 
         if (usuario == null){
             throw new RuntimeException("Não existe usuário ativo nessa sessão");
@@ -49,8 +49,8 @@ public class DenunciaService {
         denuncia.setMotivacao(denunciaDTO.getMotivacao());
         denuncia = salvar(denuncia);
 
-        Usuario usuarioDenunciado = postagem.getUsuarioAutor();
-        Long denunciasUsuario = denunciaRepository.contarDenuncias(usuarioDenunciado.getIdUsuario());
+        User usuarioDenunciado = postagem.getUsuarioAutor();
+        Long denunciasUsuario = denunciaRepository.contarDenuncias(usuarioDenunciado.getIdUser());
 
         if(denunciasUsuario > 10){
             usuarioDenunciado.setAtivo(false);

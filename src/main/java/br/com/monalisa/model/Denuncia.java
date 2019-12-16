@@ -20,7 +20,7 @@ public class Denuncia implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_usuario_autor")
-    private Usuario usuarioAutor;
+    private User usuarioAutor;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "id_postagem")
@@ -46,11 +46,11 @@ public class Denuncia implements Serializable {
         this.motivacao = motivacao;
     }
 
-    public Usuario getUsuarioAutor() {
+    public User getUsuarioAutor() {
         return usuarioAutor;
     }
 
-    public void setUsuarioAutor(Usuario usuarioAutor) {
+    public void setUsuarioAutor(User usuarioAutor) {
         this.usuarioAutor = usuarioAutor;
     }
 
